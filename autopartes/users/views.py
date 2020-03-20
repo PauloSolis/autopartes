@@ -2,12 +2,8 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth import logout, login
-from django.http import HttpResponseRedirect
 from django.views import View
-
-from .models import User
 from .forms import UserRegister
 
 
@@ -29,7 +25,6 @@ class RegisterView(SuccessMessageMixin, View):
             user = form.save(commit=False)
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
-
 
             try:
                 validate_password(password, username)
