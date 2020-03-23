@@ -11,7 +11,7 @@ class UserRegister(UserCreationForm):
     last_name = forms.CharField(label='Apellidos ')
     ruc = forms.IntegerField(min_value=00000000000, max_value=99999999999, label='RUC ',
                              widget=forms.TextInput(attrs={'placeholder': 'ej. 98688242308'}))
-    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'placeholder': 'ejemplo@gmail.com'}))
+    email = forms.EmailField(label='Correo electrónico', widget=forms.EmailInput(attrs={'placeholder': 'ejemplo@gmail.com'}))
     birthday = forms.DateField(label='Fecha de nacimiento', widget=forms.SelectDateWidget())
     phone = PhoneNumberField(label='Teléfono', widget=forms.TextInput(attrs={'placeholder': 'ej. +524617857592'}))
     mobile = PhoneNumberField(label='Teléfono celular', widget=forms.TextInput(attrs={'placeholder': 'ej. +524617857592'}))
