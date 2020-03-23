@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from .models import Product
 from .forms import Products
@@ -44,4 +45,6 @@ def crear_producto(request):
 
 
 def ver_producto(request):
+    products = Product.objects.all();
+    paginator = Paginator(products, 20);
     return render(request, '../templates/productos/ver_producto.html')
