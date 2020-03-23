@@ -48,6 +48,10 @@ def crear_producto(request):
 
 
 def ver_producto(request):
-    #    products = Product.objects.all();
-    #   paginator = Paginator(products, 20);
-    return render(request, '../templates/productos/ver_producto.html')
+    products = Product.objects.all().order_by('-id')
+    paginator = Paginator(products, 20)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, '../templates/productos/ver_producto.html', {'products': page_obj})
