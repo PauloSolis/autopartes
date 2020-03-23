@@ -20,15 +20,18 @@ def crear_producto(request):
         if form.is_valid():
             try:
                 new_product = Product(
-                    codigo=form.cleaned_data.get('codigo'),
-                    nombre=form.cleaned_data.get('nombre'),
-                    descripcion=form.cleaned_data.get('descripcion'),
-                    marca=form.cleaned_data.get('marca'),
-                    modelo_coche=form.cleaned_data.get('modelo_coche'),
-                    precio_minorista=form.cleaned_data.get('precio_minorista'),
-                    precio_mayorista1=(form.cleaned_data.get('precio_minorista') * .97),
-                    precio_mayorista2=(form.cleaned_data.get('precio_minorista') * .95),
-                    precio_mayorista3=(form.cleaned_data.get('precio_minorista') * .92),
+                    original_code=form.cleaned_data.get('original_code'),
+                    product_code=form.cleaned_data.get('product_code'),
+                    name=form.cleaned_data.get('name'),
+                    description=form.cleaned_data.get('description'),
+                    car_brand=form.cleaned_data.get('car_brand'),
+                    car_model=form.cleaned_data.get('car_model'),
+                    car_year=form.cleaned_data.get('car_year'),
+                    public_price=form.cleaned_data.get('public_price'),
+                    card_price=form.cleaned_data.get('card_price'),
+                    master_price=form.cleaned_data.get('master_price'),
+                    wholesale_price=form.cleaned_data.get('wholesale_price'),
+                    dozen_price=form.cleaned_data.get('dozen_price'),
                 )
                 new_product.save()
                 messages.success(request, 'Se guardo correctamente el nuevo producto')
@@ -45,6 +48,6 @@ def crear_producto(request):
 
 
 def ver_producto(request):
-    products = Product.objects.all();
-    paginator = Paginator(products, 20);
+    #    products = Product.objects.all();
+    #   paginator = Paginator(products, 20);
     return render(request, '../templates/productos/ver_producto.html')
