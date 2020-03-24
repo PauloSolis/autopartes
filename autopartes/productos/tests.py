@@ -78,6 +78,7 @@ class CrearProductoTestCase(TestCase):
 class VerProductosTestCase(TestCase):
     def test_view2(self):
         response = self.client.get(reverse('productos:ver_producto'))
+        print("This is a test"+response)
         self.assertContains(response, 'No hay productos registrados')
 
     def setUp(self):
