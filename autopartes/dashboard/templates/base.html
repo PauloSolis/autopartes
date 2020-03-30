@@ -68,10 +68,10 @@
 			<!-- /.title -->
 			<ul class="menu js__accordion">
 				<li class="current">
-					<a class="waves-effect" href="index.html"><i class="menu-icon fa fa-home"></i><span>Products</span></a>
+					<a class="waves-effect" href="{% url 'productos:ver_producto' %}"><i class="menu-icon fa fa-home"></i><span>Products</span></a>
 				</li>
                 <li class="current">
-					<a class="waves-effect" href="index.html"><i class="menu-icon fa fa-home"></i><span>Usuarios</span></a>
+					<a class="waves-effect" href="{% url 'users:ver' %}"> <i class="menu-icon fa fa-home"></i><span>Usuarios</span></a>
 				</li>
 
 			</ul>
@@ -296,19 +296,12 @@
         {% block content %}
         {% endblock %}
 
-		<!-- /.row -->		
-		<footer class="footer">
-			<ul class="list-inline">
-				<li>2016 © NinjaAdmin.</li>
-				<li><a href="#">Privacy</a></li>
-				<li><a href="#">Terms</a></li>
-				<li><a href="#">Help</a></li>
-			</ul>
-		</footer>
+		<!-- /.row -->
+
 	</div>
 	<!-- /.main-content -->
 </div><!--/#wrapper -->
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- HTML5 shim and Respond.js for IE8 suppo    rt of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 		<script src="assets/script/html5shiv.min.js"></script>
 		<script src="assets/script/respond.min.js"></script>
