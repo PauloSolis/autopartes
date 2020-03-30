@@ -32,6 +32,48 @@
                 class="fas fa-plus"></i>Agregar Producto
         </button>
     </a>
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Código Original</th>
+            <th scope="col">Código Producto</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Precio Público</th>
+            <th scope="col">Precio Tarjeta</th>
+            <th scope="col">Precio Maestro</th>
+            <th scope="col">Precio Mayoreo</th>
+            <th scope="col">Precio Docena</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if products %}
+
+            {% for product in products %}
+
+                <tr>
+                    <td>{{ product.original_code }}</td>
+                    <td>{{ product.product_code }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>${{ product.public_price }}</td>
+                    <td>${{ product.card_price }}</td>
+                    <td>${{ product.master_price }}</td>
+                    <td>${{ product.wholesale_price }}</td>
+                    <td>${{ product.dozen_price }}</td>
+
+                </tr>
+            {% endfor %}
+
+        {% else %}
+            <h1 id="msg">No hay productos registrados</h1>
+        {% endif %}
+
+
+
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
