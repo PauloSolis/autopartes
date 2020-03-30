@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Crear cuenta</title>
+    <title>Usuarios</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -15,40 +15,43 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-    <style>
-        .snps-inline-select {
-            width: auto;
-            display: inline-block;
-
-        }
-    </style>
 </head>
 <body>
-{% if messages %}
-<div class="alert alert-success">
-    {% for m in messages %}
-    <li
-    {% if message.tags %} class="{{ message.tags }}"{% endif %}></li>
-    {% endfor %}
-</div>
-{% endif %}
-<div class="container">
-    <form method="post" novalidate>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <div class="row">
-            <div class="col-md-2">
-                <button class="btn btn-danger" type="button">
-                    Cancelar
-                </button>
-            </div>
-            <div class="col-md-2 offset-md-8">
-                <button class="btn btn-success waves-effect waves-light" type="submit">Guardar
-                </button>
-            </div>
-        </div>
-    </form>
-</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellidos</th>
+        <th scope="col">Nombre comercial</th>
+        <th scope="col">RUC</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">Ciudad</th>
+        <th scope="col">Correo electrónico</th>
+        <th scope="col">Fecha de nacimiento</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Teléfono celular</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+    <tr>
+        <td scope="row">{{ user.first_name }}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.ruc }}</td>
+        <td>{{ user.address }}</td>
+        <td>{{ user.city }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.birthday }}</td>
+        <td>{{ user.phone }}</td>
+        <td>{{ user.mobile }}</td>
+
+    </tr>
+    {%  endfor %}
+    </tbody>
+</table>
 </body>
 </html>
 {% endblock %}
