@@ -98,4 +98,13 @@ class VerProductosTestCase(TestCase):
         self.assertContains(response, 'capot')
 
 
+class EliminarProductosTestCase(TestCase):
+    product = Product.objects.create(original_code='qwerewetret', product_code='sahsakjhaksjh', name='capot',
+                                     description='blanco', car_brand='honda', car_model='civic',
+                                     car_year='2020', public_price='200', card_price='250', master_price='100',
+                                     wholesale_price='150', dozen_price='190')
+
+    def eliminarProducto(self):
+        response = self.client.get('/inventario/delete/' + str(self.product.id) + '/')
+        self.assertEqual(response.status_code, 302)
 
