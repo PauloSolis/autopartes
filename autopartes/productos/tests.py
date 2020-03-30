@@ -2,6 +2,7 @@ from django.test import TestCase
 from .models import Product
 from .forms import Products
 from django.urls import reverse
+from django.core.management import call_command
 
 
 class CrearProductoTestCase(TestCase):
@@ -77,9 +78,10 @@ class CrearProductoTestCase(TestCase):
 
 class VerProductosTestCase(TestCase):
     def test_view2(self):
+        call_command('flush', '--noinput')
         response = self.client.get(reverse('productos:ver_producto'))
-        print("This is a test"+response)
-        self.assertContains(response, 'No hay productos registrados')
+        self.assertContains(response, '<h1 id="msg">No hay productos registrados</h1>', status_code=200)
+        self.assertTemplateUsed(response, '../templates/productos/ver_producto.html')
 
     def setUp(self):
         Product.objects.create(original_code='qwerewetret', product_code='sahsakjhaksjh', name='capot',
