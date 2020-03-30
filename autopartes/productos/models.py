@@ -3,15 +3,18 @@ from django.utils import timezone
 
 
 class Product(models.Model):
-    codigo = models.CharField(max_length=100, unique=True, null=False)
-    nombre = models.CharField(max_length=100, null=False)
-    descripcion = models.TextField(null=False)
-    marca = models.CharField(max_length=100)
-    modelo_coche = models.CharField(max_length=100)
-    precio_minorista = models.FloatField(null=False)
-    precio_mayorista1 = models.FloatField(null=True)
-    precio_mayorista2 = models.FloatField(null=True)
-    precio_mayorista3 = models.FloatField(null=True)
+    original_code = models.CharField(max_length=100, unique=True, null=False)
+    product_code = models.CharField(max_length=100, unique=True, null=False)
+    name = models.CharField(max_length=100, null=False)
+    description = models.TextField(null=False)
+    car_brand = models.CharField(max_length=100)
+    car_model = models.CharField(max_length=100)
+    car_year = models.IntegerField(null=False)
+    public_price = models.FloatField(null=False)
+    card_price = models.FloatField(null=True)
+    master_price = models.FloatField(null=True)
+    wholesale_price = models.FloatField(null=True)
+    dozen_price = models.FloatField(null=True)
 
     def __str__(self):
         return self.nombre
