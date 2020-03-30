@@ -35,7 +35,7 @@ def crear_producto(request):
                 )
                 new_product.save()
                 messages.success(request, 'Se guardo correctamente el nuevo producto')
-                return render(request, '../templates/productos/ver_producto.html', context)
+                return redirect('productos:ver_producto')
             except DatabaseError:
                 messages.error(request, 'Error')
                 return render(request, '../templates/productos/crear_producto.html')
@@ -55,3 +55,9 @@ def ver_producto(request):
     page_obj = paginator.get_page(page_number)
 
     return render(request, '../templates/productos/ver_producto.html', {'products': page_obj})
+
+
+def delete_product(request, id):
+    Product.objects.get(id=id).delete()
+    messages.success(request, 'Se ha eliminado correctamente el producto')
+    return redirect('productos:ver_producto')
