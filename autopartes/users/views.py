@@ -4,6 +4,8 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
 from django.views import View
+from django.views.generic import TemplateView
+
 from .models import User
 from .forms import UserRegister
 
@@ -11,7 +13,7 @@ from .forms import UserRegister
 # Create your views here.
 class RegisterView(SuccessMessageMixin, View):
     form_class = UserRegister
-    template_name = '../templates/crear_cuenta.html'
+    template_name = '../templates/signup.html'
     success_message = "Tu cuenta ha sido creada!"
 
     # Display blank form
@@ -48,3 +50,6 @@ def displayUsers(request):
         'users': users,
     }
     return render(request, '../templates/ver_usuarios.html', context)
+
+class HomeView(TemplateView):
+    template_name = 'home.html'
