@@ -7,10 +7,12 @@ from .models import User
 
 
 # Create your tests here.
-class CrearUsuarioTestCase(TestCase):
+class CreateUserTestCase(TestCase):
     def setUp(self):
         self.admin = User.objects.create(username='Anitalavalatina', first_name='Ana', last_name='Dueñas',
-                            email='hola9713@gmail.com', password='HolaAmigos1', phone='+524616198966')
+                                         ruc='12345678910', email='hola9713@gmail.com', password='HolaAmigos1',
+                                         address='Casa 123', city='Celaya', birthday='2020-03-23',
+                                         phone='+524616198966', mobile='+524616198966')
 
     def test_url(self):
         response = self.client.get(reverse('users:crear'))
@@ -18,13 +20,18 @@ class CrearUsuarioTestCase(TestCase):
 
     def test_form(self):
         data = {
-            'username': 'Paulo3',
             'first_name': 'Paulo',
             'last_name': 'Solis',
+            'username': 'Paulo3',
+            'ruc': '14567895214',
             'email': 'prueba@gmail.com',
             'password1': 'PauloSolis1',
             'password2': 'PauloSolis1',
+            'address': 'Micasa123',
+            'city': 'Celaya',
+            'birthday': '2020-03-23',
             'phone': '+524616133966',
+            'mobile': '+524616133966',
         }
 
         form = UserRegister(data)
@@ -45,3 +52,9 @@ class CrearUsuarioTestCase(TestCase):
 
         new_role = self.admin.is_wholesaler
         self.assertNotEqual(rol, new_role)
+
+
+class DisplayUserTestCase(TestCase):
+    def test_view(self):
+        response = self.client.get(reverse('users:ver'))
+        self.assertEqual(response.status_code, 200)
