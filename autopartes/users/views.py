@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
 from django.views import View
+from .models import User
 from .forms import UserRegister
 
 
@@ -39,3 +40,11 @@ class RegisterView(SuccessMessageMixin, View):
             return redirect('../')
 
         return render(request, self.template_name, {'form': form})
+
+
+def displayUsers(request):
+    users = User.objects.all().order_by('id')
+    context = {
+        'users': users,
+    }
+    return render(request, '../templates/ver_usuarios.html', context)
