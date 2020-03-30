@@ -1,7 +1,9 @@
+from django.contrib.auth import authenticate
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import AbstractUser
 from .views import RegisterView
+from django.test import Client
 from .forms import UserRegister
 from .models import User
 
@@ -58,3 +60,19 @@ class DisplayUserTestCase(TestCase):
     def test_view(self):
         response = self.client.get(reverse('users:ver'))
         self.assertEqual(response.status_code, 200)
+
+
+class LoginTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(username='Anitalavalatina', first_name='Ana', last_name='Dueñas',
+                                         ruc='12345678910', email='hola9713@gmail.com', password='HolaAmigos1',
+                                         address='Casa 123', city='Celaya', birthday='2020-03-23',
+                                         phone='+524616198966', mobile='+524616198966')
+        self.credentials ={
+            'username':'Anitalavalatina',
+            'password': 'HolaAmigos1'
+        }
+        self.client = Client()
+    def test_correct(self):
+        response = self.client.post('/accounts/login/', **self.credentials)
+        self.assertTrue(response)
