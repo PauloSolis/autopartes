@@ -19,7 +19,10 @@
 {% if messages %}
     <ul class="messages">
         {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            <br>
+            <div class="alert alert-success" role="alert">
+              {{ message }}
+            </div>
         {% endfor %}
     </ul>
 {% endif %}
@@ -27,11 +30,14 @@
 <div class="container">
     <br>
     <br>
-    <a {% url 'productos:crear' %}>
-        <button type="button" class="btn btn-outline-success"><i
-                class="fas fa-plus"></i>Agregar Producto
-        </button>
-    </a>
+    <div class="col">
+        <br>
+        <a href="{% url 'productos:crear' %}">
+            <button type="button"
+                    class="btn btn-success ">Agregar Producto
+            </button>
+        </a>
+    </div>
     <br>
     <table class="table">
         <thead>
@@ -45,6 +51,7 @@
             <th scope="col">Precio Maestro</th>
             <th scope="col">Precio Mayoreo</th>
             <th scope="col">Precio Docena</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -62,6 +69,11 @@
                     <td>${{ product.master_price }}</td>
                     <td>${{ product.wholesale_price }}</td>
                     <td>${{ product.dozen_price }}</td>
+                    <td>
+                        <button data-target="#delete-modal-{{ product.id }}" data-toggle="modal" type="button"
+                                class="btn btn-danger">Eliminar
+                        </button>
+                    </td>
 
                 </tr>
             {% endfor %}
@@ -70,6 +82,30 @@
             <h1 id="msg">No hay productos registrados</h1>
         {% endif %}
 
+        {% for product in products %}
+
+            <div class="modal fade" id="delete-modal-{{ product.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que quieres eliminar el producto "{{ product.name }}" permanentemente?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <a class="btn btn-danger waves-effect waves-light mr-1"
+                           href="{% url 'productos:delete_product' product.id %}">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+            <!-- US39 -->
+
+        {% endfor %}
 
 
         </tbody>
