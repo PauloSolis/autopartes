@@ -2,7 +2,6 @@
 
 
 {% block content %}
-    <body>
     <div class="container-fluid ">
         {% if messages %}
             <ul class="messages">
@@ -73,34 +72,40 @@
                 <h1 id="msg">No hay productos registrados</h1>
             {% endif %}
 
-            {% for product in products %}
 
-                <div class="modal fade" id="delete-modal-{{ product.id }}" tabindex="-1" role="dialog"
-                     aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            ¿Estás seguro de que quieres eliminar el producto "{{ product.name }}" permanentemente?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <a class="btn btn-danger waves-effect waves-light mr-1"
-                               href="{% url 'productos:delete_product' product.id %}">Eliminar</a>
-                        </div>
-                    </div>
-                </div>
-
-            {% endfor %}
 
             </div>
             </tbody>
         </table>
     </div>
-    </body>
+{% endblock %}
+
+{% block modals %}
+    {% if products %}
+        {% for product in products %}
+
+            <div class="modal fade" id="delete-modal-{{ product.id }}" tabindex="-1" role="dialog"
+                         aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Estás seguro de que quieres eliminar el producto "{{ product.name }}" permanentemente?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <a class="btn btn-danger waves-effect waves-light mr-1"
+                                   href="{% url 'productos:delete_product' product.id %}">Eliminar</a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
 {% endblock %}

@@ -23,7 +23,7 @@
 
 	<!-- Sweet Alert -->
     <link rel="stylesheet" href="{% static 'assets/plugin/sweet-alert/sweetalert.min.css' %}">
-	
+
 	<!-- Percent Circle --
 	<link rel="stylesheet" href="assets/plugin/percircle/css/percircle.css">
 
@@ -306,34 +306,35 @@
 		<script src="assets/script/html5shiv.min.js"></script>
 		<script src="assets/script/respond.min.js"></script>
 	<![endif]-->
-	<!-- 
+	<!--
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="assets/scripts/jquery.min.js"></script>
-	<script src="assets/scripts/modernizr.min.js"></script>
-	<script src="assets/plugin/bootstrap/js/bootstrap.min.js"></script>
-	<script src="assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script src="assets/plugin/nprogress/nprogress.js"></script>
+	<script src="{% static 'assets/scripts/jquery.min.js' %}"></script>
+	<script src="{% static 'assets/scripts/modernizr.min.js' %}"></script>
+	<script src="{% static 'assets/plugin/bootstrap/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+	<script src="{% static 'assets/plugin/nprogress/nprogress.js'%}"></script>
 	<script src="assets/plugin/sweet-alert/sweetalert.min.js"></script>
 	<script src="assets/plugin/waves/waves.min.js"></script>
 	<!-- Full Screen Plugin --
 	<script src="assets/plugin/fullscreen/jquery.fullscreen-min.js"></script>
 
-	<!-- Percent Circle --
+	<!-- Percent Circle -->
 	<script src="assets/plugin/percircle/js/percircle.js"></script>
 
-	<!-- Google Chart --
+	<!-- Google Chart -->
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-	<!-- Chartist Chart --
+	<!-- Chartist Chart -->
 	<script src="assets/plugin/chart/chartist/chartist.min.js"></script>
 	<script src="assets/scripts/chart.chartist.init.min.js"></script>
 
-	<!-- FullCalendar
+	<!-- FullCalendar-->
 	<script src="assets/plugin/moment/moment.js"></script>
 	<script src="assets/plugin/fullcalendar/fullcalendar.min.js"></script>
 	<script src="assets/scripts/fullcalendar.init.js"></script>
--->
-	<script src="assets/scripts/main.min.js"></script>
+	<script src="{% static '/assets/scripts/main.min.js' %}"></script>
+{% block modals %}
+{% endblock %}
 </body>
 </html>
