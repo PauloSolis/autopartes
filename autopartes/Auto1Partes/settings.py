@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'users',
     'django.contrib.sites',
     'productos.apps.ProductosConfig',
+    'shop.apps.ShopConfig',
     'dashboard.apps.DashboardConfig',
 
 ]
@@ -84,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'auto1partes',
         'USER': 'postgres',
-        'PASSWORD': 'P7iio1fe86',
+        'PASSWORD': '1234567890',
         'HOST': 'localhost',
         'PORT': '',
     }
