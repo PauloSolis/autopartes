@@ -1338,7 +1338,7 @@ blockquote cite {
 }
 
 .section-type-3 {
-  background-image: url(../media/content/bg/bg-5.jpg);
+  background-image: url(../landingMedia/content/bg/bg-5.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -1385,7 +1385,7 @@ blockquote cite {
   margin-right: 40px;
   padding-right: 320px;
   padding-bottom: 40px;
-  background: url("../media/content/bg/bg-2.png") no-repeat 100% 55px;
+  background: url("../landingMedia/content/bg/bg-2.png") no-repeat 100% 55px;
 }
 
 .b-about .ui-title-block {
@@ -1715,7 +1715,7 @@ blockquote cite {
   margin-left: -30px;
   padding: 44px 30px 30px 44px;
   color: #fff;
-  background: url("../media/components/b-banner/bg.jpg") no-repeat 50%;
+  background: url("../landingMedia/components/b-banner/bg.jpg") no-repeat 50%;
   background-size: cover;
 }
 
@@ -1743,7 +1743,7 @@ blockquote cite {
   border-bottom-width: 3px;
   border-bottom-style: solid;
   border-radius: 2px;
-  background: url("../media/components/b-banner/bg-2.jpg") no-repeat 50%;
+  background: url("../landingMedia/components/b-banner/bg-2.jpg") no-repeat 50%;
   background-size: cover;
 }
 
@@ -1781,7 +1781,7 @@ blockquote cite {
   text-align: center;
   color: #fff;
   border-radius: 2px;
-  background: url("../media/components/b-banner/bg-3.jpg") no-repeat 50%;
+  background: url("../landingMedia/components/b-banner/bg-3.jpg") no-repeat 50%;
 }
 
 .b-bnr-3__title {
@@ -1858,7 +1858,7 @@ blockquote cite {
   height: 50px;
   content: '';
   opacity: .6;
-  background: url("../media/components/b-blockquote/ic-quotes.png");
+  background: url("../landingMedia/components/b-blockquote/ic-quotes.png");
   background-size: contain;
 }
 
@@ -1971,7 +1971,7 @@ blockquote cite {
   -webkit-transform: scale(-1, 1);
           transform: scale(-1, 1);
   opacity: .6;
-  background: url("../media/components/b-blockquote/ic-quotes.png");
+  background: url("../landingMedia/components/b-blockquote/ic-quotes.png");
   background-size: contain;
 }
 
@@ -2049,7 +2049,7 @@ blockquote cite {
 .b-booking-form {
   margin-top: -15px;
   padding: 50px 30px 27px;
-  background-image: url(../media/components/b-booking-form/bg-1.jpg);
+  background-image: url(../landingMedia/components/b-booking-form/bg-1.jpg);
 }
 
 .b-booking-form .row {
@@ -3146,7 +3146,8 @@ blockquote cite {
   padding-right: 30px;
   padding-bottom: 10px;
   vertical-align: top;
-  border-bottom: none;
+  border: 1px solid #ccc!important;
+  border-radius: 20px;
 }
 
 .list-goods_th .b-goods-1__inner {
@@ -5219,7 +5220,7 @@ blockquote cite {
 .footer {
   padding-top: 111px;
   color: #888;
-  background: url("../media/components/footer/bg.jpg");
+  background: url("../landingMedia/components/footer/bg.jpg");
   background-size: cover;
 }
 
