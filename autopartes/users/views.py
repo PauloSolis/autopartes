@@ -14,7 +14,7 @@ from .decorators import admin_required,wholesaler_required,retailer_required
 # Create your views here.
 class RegisterView(SuccessMessageMixin, View):
     form_class = UserRegister
-    template_name = '../templates/signup.html'
+    template_name = '../templates/users/signup.html'
     success_message = "Tu cuenta ha sido creada!"
 
     # Display blank form

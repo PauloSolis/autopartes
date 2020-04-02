@@ -20,10 +20,7 @@
     </head>
     <body>
 
-    {% if user.is_administrator != TRUE  %}
-        <h3>No eres admin, sorry</h3>
 
-    {% else %}
     <div class="container">
         <h1>Agregar Producto</h1>
         <br>
@@ -46,7 +43,6 @@
         </form>
 
     </div>
-    {% endif %}
     </body>
     </html>
 {% endblock %}
