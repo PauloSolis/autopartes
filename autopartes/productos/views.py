@@ -4,13 +4,16 @@ from django.shortcuts import render, redirect
 from .models import Product
 from .forms import Products
 from django.db import DatabaseError
+from django.contrib.auth.decorators import login_required
+from users.decorators import admin_required, retailer_required, wholesaler_required
+from django.utils.decorators import method_decorator
 from django.utils import timezone
 from django.views.generic.edit import UpdateView
 
 STATUS_SAVED = 'SAVED'
 STATUS_ERROR = 'ERROR'
 
-
+@admin_required
 def crear_producto(request):
     if request.method == 'POST':
         form = Products(request.POST)
@@ -35,7 +38,7 @@ def crear_producto(request):
                 )
                 new_product.save()
                 messages.success(request, 'Se guardo correctamente el nuevo producto')
-                return render(request, '../templates/productos/ver_producto.html', context)
+                return redirect('productos:ver_producto')
             except DatabaseError:
                 messages.error(request, 'Error')
                 return render(request, '../templates/productos/crear_producto.html')
@@ -46,7 +49,7 @@ def crear_producto(request):
         }
         return render(request, '../templates/productos/crear_producto.html', context)
 
-
+@admin_required
 def ver_producto(request):
     products = Product.objects.all().order_by('-id')
     paginator = Paginator(products, 20)
@@ -55,3 +58,9 @@ def ver_producto(request):
     page_obj = paginator.get_page(page_number)
 
     return render(request, '../templates/productos/ver_producto.html', {'products': page_obj})
+
+@admin_required
+def delete_product(request, id):
+    Product.objects.get(id=id).delete()
+    messages.success(request, 'Se ha eliminado correctamente el producto')
+    return redirect('productos:ver_producto')
