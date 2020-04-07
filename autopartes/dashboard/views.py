@@ -8,3 +8,6 @@ from django.views.generic.edit import UpdateView
 
 def ver_catalogo(request):
     return render(request, '../templates/store.html')
+
+def ver_landing(request):
+    return render(request, '../templates/landing.html')
