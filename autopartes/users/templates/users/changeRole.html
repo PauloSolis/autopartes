@@ -1,0 +1,59 @@
+{% extends 'home.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="card-box">
+    <div class="row">
+        <h2>Nombre comercial: {{ usuario.username }}</h2>
+    </div>
+    <br>
+    <div class="row">
+        <p>
+            <strong>Nombre: </strong>{{ usuario.first_name }}
+            <br>
+            <strong>Apellido(s): </strong>{{ usuario.last_name }}
+            <br>
+            <strong>Email: </strong>{{ usuario.email }}
+            <br>
+            <strong>Rol: </strong>
+            {% if usuario.is_retailer %}
+            Minorista
+            {% elif usuario.is_wholesaler %}
+            Mayorista
+            {% elif usuario.is_administrator %}
+            Administrador
+            {% endif %}
+            <br>
+            <strong>Teléfono: </strong>{{ usuario.phone }}
+            <br>
+            <strong>Celular: </strong>{{ usuario.mobile }}
+        </p>
+    </div>
+ </div>
+    <br>
+            <br>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Nuevo rol:</label>
+             <br>
+            <br>
+            <div class="col-sm-10">
+                <select class="form-control" name="rol">
+                    <option value="0">Sin cambios</option>
+                    <option value="1">Minorista</option>
+                    <option value="2">Mayorista</option>
+                    <option value="3">Administrador</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" name="action" class=" btn btn-success" onsubmit=alert()>Guardar</button>
+    </form>
+
+
+</div>
+</body>
+</html>
+{% endblock %}
