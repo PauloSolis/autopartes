@@ -49,7 +49,8 @@ class RegisterView(SuccessMessageMixin, View):
         return render(request, self.template_name, {'form': form})
 
 
-@admin_required()
+@login_required
+@admin_required
 def displayUsers(request):
     users = User.objects.all().order_by('id')
     context = {
@@ -58,6 +59,8 @@ def displayUsers(request):
     return render(request, '../templates/users/ver_usuarios.html', context)
 
 
+@login_required
+@admin_required
 def changeRole(request, id):
     try:
         User = get_user_model()
@@ -79,7 +82,6 @@ def changeRole(request, id):
                     usuario.is_wholesaler = False
                     usuario.is_administrator = True
 
-
             usuario.save()
             return HttpResponseRedirect('/ver/')
 
@@ -91,6 +93,7 @@ def changeRole(request, id):
 
 class CustomLoginView(LoginView):
     authentication_form = AuthenticationForm
-class HomeView(TemplateView):
 
+
+class HomeView(TemplateView):
     template_name = 'home.html'
