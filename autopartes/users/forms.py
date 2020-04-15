@@ -47,7 +47,7 @@ class UserRegister(UserCreationForm):
 
 class AuthenticationForm(AuthenticationForm):
     username = forms.CharField(label='Email')
-    password = forms.CharField(label='Contraseña')
+    password = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
     class Meta:
         model = User
         fields = ['email', 'password']
