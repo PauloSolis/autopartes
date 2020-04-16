@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db import DatabaseError
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 from users.decorators import admin_required
 from .forms import Products
@@ -16,12 +16,9 @@ STATUS_ERROR = 'ERROR'
 def crear_producto(request):
     if request.method == 'POST':
         form = Products(request.POST, request.FILES)
-
         if form.is_valid():
-            print("entre al is valid")
-            form.save()
             messages.success(request, 'Se guardo correctamente el nuevo producto')
-            return HttpResponse("/productos/ver/")
+            return HttpResponseRedirect("/productos/ver/")
         else:
             form.save()
             return redirect("productos:ver_producto")
@@ -31,8 +28,6 @@ def crear_producto(request):
             'form': form,
         }
         return render(request, '../templates/productos/crear_producto.html', context)
-
-
 
 
 @admin_required

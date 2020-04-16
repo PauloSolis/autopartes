@@ -15,8 +15,8 @@ class Product(models.Model):
     master_price = models.FloatField(null=True)
     wholesale_price = models.FloatField(null=True)
     dozen_price = models.FloatField(null=True)
-    image1 = models.ImageField(upload_to='images/%Y/%m/%d', blank=True)
-    image2 = models.ImageField(upload_to='images/%Y/%m/%d', blank=True)
+    image1 = models.ImageField(upload_to='productos/%Y/%m/%d', blank=True)
+    image2 = models.ImageField(upload_to='productos/%Y/%m/%d', blank=True)
 
     def __str__(self):
         return self.name
