@@ -1,20 +1,24 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ValidationError
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout, login
+from django.contrib.auth import logout, login, get_user_model
+from django.contrib.auth.views import LoginView
 from django.views import View
 from django.views.generic import TemplateView
 
 from .models import User
 from .forms import UserRegister
-from .decorators import admin_required,wholesaler_required,retailer_required
+from .decorators import admin_required, wholesaler_required, retailer_required
+from .forms import AuthenticationForm
 
 
 # Create your views here.
 class RegisterView(SuccessMessageMixin, View):
     form_class = UserRegister
-    template_name = '../templates/users/signup.html'
+    template_name = '../templates/registration/signup.html'
     success_message = "Tu cuenta ha sido creada!"
 
     # Display blank form
@@ -44,13 +48,52 @@ class RegisterView(SuccessMessageMixin, View):
 
         return render(request, self.template_name, {'form': form})
 
-@admin_required()
+
+@login_required
+@admin_required
 def displayUsers(request):
     users = User.objects.all().order_by('id')
     context = {
         'users': users,
     }
     return render(request, '../templates/users/ver_usuarios.html', context)
+
+
+@login_required
+@admin_required
+def changeRole(request, id):
+    try:
+        User = get_user_model()
+        usuario = User.objects.get(id=id)
+
+        if request.method == 'POST':
+
+            if request.POST.get('rol') != "0":
+                if request.POST.get('rol') == "1":
+                    usuario.is_retailer = True
+                    usuario.is_wholesaler = False
+                    usuario.is_administrator = False
+                if request.POST.get('rol') == "2":
+                    usuario.is_retailer = False
+                    usuario.is_wholesaler = True
+                    usuario.is_administrator = False
+                if request.POST.get('rol') == "3":
+                    usuario.is_retailer = False
+                    usuario.is_wholesaler = False
+                    usuario.is_administrator = True
+
+            usuario.save()
+            return HttpResponseRedirect('/ver/')
+
+        context = {'usuario': usuario}
+        return render(request, '../templates/users/changeRole.html', context)
+    except:
+        return render(request, '')  # cambiar esto a pantalla de error
+
+
+class CustomLoginView(LoginView):
+    authentication_form = AuthenticationForm
+
 
 class HomeView(TemplateView):
     template_name = 'home.html'

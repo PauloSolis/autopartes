@@ -11,7 +11,7 @@
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'account_login' %}">Log In</a> |
-  <a href="{% url 'users:crear' %}">Sign Up</a>
+  <a href="{% url 'users:signup' %}">Sign Up</a>
 {% endif %}
 </body>
 </html>-->
@@ -70,7 +70,7 @@
 				<div class="control-list">
 					<div class="control-item"><a href="profile.html"><i class="fa fa-user"></i> Profile</a></div>
 					<div class="control-item"><a href="#"><i class="fa fa-gear"></i> Settings</a></div>
-					<div class="control-item"><a href="#"><i class="fa fa-sign-out"></i> Log out</a></div>
+					<div class="control-item"><a href="{% url 'users:logout' %}"><i class="fa fa-sign-out"></i> Log out</a></div>
 				</div>
 				<!-- /.control-list -->
 			</div>
