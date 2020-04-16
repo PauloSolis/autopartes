@@ -13,6 +13,8 @@ from django.views.generic.edit import UpdateView
 STATUS_SAVED = 'SAVED'
 STATUS_ERROR = 'ERROR'
 
+
+@login_required
 @admin_required
 def crear_producto(request):
     if request.method == 'POST':
@@ -49,6 +51,8 @@ def crear_producto(request):
         }
         return render(request, '../templates/productos/crear_producto.html', context)
 
+
+@login_required
 @admin_required
 def ver_producto(request):
     products = Product.objects.all().order_by('-id')
@@ -59,6 +63,8 @@ def ver_producto(request):
 
     return render(request, '../templates/productos/ver_producto.html', {'products': page_obj})
 
+
+@login_required
 @admin_required
 def delete_product(request, id):
     Product.objects.get(id=id).delete()
