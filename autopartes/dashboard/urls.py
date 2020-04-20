@@ -7,4 +7,5 @@ app_name = 'dashboard'
 urlpatterns = [
 
     path('catalogo/', views.ver_catalogo, name='catalogo'),
+
 ]
