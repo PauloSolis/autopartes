@@ -20,7 +20,7 @@ Primary use:  MotorLand
 /* PLUGIN CSS */
 
 @import '../landingLibs/bootstrap/bootstrap.css';                /* bootstrap */
-@import '../landingPlugins/bootstrap-select/css/bootstrap-select.css';   /* select customization */
+/*@import '../landingPlugins/bootstrap-select/css/bootstrap-select.css';   /* select customization */
 @import '../landingPlugins/headers/header.css';                /* header */
 @import '../landingPlugins/headers/yamm.css';                /* header */
 @import '../landingPlugins/slider-pro/slider-pro.css';         /* main slider */
@@ -31,7 +31,7 @@ Primary use:  MotorLand
 @import '../landingPlugins/datepicker/jquery.datetimepicker.css';        /* datepicker */
 @import '../landingPlugins/parallax/parallax.css';                        /* parallax */
 
-/*@import '../plugins/flowplayer/skin/playful.css';          /* video-player */
+@import '../plugins/flowplayer/skin/playful.css';          /* video-player */
 
 
 /* MAIN CSS */

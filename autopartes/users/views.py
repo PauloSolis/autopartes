@@ -4,15 +4,19 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout, login, get_user_model
 from django.contrib.auth.views import LoginView
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import TemplateView
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db import DatabaseError
 from .models import User, Address
-from .forms import UserRegister, AddressForm
+from .forms import UserRegister, AddressForm, EditProfileForm
+from django.contrib.auth.forms import UserChangeForm
+
 from .decorators import admin_required, wholesaler_required, retailer_required
 from .forms import AuthenticationForm
 
@@ -46,7 +50,7 @@ class RegisterView(SuccessMessageMixin, View):
             user.save()
             if user is not None:
                 login(request, user)
-            return redirect('../')
+            return redirect('/index/')
 
         return render(request, self.template_name, {'form': form})
 
@@ -93,11 +97,28 @@ def changeRole(request, id):
         return render(request, '')  # cambiar esto a pantalla de error
 
 
+class EditView(LoginRequiredMixin, View):
+    form_class = EditProfileForm
+    template_name = '../templates/registration/edit_profile.html'
+    success_message = "Tus datos han sido modificados! "
+
+    def get(self, request):
+        form = self.form_class(instance=request.user)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('/index')
+        return render(request, self.template_name, {'form': form})
+
+
 class CustomLoginView(LoginView):
     authentication_form = AuthenticationForm
 
 
-class HomeView(TemplateView):
+class HomeView(LoginRequiredMixin,TemplateView):
     template_name = 'home.html'
 
 

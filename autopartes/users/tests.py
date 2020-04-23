@@ -87,6 +87,7 @@ class ChangeRoleTestCase(TestCase):
         self.assertEqual(response.status_code, 302)
 
 
+
 class CreateAddressTests(TestCase):
     def setUp(self):
         self.user = User.objects.create(username='Anitalavalatina', first_name='Ana', last_name='Dueñas',
@@ -155,3 +156,14 @@ class EditAddress(TestCase):
                                         birthday='2020-03-23', phone='+523516198966', mobile='+523516198966')
         self.address = Address.objects.create(name='Alborada', state='Guayas', city='Guayaquil', postal_code='060509', user=self.user)
         self.client.get('users:edit_address', )
+
+class EditProfileTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(username='Anitalavalatina', first_name='Ana', last_name='Dueñas',
+                                        ruc='12345678910', email='hola9713@gmail.com', password='HolaAmigos1',
+                                        address='Casa 123', city='Celaya', birthday='2020-03-23',
+                                        phone='+523516198966', mobile='+523516198966')
+    def test_view(self):
+        response = self.client.get(reverse('users:edit_profile'))
+        self.assertEqual(response.status_code, 302)
+

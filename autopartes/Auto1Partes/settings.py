@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'auto1partes',
         'USER': 'postgres',
-        'PASSWORD': '1234567890',
+        'PASSWORD': '123456890',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -149,6 +149,6 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/dashboards/landing'
+LOGIN_REDIRECT_URL = '/index'
+LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
