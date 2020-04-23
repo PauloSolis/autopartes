@@ -110,9 +110,23 @@ class EditView(LoginRequiredMixin, View):
         return render(request, self.template_name, {'form': form})
 
 
+def deactivate_profile(request, id):
+    user = User.objects.get(id=id)
+    user.is_active = False
+    user.save()
+    return HttpResponseRedirect('/ver/')
+
+def activate_profile(request, id):
+    user = User.objects.get(id=id)
+    user.is_active = True
+    user.save()
+    return HttpResponseRedirect('/ver/')
+
+
+
 class CustomLoginView(LoginView):
     authentication_form = AuthenticationForm
 
 
-class HomeView(LoginRequiredMixin,TemplateView):
+class HomeView(LoginRequiredMixin, TemplateView):
     template_name = 'home.html'

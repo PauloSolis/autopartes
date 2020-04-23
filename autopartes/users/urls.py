@@ -3,7 +3,6 @@ from . import views
 from django.contrib.auth.views import LogoutView
 from dashboard.views import ver_landing
 
-
 app_name = 'users'
 
 urlpatterns = [
@@ -15,4 +14,6 @@ urlpatterns = [
     path('login/', views.CustomLoginView.as_view(), name='login'),
     path('profile/edit/', views.EditView.as_view(), name='edit_profile'),
     path('', ver_landing, name='landing'),
+    path('deactivate/<int:id>/', views.deactivate_profile, name='deactivateUser'),
+    path('activate/<int:id>/', views.activate_profile, name='activateUser'),
 ]
