@@ -8,9 +8,11 @@ from django.contrib.auth import logout, login, get_user_model
 from django.contrib.auth.views import LoginView
 from django.views import View
 from django.views.generic import TemplateView
-
-from .models import User
-from .forms import UserRegister
+from django.contrib import messages
+from django.core.paginator import Paginator
+from django.db import DatabaseError
+from .models import User, Address
+from .forms import UserRegister, AddressForm
 from .decorators import admin_required, wholesaler_required, retailer_required
 from .forms import AuthenticationForm
 
@@ -97,3 +99,64 @@ class CustomLoginView(LoginView):
 
 class HomeView(TemplateView):
     template_name = 'home.html'
+
+
+def create_address(request):
+    if request.method == 'POST':
+        form = AddressForm(request.POST)
+        context = {
+            'form': form,
+        }
+        if form.is_valid():
+            try:
+                new_product = Address(
+                    name=form.cleaned_data.get('name'),
+                    state=form.cleaned_data.get('state'),
+                    city=form.cleaned_data.get('city'),
+                    address=form.cleaned_data.get('address'),
+                    postal_code=form.cleaned_data.get('postal_code'),
+                    user=request.user
+                )
+                new_product.save()
+                messages.success(request, 'Se guardo correctamente la nueva direción!')
+                return redirect('users:view_address')
+            except DatabaseError:
+                messages.error(request, 'Error')
+                return render(request, '../templates/users/create_address.html', context)
+    else:
+        form = AddressForm
+        context = {
+            'form': form,
+        }
+        return render(request, '../templates/users/create_address.html', context)
+
+
+def view_address(request):
+    user = User.objects.get(id=request.user.id)
+    addresses = Address.objects.filter(user=user).order_by('-id')
+
+    context = {
+        'addresses': addresses,
+        'form': AddressForm,
+    }
+
+    return render(request, '../templates/users/view_address.html', context)
+
+
+def delete_address(request, pk):
+    Address.objects.get(id=pk).delete()
+    messages.success(request, 'Se ha eliminado correctamente la dirección!')
+    return redirect('users:view_address')
+
+
+def edit_address(request, pk):
+    address = Address.objects.get(id=pk)
+    form = AddressForm(request.POST or None, instance=address)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, 'Se ha editado correctamente la dirección!')
+        return redirect('users:view_address')
+    context = {
+        'form': form,
+    }
+    return render(request, '../templates/users/edit_address.html', context)
