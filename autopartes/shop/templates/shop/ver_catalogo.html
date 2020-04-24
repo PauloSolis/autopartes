@@ -6,17 +6,17 @@
         {% for product in products %}
             <section class="b-goods-1 b-goods-1_mod-a">
                 <div class="row">
-                    <div class="b-goods-1__img col-md-12">
+                    <div class="b-goods-1__img col-md-8">
                         <a class="js-zoom-images "
-                           href="{{product.image2.url }}">
+                           href="{{ product.image2.url }}">
                             <img class="img-responsive center-block"
-                                 src="{{product.image1.url }}" alt="foto"/>
+                                 src="{{ product.image1.url }}" alt="foto"/>
                         </a>
                         <span class="b-goods-1_price hidden-th">{{ product.public_price }}</span>
                     </div>
                     <div class="b-goods-1__inner row">
-                        <div class="b-goods-1_header col-md-12"><a class="b-goods-1_choose hidden-th"
-                                                                   href="listing-1.html"><i
+                        <div class="b-goods-1_header col-md-8"><a class="b-goods-1_choose hidden-th"
+                                                                  href="listing-1.html"><i
                                 class="icon fa fa-heart-o"></i></a>
                             <h2 class="b-goods-1__name"><a href="car-details.html">{{ product.name }}</a></h2>
 
@@ -24,7 +24,8 @@
                         <div class="hidden product-id" value="{{ product.id }}">{{ product.id }}</div>
                         <div class="b-goods-1__info col-md-12"> {{ product.description }}
                         </div>
-                        <span class="b-goods-1_price_th text-primary visible-th col-md-12 shop-item-price" value="{{ product.public_price }}">$ {{ product.public_price }}
+                        <span class="b-goods-1_price_th text-primary visible-th col-md-12 shop-item-price"
+                              value="{{ product.public_price }}">$ {{ product.public_price }}
                                             </span>
                         <span class="b-goods-1_price_th text-primary visible-th col-md-12">$ {{ product.wholesale_price }}
                                             </span>
@@ -40,13 +41,13 @@
                         <br>
                         <div class="row">
                             <div class="col-md-6">
-                                <input class="cart-quantity-input shop-item-quantity" type="number" value="1" min="1" max="1000" step="1"/>
+                                <input class="cart-quantity-input shop-item-quantity" type="number" value="1" min="1"
+                                       max="1000" step="1"/>
                             </div>
                             <div class="col-md-6">
-                                 <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
                             </div>
                         </div>
-
 
 
                     </div>

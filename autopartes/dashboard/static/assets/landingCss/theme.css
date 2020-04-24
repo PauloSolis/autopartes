@@ -3141,8 +3141,9 @@ blockquote cite {
 
 .list-goods_th .b-goods-1 {
   display: inline-block;
-  width: 33.3%;
-  margin-right: 28px;
+  width: 30%;
+  margin-right: 20px;
+  margin-bottom: 20px;
   padding: 40px 20px 20px 20px;
   vertical-align: top;
   border: 1px solid #ccc!important;
