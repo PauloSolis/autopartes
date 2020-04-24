@@ -39,7 +39,7 @@
                 <th scope="col">Precio Maestro</th>
                 <th scope="col">Precio Mayoreo</th>
                 <th scope="col">Precio Docena</th>
-                <th></th>
+                <th scope="col">Editar Producto</th>
             </tr>
             </thead>
             <tbody>
@@ -57,6 +57,12 @@
                         <td>${{ product.master_price }}</td>
                         <td>${{ product.wholesale_price }}</td>
                         <td>${{ product.dozen_price }}</td>
+                        <td>${{ product.dozen_price }}</td>
+                        <td><a href="{% url  'productos:edit_product' id=product.id %}"
+                data-animation="blur" data-overlaycolor="#36404a">
+                <button type="button" class=" btn btn-success"><i class="mdi mdi-account"></i>
+                </button>
+                </a></td>
                         <td>
                             <button data-target="#delete-modal-{{ product.id }}" data-toggle="modal" type="button"
                                     class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
