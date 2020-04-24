@@ -18,7 +18,7 @@
             <th scope="col">Teléfono celular</th>
             <th scope="col">Rol actual</th>
             <th scope="col">Cambio de rol</th>
-
+            <th scope="col">Acitivar/Desactivar Cuenta</th>
 
 
 
@@ -38,17 +38,31 @@
             <td>{{ user.phone }}</td>
             <td>{{ user.mobile }}</td>
             <td>{% if user.is_retailer %}
-                            Minorista
-                            {% elif user.is_wholesaler %}
-                            Mayorista
-                            {% elif user.is_administrator %}
-                            Administrador
-                        {% endif %}</td>
+                Minorista
+                {% elif user.is_wholesaler %}
+                Mayorista
+                {% elif user.is_administrator %}
+                Administrador
+                {% endif %}
+            </td>
             <td><a href="{% url  'users:rol' id=user.id %}"
-                data-animation="blur" data-overlaycolor="#36404a">
+                   data-animation="blur" data-overlaycolor="#36404a">
                 <button type="button" class=" btn btn-success"><i class="mdi mdi-account"></i>
                 </button>
-                </a></td>
+            </a></td>
+            {% if user.is_active%}
+            <td><a href="{% url  'users:deactivateUser' id=user.id %}"
+                   data-animation="blur" data-overlaycolor="#36404a">
+                <button type="button" class=" btn btn-danger"><i class="mdi mdi-account">Desactivar cuenta</i>
+                </button>
+            </a></td>
+            {% else %}
+            <td><a href="{% url  'users:activateUser' id=user.id %}"
+                   data-animation="blur" data-overlaycolor="#36404a">
+                <button type="button" class=" btn btn-primary"><i class="mdi mdi-account">Activar cuenta</i>
+                </button>
+            </a></td>
+            {% endif %}
 
         </tr>
         {% endfor %}

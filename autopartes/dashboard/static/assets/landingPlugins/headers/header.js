@@ -1,6 +1,6 @@
 /*!
  * Version: 1.2 Development
- */
+ *
 
 
 
@@ -100,8 +100,8 @@
 
 
 
-    dropdownhover: function(options) {
-      /** Extra script for smoother navigation effect **/
+    /*dropdownhover: function(options) {
+      /** Extra script for smoother navigation effect **
       if ($(window).width() > 798) {
         $('.yamm').on('mouseenter', '.navbar-nav > .dropdown', function() {
           "use strict";
@@ -111,7 +111,7 @@
           $(this).removeClass('open');
         });
       }
-    },
+    },*
 
         fixedHeader: function (options) {
             if ($(window).width() > 767) {
@@ -410,3 +410,4 @@
 
 
 
+*/

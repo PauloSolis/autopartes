@@ -1,0 +1,35 @@
+.dropdown-button{
+    color:black!important;
+    background: none!important;
+    border:none !important;
+}
+.no-background-color{
+    background-color: #FFFFFF!important;
+}
+.cart-items{
+    width: 30vh;
+    max-height: 25vh;
+    overflow: auto;
+    padding: 2vh;
+}
+.cart-item{
+  display: inline-block;
+}
+
+.cart-item-title{
+    font-size: 20px;
+}
+
+.cart-price{
+    font-size: 14px;
+}
+
+.cart-product-image{
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
+.cart-quantity-input{
+    width: 25%;
+}
