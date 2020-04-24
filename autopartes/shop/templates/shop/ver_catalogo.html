@@ -8,9 +8,9 @@
                 <div class="row">
                     <div class="b-goods-1__img col-md-12">
                         <a class="js-zoom-images "
-                           href="{% static 'assets/landingMedia/components/b-goods/263x210_1.jpg' %}">
+                           href="">
                             <img class="img-responsive center-block"
-                                 src="{% static 'assets/landingMedia/components/b-goods/263x210_1.jpg' %}" alt="foto"/>
+                                 src="{{product.image1.url }}" alt="foto"/>
                         </a>
                         <span class="b-goods-1_price hidden-th">{{ product.public_price }}</span>
                     </div>
@@ -18,6 +18,7 @@
                         <div class="b-goods-1_header col-md-12"><a class="b-goods-1_choose hidden-th"
                                                                    href="listing-1.html"><i
                                 class="icon fa fa-heart-o"></i></a>
+
                             <h2 class="b-goods-1__name"><a href="car-details.html">{{ product.name }}</a></h2>
                         </div>
                         <div class="b-goods-1__info col-md-12"> {{ product.description }}

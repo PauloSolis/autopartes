@@ -17,10 +17,11 @@ def crear_producto(request):
     if request.method == 'POST':
         form = Products(request.POST, request.FILES)
         if form.is_valid():
+            form.save()
             messages.success(request, 'Se guardo correctamente el nuevo producto')
             return HttpResponseRedirect("/productos/ver/")
         else:
-            form.save()
+
             return redirect("productos:ver_producto")
     else:
         form = Products()
