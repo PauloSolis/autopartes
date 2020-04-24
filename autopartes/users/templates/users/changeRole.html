@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="container-fluid">
-        <div class="card-box">
+    <h1>Usuario {{ usuario.first_name }} {{ usuario.last_name }}</h1>
             <div class="row">
                 <p>
                 <table class="table table-striped">
@@ -30,11 +30,9 @@
                             Administrador
                         {% endif %}</td>
                     </tr>
+                    </tbody>
+            </table>
             </div>
-        </div>
-        <br>
-        <br>
-
         <form method="POST">
             {% csrf_token %}
             <div class="form-group row">
