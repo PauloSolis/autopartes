@@ -71,7 +71,7 @@ function purchaseClicked() {
 
     json = JSON.stringify(cart);
     var xhr = new XMLHttpRequest();
-    var url = "/store_order";
+    var url = "{% url 'crear_orden' %}";
     var token = document.getElementById("token").content
 
     var redirect = '';
