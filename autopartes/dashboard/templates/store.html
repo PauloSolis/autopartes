@@ -13,16 +13,7 @@
     <meta name="HandheldFriendly" content="true"/>
     <link rel="stylesheet" href="{% static 'assets/LandingCss/master.css' %}"/>
     <link rel="stylesheet" href="{% static 'assets/LandingCss/cart.css' %}"/>
-    <!-- SWITCHER-->
-    <link href="{% static 'assets/landingPlugins/switcher/css/switcher.css' %}" rel="stylesheet" id="switcher-css"/>
-    <link href="{% static 'assets/landingPlugins/switcher/css/color1.css' %}" rel="alternate stylesheet"
-          title="color1"/>
-    <link href="{% static 'assets/landingPlugins/switcher/css/color2.css' %}" rel="alternate stylesheet"
-          title="color2"/>
-    <link href="{% static 'assets/landingPlugins/switcher/css/color3.css' %}" rel="alternate stylesheet"
-          title="color3"/>
-    <link href="{% static 'assets/landingPlugins/switcher/css/color4.css' %}" rel="alternate stylesheet"
-          title="color4"/>
+
     <link rel="icon" type="image/x-icon" href="favicon.ico"/>
     <!--[if lt IE 9 ]>
 
@@ -206,30 +197,29 @@
                                     class="caret"></b></a>
 
                             </li>
-                            <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Blog<b
-                                    class="caret"></b></a>
+                            <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Blog<b class="caret"></b></a>
 
                             </li>
-                            <li>
-                                <div class="btn-group">
-                                      <button type="button" class="btn dropdown-button dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                       <div class="header-cart">
-                                           <a href="#"><i class="icon fa fa-shopping-basket no-background-color" aria-hidden="true"></i>
-                                               <span class="header-cart-count bg-primary ">0</span>
-                                           </a>
+                            <li aria-haspopup="true" aria-expanded="false" class="btn-group dropdown">
+
+                                    <button type="button" class="btn dropdown-button dropdown-toggle" data-toggle="dropdown" >
+                                        <div class="header-cart">
+                                            <a href="#">
+                                                <i class="icon fa fa-shopping-basket no-background-color" aria-hidden="true"></i>
+                                                <span class="header-cart-count bg-primary ">0</span>
+                                            </a>
                                         </div>
-                                      </button>
-                                      <ul class=" dropdown-menu">
+                                    </button>
+                                    <ul class=" dropdown-menu">
+                                        <div class="cart-items">
 
-                                          <div class="cart-items">
+                                        </div>
+                                        <span>Total: <span class="cart-total-price btn-purchase"></span></span>
+                                        <button>
+                                        Checkout
+                                        </button>
+                                    </ul>
 
-                                          </div>
-                                          <span>Total: <span class="cart-total-price btn-purchase"></span></span>
-                                          <button>
-                                              Checkout
-                                          </button>
-                                      </ul>
-                                </div>
                             </li>
 
                         </ul>
@@ -418,7 +408,7 @@
                 </div>
             </div>
             <!-- end .b-title-page-->
-            </div>
+                </div>
             <footer class="footer area-bg">
                 <div class="area-bg__inner">
                     <div class="footer__main">
@@ -514,34 +504,6 @@
 <!-- cart -->
 <script src="{% static 'assets/scripts/cart.js' %}"></script>
 
-
-        <!-- ++++++++++++-->
-        <!-- MAIN SCRIPTS-->
-        <!-- ++++++++++++-->
-        <script src="{% static 'assets/landingLibs/jquery-1.12.4.min.js' %}"></script>
-        <script src="{% static 'assets/landingLibs/jquery-migrate-1.2.1.js' %}"></script>
-        <!-- Bootstrap-->
-        <script src="{% static 'assets/landingLibs/bootstrap/bootstrap.min.js' %}"></script>
-        <!-- User customization-->
-        <script src="{% static 'assets/landingJs/custom.js' %}"></script>
-        <!-- Headers scripts-->
-        <script src="{% static 'assets/landingPlugins/headers/slidebar.js' %}"></script>
-        <script src="{% static 'assets/landingPlugins/headers/header.js' %}"></script>
-        <!-- Slider-->
-        <script src="{% static 'assets/landingPlugins/owl-carousel/owl.carousel.min.js' %}"></script>
-        <!-- Pop-up window-->
-        <script src="{% static 'assets/landingPlugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
-        <!-- Filter and sorting images-->
-        <script src="{% static 'assets/landingPlugins/isotope/isotope.pkgd.min.js' %}"></script>
-        <script src="{% static 'assets/landingPlugins/isotope/imagesLoaded.js' %}"></script>
-        <!-- Progress numbers-->
-        <script src="{% static 'assets/landingPlugins/rendro-easy-pie-chart/jquery.easypiechart.min.js' %}"></script>
-        <script src="{% static 'assets/landingPlugins/rendro-easy-pie-chart/waypoints.min.js' %}"></script>
-        <!-- NoUiSlider-->
-        <script src="{% static 'assets/landingPlugins/noUiSlider/nouislider.min.js' %}"></script>
-        <script src="{% static 'assets/landingPlugins/noUiSlider/wNumb.js' %}"></script>
-        <!-- Animations-->
-        <script src="{% static 'assets/landingPlugins/scrollreveal/scrollreveal.min.js' %}"></script>
     </body>
 
 </html>
