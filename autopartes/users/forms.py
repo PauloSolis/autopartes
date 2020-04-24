@@ -100,14 +100,10 @@ class EditProfileForm(UserChangeForm):
     phone = PhoneNumberField(label='Teléfono', widget=forms.TextInput(attrs={'placeholder': 'ej. +524617857592'}))
     mobile = PhoneNumberField(label='Teléfono celular',
                               widget=forms.TextInput(attrs={'placeholder': 'ej. +524617857592'}))
-    address = forms.CharField(label='Dirección',
-                              widget=forms.TextInput(attrs={'placeholder': 'Calle, colonia y número'}))
-    city = forms.CharField(label='Ciudad')
-
     class Meta:
         model = User
         fields = [
-            'first_name', 'last_name', 'username', 'ruc', 'email', 'address', 'city',
+            'first_name', 'last_name', 'username', 'ruc', 'email',
             'birthday',
             'phone', 'mobile']
 
@@ -118,8 +114,6 @@ class EditProfileForm(UserChangeForm):
         self.fields['username'].widget.attrs['class'] = 'form-control'
         self.fields['ruc'].widget.attrs['class'] = 'form-control'
         self.fields['email'].widget.attrs['class'] = 'form-control'
-        self.fields['address'].widget.attrs['class'] = 'form-control'
-        self.fields['city'].widget.attrs['class'] = 'form-control'
         self.fields['phone'].widget.attrs['class'] = 'form-control'
         self.fields['mobile'].widget.attrs['class'] = 'form-control'
 
