@@ -2,58 +2,57 @@
 {% load staticfiles %}
 {% block content %}
 
-<div class="container-fluid">
-    <div class="card-box">
-    <div class="row">
-        <h2>Nombre comercial: {{ usuario.username }}</h2>
-    </div>
-    <br>
-    <div class="row">
-        <p>
-            <strong>Nombre: </strong>{{ usuario.first_name }}
-            <br>
-            <strong>Apellido(s): </strong>{{ usuario.last_name }}
-            <br>
-            <strong>Email: </strong>{{ usuario.email }}
-            <br>
-            <strong>Rol: </strong>
-            {% if usuario.is_retailer %}
-            Minorista
-            {% elif usuario.is_wholesaler %}
-            Mayorista
-            {% elif usuario.is_administrator %}
-            Administrador
-            {% endif %}
-            <br>
-            <strong>Teléfono: </strong>{{ usuario.phone }}
-            <br>
-            <strong>Celular: </strong>{{ usuario.mobile }}
-        </p>
-    </div>
- </div>
-    <br>
-            <br>
-
-    <form method="POST">
-        {% csrf_token %}
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Nuevo rol:</label>
-             <br>
-            <br>
-            <div class="col-sm-10">
-                <select class="form-control" name="rol">
-                    <option value="0">Sin cambios</option>
-                    <option value="1">Minorista</option>
-                    <option value="2">Mayorista</option>
-                    <option value="3">Administrador</option>
-                </select>
+    <div class="container-fluid">
+    <h1>Usuario {{ usuario.first_name }} {{ usuario.last_name }}</h1>
+            <div class="row">
+                <p>
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <th scope="row">Nombre Comercial</th>
+                        <td>{{ usuario.username }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nombres</th>
+                        <td>{{ usuario.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Apellidos</th>
+                        <td>{{ usuario.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Rol</th>
+                        <td>{% if usuario.is_retailer %}
+                            Minorista
+                        {% elif usuario.is_wholesaler %}
+                            Mayorista
+                        {% elif usuario.is_administrator %}
+                            Administrador
+                        {% endif %}</td>
+                    </tr>
+                    </tbody>
+            </table>
             </div>
-        </div>
-        <button type="submit" name="action" class=" btn btn-success" onsubmit=alert()>Guardar</button>
-    </form>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Nuevo rol:</label>
+                <br>
+                <br>
+                <div class="col-sm-10">
+                    <select class="form-control" name="rol">
+                        <option value="0">Sin cambios</option>
+                        <option value="1">Minorista</option>
+                        <option value="2">Mayorista</option>
+                        <option value="3">Administrador</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" name="action" class=" btn btn-success" onsubmit=alert()>Guardar</button>
+        </form>
 
 
-</div>
-</body>
-</html>
+    </div>
+    </body>
+    </html>
 {% endblock %}

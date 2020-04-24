@@ -16,11 +16,13 @@ class Products(ModelForm):
     master_price = forms.FloatField(label="Precio Maestro")
     wholesale_price = forms.FloatField(label="Precio por Mayoreo")
     dozen_price = forms.FloatField(label="Precio por Docena")
+    image1 = forms.ImageField(label="Foto de Frente")
+    image2 = forms.ImageField(label="Foto de Posterior")
 
     class Meta:
         model = Product
         fields = ['original_code', 'product_code', 'name', 'car_brand', 'car_model', 'car_year', 'description',
-                  'public_price', 'card_price', 'master_price', 'wholesale_price', 'dozen_price']
+                  'public_price', 'card_price', 'master_price', 'wholesale_price', 'dozen_price', 'image1', 'image2']
 
     def __init__(self, *args, **kwargs):
         super(Products, self).__init__(*args, **kwargs)
@@ -36,4 +38,5 @@ class Products(ModelForm):
         self.fields['master_price'].widget.attrs['class'] = 'form-control'
         self.fields['wholesale_price'].widget.attrs['class'] = 'form-control'
         self.fields['dozen_price'].widget.attrs['class'] = 'form-control'
+
 
