@@ -118,4 +118,4 @@ class EditProductsTestCase(TestCase):
 
     def test_view(self):
         response = self.client.get(reverse('productos:edit_product', args={self.product.id}))
-        self.assertContains(response.status_code,302)
+        self.assertContains(response.status_code, 302)
