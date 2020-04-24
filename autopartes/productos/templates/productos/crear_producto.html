@@ -1,4 +1,4 @@
-    {% extends 'home.html' %}
+{% extends 'home.html' %}
 {% block content %}
     <!DOCTYPE html>
     <html lang="en">
@@ -20,11 +20,20 @@
     </head>
     <body>
 
-
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <br>
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <div class="container">
         <h1>Agregar Producto</h1>
         <br>
-        <form method="post" novalidate>
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <div class="container">
