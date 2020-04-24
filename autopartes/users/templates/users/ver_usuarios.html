@@ -1,74 +1,128 @@
 {% extends 'home.html' %}
 {% block content %}
-<div class="container-fluid">
-    <br>
-    <br>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellidos</th>
-            <th scope="col">Nombre comercial</th>
-            <th scope="col">RUC</th>
-            <th scope="col">Dirección</th>
-            <th scope="col">Ciudad</th>
-            <th scope="col">Correo electrónico</th>
-            <th scope="col">Fecha de nacimiento</th>
-            <th scope="col">Teléfono</th>
-            <th scope="col">Teléfono celular</th>
-            <th scope="col">Rol actual</th>
-            <th scope="col">Cambio de rol</th>
-            <th scope="col">Acitivar/Desactivar Cuenta</th>
+    <div class="container-fluid">
+        <h1>Usuarios</h1>
+        <br>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">RUC</th>
+                <th scope="col">Correo electrónico</th>
+                <th scope="col">Rol actual</th>
+                <th scope="col">Cambio de rol</th>
+                <th scope="col">Acitivar/Desactivar Cuenta</th>
+                <th></th>
 
-
-
-        </tr>
-        </thead>
-        <tbody>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td scope="row">{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.ruc }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{% if user.is_retailer %}
+                        Minorista
+                    {% elif user.is_wholesaler %}
+                        Mayorista
+                    {% elif user.is_administrator %}
+                        Administrador
+                    {% endif %}
+                    </td>
+                    <td><a href="{% url  'users:rol' id=user.id %}"
+                           data-animation="blur" data-overlaycolor="#36404a">
+                        <button type="button" class="btn btn-success align-self-center" ><i class="fa fa-tag"
+                                                                          aria-hidden="true"></i>
+                        </button>
+                    </a></td>
+                    {% if user.is_active %}
+                        <td><a href="{% url  'users:deactivateUser' id=user.id %}"
+                               data-animation="blur" data-overlaycolor="#36404a">
+                            <button type="button" class=" btn btn-danger"><i class="mdi mdi-account">Desactivar
+                                </i>
+                            </button>
+                        </a></td>
+                    {% else %}
+                        <td><a href="{% url  'users:activateUser' id=user.id %}"
+                               data-animation="blur" data-overlaycolor="#36404a">
+                            <button type="button" class=" btn btn-primary"><i class="mdi mdi-account">Activar</i>
+                            </button>
+                        </a></td>
+                    {% endif %}
+                    <td>
+                        <button class=" btn btn-success" data-toggle="modal" data-target="#info{{ user.id }}"><i
+                                class="fa fa-info-circle" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </body>
+    </html>
+{% endblock %}
+{% block modals %}
+    {% if users %}
         {% for user in users %}
-        <tr>
-            <td scope="row">{{ user.first_name }}</td>
-            <td>{{ user.last_name }}</td>
-            <td>{{ user.username }}</td>
-            <td>{{ user.ruc }}</td>
-            <td>{{ user.address }}</td>
-            <td>{{ user.city }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.birthday }}</td>
-            <td>{{ user.phone }}</td>
-            <td>{{ user.mobile }}</td>
-            <td>{% if user.is_retailer %}
-                Minorista
-                {% elif user.is_wholesaler %}
-                Mayorista
-                {% elif user.is_administrator %}
-                Administrador
-                {% endif %}
-            </td>
-            <td><a href="{% url  'users:rol' id=user.id %}"
-                   data-animation="blur" data-overlaycolor="#36404a">
-                <button type="button" class=" btn btn-success"><i class="mdi mdi-account"></i>
-                </button>
-            </a></td>
-            {% if user.is_active%}
-            <td><a href="{% url  'users:deactivateUser' id=user.id %}"
-                   data-animation="blur" data-overlaycolor="#36404a">
-                <button type="button" class=" btn btn-danger"><i class="mdi mdi-account">Desactivar cuenta</i>
-                </button>
-            </a></td>
-            {% else %}
-            <td><a href="{% url  'users:activateUser' id=user.id %}"
-                   data-animation="blur" data-overlaycolor="#36404a">
-                <button type="button" class=" btn btn-primary"><i class="mdi mdi-account">Activar cuenta</i>
-                </button>
-            </a></td>
-            {% endif %}
 
-        </tr>
+            <div class="modal fade" id="info{{ user.id }}" tabindex="-1" role="dialog"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalLabel">
+                                Información de {{ user.first_name }} {{ user.last_name }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <th scope="row">Nombres</th>
+                                    <td>{{ user.first_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Apellidos</th>
+                                    <td>{{ user.last_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">RUC</th>
+                                    <td>{{ user.ruc }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Fecha de Nacimiento</th>
+                                    <td>{{ user.birthday }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Teléfono Convencional</th>
+                                    <td>{{ user.phone }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Teléfono Celular</th>
+                                    <td>{{ user.mobile }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Rol del Sistema</th>
+                                    <td>{% if user.is_retailer %}
+                                        Minorista
+                                    {% elif user.is_wholesaler %}
+                                        Mayorista
+                                    {% elif user.is_administrator %}
+                                        Administrador
+                                    {% endif %}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
-</div>
-</body>
-</html>
+    {% endif %}
+
 {% endblock %}
