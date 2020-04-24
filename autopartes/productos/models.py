@@ -17,4 +17,4 @@ class Product(models.Model):
     dozen_price = models.FloatField(null=True)
 
     def __str__(self):
-        return self.nombre
+        return self.name
