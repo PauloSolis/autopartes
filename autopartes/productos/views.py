@@ -70,3 +70,16 @@ def delete_product(request, id):
     Product.objects.get(id=id).delete()
     messages.success(request, 'Se ha eliminado correctamente el producto')
     return redirect('productos:ver_producto')
+
+@login_required
+@admin_required
+def edit_product(request, id):
+    product = Product.objects.get(id=id)
+    form = Products(request.POST or None, instance=product)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('productos:ver_producto')
+    context = {
+        'form': form,
+    }
+    return render(request, '../templates/productos/editar_producto.html', context)
