@@ -24,11 +24,15 @@
                         <div class="hidden product-id" value="{{ product.id }}">{{ product.id }}</div>
                         <div class="b-goods-1__info col-md-12"> {{ product.description }}
                         </div>
-                        <span class="b-goods-1_price_th text-primary visible-th col-md-12 shop-item-price"
-                              value="{{ product.public_price }}">$ {{ product.public_price }}
+                        {% if user.is_retailer %}
+                            <span class="b-goods-1_price_th text-primary visible-th col-md-12 shop-item-price"
+                                  value="{{ product.public_price }}">$ {{ product.public_price }}
                                             </span>
-                        <span class="b-goods-1_price_th text-primary visible-th col-md-12">$ {{ product.wholesale_price }}
+                        {% endif %}
+                        {% if user.is_wholesaler %}
+                            <span class="b-goods-1_price_th text-primary visible-th col-md-12">$ {{ product.wholesale_price }}
                                             </span>
+                        {% endif %}
                         <div class="b-goods-1__section">
                             <div class="collapse in" id="desc-1">
                                 <ul class="b-goods-1__desc list-unstyled">
