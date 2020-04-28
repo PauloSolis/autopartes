@@ -197,29 +197,27 @@
                                     class="caret"></b></a>
 
                             </li>
-                            <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Blog<b class="caret"></b></a>
+                            <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Blog<b
+                                    class="caret"></b></a>
 
                             </li>
                             <li aria-haspopup="true" aria-expanded="false" class="btn-group dropdown">
+                                <button type="button" class="btn dropdown-button " data-toggle="modal"
+                                        data-target="#myModal">
+                                    <div class="header-cart">
+                                        <a href="#">
+                                            <i class="icon fa fa-shopping-basket no-background-color"
+                                               aria-hidden="true"></i>
+                                            <span class="header-cart-count bg-primary ">0</span>
+                                        </a>
+                                    </div>
+                                </button>
 
-                                    <button type="button" class="btn dropdown-button dropdown-toggle" data-toggle="dropdown" >
-                                        <div class="header-cart">
-                                            <a href="#">
-                                                <i class="icon fa fa-shopping-basket no-background-color" aria-hidden="true"></i>
-                                                <span class="header-cart-count bg-primary ">0</span>
-                                            </a>
-                                        </div>
-                                    </button>
-                                    <ul class=" dropdown-menu">
-                                        <div class="cart-items">
 
-                                        </div>
-                                        <span>Total: <span class="cart-total-price btn-purchase"></span></span>
-                                        <button>
-                                        Checkout
-                                        </button>
-                                    </ul>
+                                <!--
 
+
+                                -->
                             </li>
 
                         </ul>
@@ -392,82 +390,53 @@
                             </section>
                         </div>
 
-                    </nav>
-                </div>
-            </header>
-            <!-- end .header-->
-            <div class="section-title-page area-bg area-bg_dark area-bg_op_70">
-                <div class="area-bg__inner">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <h1 class="b-title-page bg-primary_a">Productos</h1>
-                            </div>
-                        </div>
+                        </nav>
                     </div>
-                </div>
-            </div>
-            <!-- end .b-title-page-->
+                    </header>
+
+                    <!-- end .b-title-page-->
 
 
-            <footer class="footer area-bg">
-                <div class="area-bg__inner">
-                    <div class="footer__main">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="footer-section">
-                                        <a class="footer__logo" href="home.html">
-                                            <img class="img-responsive" src="{% static 'assets/landingMedia/general/logo.png' %}" alt="Logo" />
-                                        </a>
-                                        <div class="footer__info">Duis aute irure reprehend voluptate velit ese acium fugiat nula pariatur exceptus ipsum dolor sit amet consectetur adipisic elita sed eiusmod tempor.</div>
-                                        <ul class="social-net list-inline">
-                                            <li class="social-net__item"><a class="social-net__link text-primary_h" href="facebook.com"><i class="icon fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="social-net__item"><a class="social-net__link text-primary_h" href="twitter.com"><i class="icon fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="social-net__item"><a class="social-net__link text-primary_h" href="linkedin.com"><i class="icon fa fa-linkedin"></i></a>
-                                            </li>
-                                            <li class="social-net__item"><a class="social-net__link text-primary_h" href="instagram.com"><i class="icon fa fa-instagram"></i></a>
-                                            </li>
-                                            <li class="social-net__item"><a class="social-net__link text-primary_h" href="youtube.com"><i class="icon fa fa-youtube-play"></i></a>
-                                            </li>
-                                        </ul>
-                                        <!-- end .social-list-->
-                                    </div>
+                    <div class="col-xs-12">Copyrights 2017<a class="copyright__brand" href="home.html">
+                        MOTORLAND</a> All Rights Reserved<a class="copyright__link"
+                                                            href="privacy-policy.html">Privacy
+                        Policy</a><a class="copyright__link" href="terms-of-use.html">Terms &
+                        Conditions</a>
+                    </div>
 
-                                </div>
-                                <div class="footer-contact"><i class="icon icon-xs fa fa-envelope-o"></i>support@motorland.com
-                                </div>
-                                <div class="footer-contact"><i class="icon icon-lg fa fa-map-marker"></i>Fairview Ave,
-                                    El Monte, CA, 91732
-                                </div>
-                                <div class="footer-contact"><i class="icon fa fa-clock-o"></i>Mon - Fri : 0900am to
-                                    0600pm
-                                </div>
-                            </section>
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div class="copyright">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">Copyrights 2017<a class="copyright__brand" href="home.html">
-                            MOTORLAND</a> All Rights Reserved<a class="copyright__link" href="privacy-policy.html">Privacy
-                            Policy</a><a class="copyright__link" href="terms-of-use.html">Terms & Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <span class="btn-up" id="toTop">TOP</span>
-        </div>
     </footer>
     <!-- .footer-->
 </div>
 <!-- end layout-theme-->
 
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Mi carrito:</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="cart-items">
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <span class="modal-title total_price">Total:<span class="cart-total-price btn-purchase"></span> </span>
+                <button type="button" class="btn btn-default">Checkout</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 <!-- ++++++++++++-->
 <!-- MAIN SCRIPTS-->
 <!-- ++++++++++++-->
@@ -505,6 +474,6 @@
 <!-- cart -->
 <script src="{% static 'assets/scripts/cart.js' %}"></script>
 
-    </body>
+</body>
 
 </html>
