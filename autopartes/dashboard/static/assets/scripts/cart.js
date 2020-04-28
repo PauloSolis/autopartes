@@ -148,8 +148,8 @@ function addItemToCart(prod_id, title, quantity, price, imageSrc) {
                 <div class="cart-quantity cart-column">
                     <input class="cart-quantity-input" type="number" value="${quantity}">
                     <span class="base-price hidden">${price}</span>
-                    <span class="cart-price cart-column">$${total_price}</span>
-                    <span><button class="btn btn-danger" type="button"><i class="fa fa-trash fa-fw"></i></button></span>
+                    <span class="cart-price cart-column" >$${total_price}</span>
+                    <span><button class="btn btn-danger" type="button" style="float:right;"><i class="fa fa-trash fa-fw"></i></button></span>
                 </div>    
                 
             </div>

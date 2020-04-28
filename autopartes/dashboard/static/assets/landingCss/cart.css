@@ -7,7 +7,7 @@
     background-color: #FFFFFF!important;
 }
 .cart-items{
-    width: 30vh;
+    width: 100%;
     max-height: 25vh;
     overflow: auto;
     padding: 2vh;
@@ -21,7 +21,7 @@
 }
 
 .cart-price{
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .cart-product-image{
@@ -32,4 +32,8 @@
 
 .cart-quantity-input{
     width: 25%;
+}
+
+.total_price{
+    font-size: 20px;
 }
