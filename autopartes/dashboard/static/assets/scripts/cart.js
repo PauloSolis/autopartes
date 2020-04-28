@@ -139,7 +139,7 @@ function addItemToCart(prod_id, title, quantity, price, imageSrc) {
         <br>
         <div class="row">
             <div class="col-md-5">
-                <img class="cart-product-image" src="${imageSrc}">
+                <img class="cart-product-image" style="height: 16vh;" src="${imageSrc}">
             </div>
             <div class="col-md-7">
                 <div class="cart-item cart-column">

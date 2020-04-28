@@ -8,7 +8,7 @@
 }
 .cart-items{
     width: 100%;
-    max-height: 25vh;
+    max-height: 75vh;
     overflow: auto;
     padding: 2vh;
 }
