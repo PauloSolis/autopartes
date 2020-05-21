@@ -24,13 +24,13 @@
                         <div class="hidden product-id" value="{{ product.id }}">{{ product.id }}</div>
                         <div class="b-goods-1__info col-md-12"> {{ product.description }}
                         </div>
-                        {% if user.is_retailer %}
+                        {% if user.is_retailer or user.is_administrator %}
                             <span class="b-goods-1_price_th text-primary visible-th col-md-12 shop-item-price"
                                   value="{{ product.public_price }}">$ {{ product.public_price }}
                                             </span>
                         {% endif %}
-                        {% if user.is_wholesaler %}
-                            <span class="b-goods-1_price_th text-primary visible-th col-md-12">$ {{ product.wholesale_price }}
+                        {% if user.is_wholesaler or user.is_administrator %}
+                            <span class="b-goods-1_price_th text-primary visible-th col-md-12 shop-item-price">$ {{ product.wholesale_price }}
                                             </span>
                         {% endif %}
                         <div class="b-goods-1__section">
@@ -43,16 +43,17 @@
                             </div>
                         </div>
                         <br>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input class="cart-quantity-input shop-item-quantity" type="number" value="1" min="1"
-                                       max="1000" step="1"/>
+                        {% if user.is_wholesaler or user.is_administrator or user.retailer %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input class="cart-quantity-input shop-item-quantity" type="number" value="1" min="1"
+                                           max="1000" step="1"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
-                            </div>
-                        </div>
-
+                        {% endif %}
 
                     </div>
                 </div>
