@@ -148,6 +148,9 @@
 <div id="wrapper">
     <div class="main-content">
         {% block content %}
+        <h1>Bienvenido {{user.first_name}}</h1>
+
+        <h4>Tu saldo  actual es de:  {{ user.balance }}</h4>
         {% endblock %}
 
         <!-- /.row -->
@@ -189,6 +192,9 @@
 <script src="assets/scripts/fullcalendar.init.js"></script>
 <script src="{% static '/assets/scripts/main.min.js' %}"></script>
 {% block modals %}
+
 {% endblock %}
 </body>
+
+
 </html>

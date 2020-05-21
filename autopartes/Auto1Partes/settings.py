@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'productos.apps.ProductosConfig',
     'shop.apps.ShopConfig',
     'dashboard.apps.DashboardConfig',
+    'djmoney',
 
 ]
 
@@ -134,7 +135,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
-    #"django.contrib.auth.backends.ModelBackend",
+    # "django.contrib.auth.backends.ModelBackend",
 
     # `allauth` specific authentication methods, such as login by e-mail
     "allauth.account.auth_backends.AuthenticationBackend",
@@ -155,5 +156,5 @@ LOGOUT_REDIRECT_URL = '/dashboards/landing'
 LOGIN_REDIRECT_URL = '/index'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
-PHONENUMBER_DB_FORMAT ='NATIONAL'
-PHONENUMBER_DEFAULT_REGION ='EC'
+PHONENUMBER_DB_FORMAT = 'NATIONAL'
+PHONENUMBER_DEFAULT_REGION = 'EC'

@@ -11,7 +11,7 @@ urlpatterns = [
     path('ver/rol/<int:id>/', views.changeRole, name='rol'),
     path('index/', views.HomeView.as_view(), name='home'),
     path(r'^logout/$', LogoutView.as_view(), name='logout'),
-    path('login/', views.CustomLoginView.as_view(), name='login'),
+    path('login/', views.CustomLoginView.as_view(redirect_authenticated_user=True), name='login'),
     path('create_address/', views.create_address, name='create_address'),
     path('view_address/', views.view_address, name='view_address'),
     path('delete_address/<int:pk>/', views.delete_address, name="delete_address"),
