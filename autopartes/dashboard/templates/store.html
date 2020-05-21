@@ -429,8 +429,9 @@
 
             </div>
             <div class="modal-footer">
-                <span class="modal-title total_price">Total:<span class="cart-total-price btn-purchase"></span> </span>
-                <button type="button" class="btn btn-default">Checkout</button>
+                <span class="modal-title total_price">Total:<span class="cart-total-price"></span> </span>
+                <span class="hidden " id="token" value="{% csrf_token %}">{% csrf_token %}</span>
+                <button type="button" class="btn btn-default btn-purchase">Checkout</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>

@@ -13,7 +13,7 @@
         {% endif %}
 
 
-        <h1>Productos</h1>
+        <h1>Ordenes</h1>
 
 
         <br>
@@ -30,22 +30,22 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">Id de Orden</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Precio total</th>
+                <th scope="col">Id de producto</th>
+                <th scope="col">cantidad</th>
+                <th scope="col">Precio</th>
 
 
             </tr>
             </thead>
             <tbody>
-            {% if orders %}
+            {% if order %}
 
-                {% for order in orders %}
+                {% for o in order %}
 
                     <tr>
-                        <td>{{ order.id }}</td>
-                        <td>Nombre de cliente</td>
-                        <td>{{ order.total_price }}</td>
+                        <td>{{ o.product_id }}</td>
+                        <td>{{ o.quantity }}</td>
+                        <td>{{ order.price }}</td>
 
                         <td>
 {#                        <a href="{% url  'orders:edit_order' id=order.id %}"#}
