@@ -1,0 +1,106 @@
+{% extends 'home.html' %}
+{% block content %}
+    <div class="container-fluid ">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <br>
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+
+        <h1>Productos</h1>
+
+
+        <br>
+{#        <div class="justify-content-end">#}
+{#            <a href="{% url 'productos:crear' %}">#}
+{#                <button type="button"#}
+{#                        class="btn btn-success "> + Agregar Producto#}
+{#                </button>#}
+{#            </a>#}
+{#        </div>#}
+
+
+        <br>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Id de Orden</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio total</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% if orders %}
+
+                {% for order in orders %}
+
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>Nombre de cliente</td>
+                        <td>{{ order.total_price }}</td>
+
+                        <td>
+{#                        <a href="{% url  'orders:edit_order' id=order.id %}"#}
+{#                data-animation="blur" data-overlaycolor="#36404a">#}
+                <button type="button" class=" btn btn-success"><i class="mdi mdi-account"></i>
+                </button>
+{#                </a>#}
+                        </td>
+                        <td>
+                            <button data-target="#delete-modal-{{ order.id }}" data-toggle="modal" type="button"
+                                    class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+
+            {% else %}
+                <h1 id="msg">No hay ordenes registradas</h1>
+            {% endif %}
+
+
+
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block modals %}
+    {% if products %}
+        {% for product in products %}
+
+            <div class="modal fade" id="delete-modal-{{ product.id }}" tabindex="-1" role="dialog"
+                         aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Estás seguro de que quieres eliminar el producto "{{ product.name }}" permanentemente?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <a class="btn btn-danger waves-effect waves-light mr-1"
+                                   href="{% url 'productos:delete_product' product.id %}">Eliminar</a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
