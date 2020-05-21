@@ -41,8 +41,8 @@ class UserRegister(UserCreationForm):
         self.fields['password2'].widget.attrs['class'] = 'form-control'
         self.fields['phone'].widget.attrs['class'] = 'form-control'
         self.fields['mobile'].widget.attrs['class'] = 'form-control'
-        for fieldname in ['password1', 'password2']:
-            self.fields[fieldname].help_text = None
+        #for fieldname in ['password1', 'password2']:
+           # self.fields[fieldname].help_text = None
 
 
 class AuthenticationForm(AuthenticationForm):
