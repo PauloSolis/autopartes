@@ -15,44 +15,37 @@
 
         <h1>Ordenes</h1>
 
-
-        <br>
-{#        <div class="justify-content-end">#}
-{#            <a href="{% url 'productos:crear' %}">#}
-{#                <button type="button"#}
-{#                        class="btn btn-success "> + Agregar Producto#}
-{#                </button>#}
-{#            </a>#}
-{#        </div>#}
-
-
         <br>
         <table class="table">
             <thead>
-            <tr>
-                <th scope="col">Id de producto</th>
-                <th scope="col">cantidad</th>
-                <th scope="col">Precio</th>
-
-
-            </tr>
+                <tr>
+                    <th scope="col">Id de producto</th>
+                    <th scope="col">Nombre del producto</th>
+                    <th scope="col">cantidad</th>
+                    <th scope="col">Precio a la venta</th>
+                </tr>
             </thead>
             <tbody>
             {% if order %}
 
-                {% for o in order %}
+                {% for product in products %}
 
                     <tr>
-                        <td>{{ o.product_id }}</td>
-                        <td>{{ o.quantity }}</td>
-                        <td>{{ order.price }}</td>
-
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.name }}</td>
                         <td>
-{#                        <a href="{% url  'orders:edit_order' id=order.id %}"#}
-{#                data-animation="blur" data-overlaycolor="#36404a">#}
-                <button type="button" class=" btn btn-success"><i class="mdi mdi-account"></i>
-                </button>
-{#                </a>#}
+                            {% for o in order %}
+                                {% if o.product_id == product.id  %}
+                                    {{ o.quantity }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for o in order %}
+                                {% if o.product_id == product.id  %}
+                                    {{ o.price }}
+                                {% endif %}
+                            {% endfor %}
                         </td>
                         <td>
                             <button data-target="#delete-modal-{{ order.id }}" data-toggle="modal" type="button"

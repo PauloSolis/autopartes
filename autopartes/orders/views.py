@@ -39,9 +39,9 @@ def ver_ordenes(request):
 
     return render(request, '../templates/orders/ver_ordenes.html', {'orders': page_obj})
 
+
 def ver_desgloce(request, id):
-    order = ProductsOrder.objects.get(order_id=id)
-    logger.error(order[0])
+    order = ProductsOrder.objects.filter(order_id=id)
     prod = []
     for o in order:
         aux = Product.objects.get(id = o.product_id)

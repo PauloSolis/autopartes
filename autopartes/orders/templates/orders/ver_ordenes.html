@@ -15,23 +15,12 @@
 
         <h1>Ordenes</h1>
 
-
-        <br>
-{#        <div class="justify-content-end">#}
-{#            <a href="{% url 'productos:crear' %}">#}
-{#                <button type="button"#}
-{#                        class="btn btn-success "> + Agregar Producto#}
-{#                </button>#}
-{#            </a>#}
-{#        </div>#}
-
-
         <br>
         <table class="table">
             <thead>
             <tr>
                 <th scope="col">Id de Orden</th>
-                <th scope="col">Nombre</th>
+                <th scope="col">Nombre del cliente</th>
                 <th scope="col">Precio total</th>
 
 
@@ -48,8 +37,8 @@
                         <td>{{ order.total_price }}</td>
 
                         <td>
-{#                        <a href="{% url  'orders:edit_order' id=order.id %}"#}
-{#                data-animation="blur" data-overlaycolor="#36404a">#}
+                        <a href="{% url  'orders:ver_desgloce' id=order.id %}"
+                           data-animation="blur" data-overlaycolor="#36404a">
                 <button type="button" class=" btn btn-success"><i class="mdi mdi-account"></i>
                 </button>
 {#                </a>#}
