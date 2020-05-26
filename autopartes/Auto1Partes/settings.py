@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'productos.apps.ProductosConfig',
     'shop.apps.ShopConfig',
+    'orders.apps.OrdersConfig',
     'dashboard.apps.DashboardConfig',
     'djmoney',
 
