@@ -59,9 +59,37 @@ class AuthenticationForm(AuthenticationForm):
             self.fields['password'].widget.attrs['class'] = 'form-control'
 
 
+STATE_CHOICES = [
+    ('Azuay', 'Azuay'),
+    ('Bolívar', 'Bolívar'),
+    ('Cañar', 'Cañar'),
+    ('Carchi', 'Carchi'),
+    ('Chimborazo', 'Chimborazo'),
+    ('El Oro', 'El Oro'),
+    ('Esmeraldas', 'Esmeraldas'),
+    ('Galápagos', 'Galápagos'),
+    ('Guayas', 'Guayas'),
+    ('Imbabura', 'Imbabura'),
+    ('Loja', 'Loja'),
+    ('Los Ríos', 'Los Ríos'),
+    ('Manabí', 'Manabí'),
+    ('Morona Santiago', 'Morona Santiago'),
+    ('Napo', 'Napo'),
+    ('Orellana', 'Orellana'),
+    ('Pastaza', 'Pastaza'),
+    ('Pichincha', 'Pichincha'),
+    ('Santa Elena', 'Santa Elena'),
+    ('Santo Domingo de los Tsáchilas', 'Santo Domingo de los Tsáchilas'),
+    ('Sucumbíos', 'Sucumbíos'),
+    ('Tungurahua', 'Tungurahua'),
+    ('Zamora Chinchipe', 'Zamora Chinchipe'),
+
+]
+
+
 class AddressForm(ModelForm):
     name = forms.CharField(label='Nombre de la Sucursal')
-    state = forms.CharField(label='Provincia')
+    state = forms.CharField(label='Provincia', widget=forms.Select(choices=STATE_CHOICES))
     city = forms.CharField(label='Ciudad')
     address = forms.CharField(label='Dirección',
                               widget=forms.TextInput(attrs={'placeholder': 'Calle, colonia y número'}))

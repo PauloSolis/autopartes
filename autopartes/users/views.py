@@ -59,10 +59,12 @@ class RegisterView(SuccessMessageMixin, View):
 @admin_required
 def displayUsers(request):
     users = User.objects.all().order_by('id')
+    addresses = Address.objects.all()
     form = EditBalance
     context = {
         'users': users,
-        'form': form
+        'form': form,
+        'addresses': addresses,
     }
     return render(request, '../templates/users/ver_usuarios.html', context)
 
