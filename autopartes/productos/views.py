@@ -5,7 +5,7 @@ from django.db import DatabaseError
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from users.decorators import admin_required
-from .forms import Products
+from .forms import Products, CategoryForm
 from .models import Product
 
 STATUS_SAVED = 'SAVED'
@@ -65,3 +65,21 @@ def edit_product(request, id):
         'form': form,
     }
     return render(request, '../templates/productos/editar_producto.html', context)
+
+
+def crear_categoria(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Se guardó correctamente la categoría')
+            return HttpResponseRedirect("/productos/ver/")
+        else:
+
+            return redirect("productos:ver_producto")
+    else:
+        form = CategoryForm
+        context = {
+            'form': form,
+        }
+        return render(request, '../templates/productos/crear_categoria.html', context)
