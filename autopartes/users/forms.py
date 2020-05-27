@@ -4,6 +4,7 @@ from django.forms import DateInput
 from django.forms import ModelForm
 from phonenumber_field.formfields import PhoneNumberField
 from .models import User, Address
+from djmoney.models.fields import MoneyField
 
 
 class UserRegister(UserCreationForm):
@@ -29,7 +30,6 @@ class UserRegister(UserCreationForm):
             'first_name', 'last_name', 'username', 'ruc', 'email', 'password1', 'password2', 'birthday',
             'phone', 'mobile')
 
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['first_name'].widget.attrs['class'] = 'form-control'
@@ -41,15 +41,13 @@ class UserRegister(UserCreationForm):
         self.fields['password2'].widget.attrs['class'] = 'form-control'
         self.fields['phone'].widget.attrs['class'] = 'form-control'
         self.fields['mobile'].widget.attrs['class'] = 'form-control'
-        #for fieldname in ['password1', 'password2']:
-           # self.fields[fieldname].help_text = None
+        # for fieldname in ['password1', 'password2']:
+        # self.fields[fieldname].help_text = None
 
 
 class AuthenticationForm(AuthenticationForm):
-
     username = forms.CharField(label=False, widget=forms.EmailInput(attrs={'placeholder': 'Correo'}))
     password = forms.CharField(label=False, widget=forms.PasswordInput(attrs={'placeholder': 'Contraseña'}))
-
 
     class Meta:
         model = User
@@ -61,10 +59,37 @@ class AuthenticationForm(AuthenticationForm):
             self.fields['password'].widget.attrs['class'] = 'form-control'
 
 
+STATE_CHOICES = [
+    ('Azuay', 'Azuay'),
+    ('Bolívar', 'Bolívar'),
+    ('Cañar', 'Cañar'),
+    ('Carchi', 'Carchi'),
+    ('Chimborazo', 'Chimborazo'),
+    ('El Oro', 'El Oro'),
+    ('Esmeraldas', 'Esmeraldas'),
+    ('Galápagos', 'Galápagos'),
+    ('Guayas', 'Guayas'),
+    ('Imbabura', 'Imbabura'),
+    ('Loja', 'Loja'),
+    ('Los Ríos', 'Los Ríos'),
+    ('Manabí', 'Manabí'),
+    ('Morona Santiago', 'Morona Santiago'),
+    ('Napo', 'Napo'),
+    ('Orellana', 'Orellana'),
+    ('Pastaza', 'Pastaza'),
+    ('Pichincha', 'Pichincha'),
+    ('Santa Elena', 'Santa Elena'),
+    ('Santo Domingo de los Tsáchilas', 'Santo Domingo de los Tsáchilas'),
+    ('Sucumbíos', 'Sucumbíos'),
+    ('Tungurahua', 'Tungurahua'),
+    ('Zamora Chinchipe', 'Zamora Chinchipe'),
+
+]
+
 
 class AddressForm(ModelForm):
     name = forms.CharField(label='Nombre de la Sucursal')
-    state = forms.CharField(label='Provincia')
+    state = forms.CharField(label='Provincia', widget=forms.Select(choices=STATE_CHOICES))
     city = forms.CharField(label='Ciudad')
     address = forms.CharField(label='Dirección',
                               widget=forms.TextInput(attrs={'placeholder': 'Calle, colonia y número'}))
@@ -100,6 +125,7 @@ class EditProfileForm(UserChangeForm):
     phone = PhoneNumberField(label='Teléfono', widget=forms.TextInput(attrs={'placeholder': 'ej. +524617857592'}))
     mobile = PhoneNumberField(label='Teléfono celular',
                               widget=forms.TextInput(attrs={'placeholder': 'ej. +524617857592'}))
+
     class Meta:
         model = User
         fields = [
@@ -117,3 +143,14 @@ class EditProfileForm(UserChangeForm):
         self.fields['phone'].widget.attrs['class'] = 'form-control'
         self.fields['mobile'].widget.attrs['class'] = 'form-control'
 
+
+class EditBalance(UserChangeForm):
+    balance = forms.DecimalField(label='Cantidad Pagada')
+
+    class Meta:
+        model = User
+        fields = ['balance']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['balance'].widget.attrs['class'] = 'form-control'

@@ -6,7 +6,7 @@ if (document.readyState == 'loading') {
 
 function ready() {
     //sc = shopping cart
-    //localStorage.clear()
+    localStorage.clear()
     var sc = JSON.parse(localStorage.getItem('local_shopping_cart'));
     if(sc != null){
         for(i=0; i<sc.length;i++){

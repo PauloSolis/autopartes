@@ -61,12 +61,12 @@
 <body>
 <div class="main-menu">
     <header class="header">
-        <a href="index.html" class="logo">Auto 1 Partes</a>
+        <a  class="logo">Auto 1 Partes</a>
         <button type="button" class="button-close fa fa-times js__menu_close"></button>
         <div class="user">
-            <a href="#" class="avatar"><img src="http://placehold.it/80x80" alt=""><span
+            <a  class="avatar"><img src="http://placehold.it/80x80" alt=""><span
                     class="status online"></span></a>
-            <h5 class="name"><a href="profile.html">{{ request.user.first_name }}</a></h5>
+            <h5 class="name"><a>{{ request.user.first_name }}</a></h5>
             <h5 class="position">
                 {% if user.is_retailer %}
                 Cliente Minorista
