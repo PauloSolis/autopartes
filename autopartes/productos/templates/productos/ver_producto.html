@@ -23,6 +23,11 @@
                         class="btn btn-success "> + Agregar Producto
                 </button>
             </a>
+            <a href="{% url 'productos:crear_categoria' %}">
+                <button type="button"
+                        class="btn btn-primary "> + Agregar Categoría
+                </button>
+            </a>
         </div>
 
 
@@ -33,6 +38,7 @@
                 <th scope="col">Código Original</th>
                 <th scope="col">Código Producto</th>
                 <th scope="col">Nombre</th>
+                <th scope="col">Categoría</th>
                 <th scope="col">Descripción</th>
                 <th scope="col">Precio Público</th>
                 <th scope="col">Precio Tarjeta</th>
@@ -51,6 +57,7 @@
                         <td>{{ product.original_code }}</td>
                         <td>{{ product.product_code }}</td>
                         <td>{{ product.name }}</td>
+                         <td>{{ product.category.name }}</td>
                         <td>{{ product.description }}</td>
                         <td>${{ product.public_price }}</td>
                         <td>${{ product.card_price }}</td>
@@ -60,7 +67,7 @@
                         <td>${{ product.dozen_price }}</td>
                         <td><a href="{% url  'productos:edit_product' id=product.id %}"
                 data-animation="blur" data-overlaycolor="#36404a">
-                <button type="button" class=" btn btn-success"><i class="mdi mdi-account"></i>
+                <button type="button" class=" btn btn-success"><i class="fa fa-edit"></i>
                 </button>
                 </a></td>
                         <td>

@@ -14,7 +14,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db import DatabaseError
 from .models import User, Address
-from .forms import UserRegister, AddressForm, EditProfileForm
+from .forms import UserRegister, AddressForm, EditProfileForm, EditBalance
 from django.contrib.auth.forms import UserChangeForm
 
 from .decorators import admin_required, wholesaler_required, retailer_required
@@ -59,8 +59,12 @@ class RegisterView(SuccessMessageMixin, View):
 @admin_required
 def displayUsers(request):
     users = User.objects.all().order_by('id')
+    addresses = Address.objects.all()
+    form = EditBalance
     context = {
         'users': users,
+        'form': form,
+        'addresses': addresses,
     }
     return render(request, '../templates/users/ver_usuarios.html', context)
 
