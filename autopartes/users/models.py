@@ -15,6 +15,7 @@ class User(AbstractUser):
     is_administrator = models.BooleanField(default=False)
     is_wholesaler = models.BooleanField(default=False)
     is_retailer = models.BooleanField(default=True)
+    can_buy = models.BooleanField(default=True)
 
     def __str__(self):
         return self.email
