@@ -6,7 +6,7 @@ app_name = 'orders'
 
 urlpatterns = [
 
-    path('crear/', views.crear_producto, name='crear'),
-    path('ver/', views.ver_producto, name='ver_producto'),
-    path('delete/<int:id>/', views.delete_product, name="delete_product"),
+    path('ver_ordenes/', views.ver_ordenes, name='ver_ordenes'),
+    path('ver_desgloce/<int:id>/', views.ver_desgloce, name='ver_desgloce'),
+    path('store_order/', views.crear_orden, name="crear_orden"),
 ]
