@@ -59,31 +59,31 @@ function purchaseClicked() {
         total = total + (price * quantity)
     }
 
-    var responsable = document.getElementById('creator_name').value;
-    var cliente = document.getElementById('customer_name').value;
-    var estado = document.getElementById('state').value;
+    //var responsable = document.getElementById('creator_name').value;
+    //var cliente = document.getElementById('customer_name').value;
+    //var estado = document.getElementById('state').value;
 
-    cart.data.push(JSON.stringify(responsable));
-    cart.data.push(JSON.stringify(cliente));
-    cart.data.push(JSON.stringify(total));
-    cart.data.push(JSON.stringify(estado));
+    //cart.data.push(JSON.stringify(responsable));
+    //cart.data.push(JSON.stringify(cliente));
+    cart.data.push(JSON.stringify( {total: [total]}));
+    //cart.data.push(JSON.stringify(estado));
     //cart.data.push
 
     json = JSON.stringify(cart);
     var xhr = new XMLHttpRequest();
-    var url = "/store_order";
-    var token = document.getElementById("token").content
+    var url = "/orders/store_order/";
+    var token = getCookie('csrftoken');
 
     var redirect = '';
 
     xhr.open("POST", url, true);
-    xhr.setRequestHeader("x-csrf-token", token);
+    xhr.setRequestHeader("X-CSRFToken", token);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var json = JSON.stringify(xhr.responseText);
             console.log(json);
-            window.location.href = "/admin/order/"+ parseInt(JSON.parse(json));
+
         }
     };
 
@@ -139,7 +139,7 @@ function addItemToCart(prod_id, title, quantity, price, imageSrc) {
         <br>
         <div class="row">
             <div class="col-md-5">
-                <img class="cart-product-image" src="${imageSrc}">
+                <img class="cart-product-image" style="height: 16vh;" src="${imageSrc}">
             </div>
             <div class="col-md-7">
                 <div class="cart-item cart-column">
@@ -148,8 +148,8 @@ function addItemToCart(prod_id, title, quantity, price, imageSrc) {
                 <div class="cart-quantity cart-column">
                     <input class="cart-quantity-input" type="number" value="${quantity}">
                     <span class="base-price hidden">${price}</span>
-                    <span class="cart-price cart-column">$${total_price}</span>
-                    <span><button class="btn btn-danger" type="button"><i class="fa fa-trash fa-fw"></i></button></span>
+                    <span class="cart-price cart-column" >$${total_price}</span>
+                    <span><button class="btn btn-danger" type="button" style="float:right;"><i class="fa fa-trash fa-fw"></i></button></span>
                 </div>    
                 
             </div>
@@ -198,4 +198,20 @@ function updateCartTotal() {
         local.push(JSON.stringify(obj))
     }
     localStorage.setItem('local_shopping_cart', JSON.stringify(local));
+}
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
