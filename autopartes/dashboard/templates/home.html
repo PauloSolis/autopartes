@@ -144,8 +144,9 @@
     <div class="main-content">
         {% block content %}
         <h1>Bienvenido {{user.first_name}}</h1>
-
+        {% if user.is_wholesaler %}
         <h4>Tu saldo  actual es de:  {{ user.balance }}</h4>
+        {% endif %}
         {% endblock %}
 
         <!-- /.row -->
