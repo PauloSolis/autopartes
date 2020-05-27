@@ -180,7 +180,7 @@
                     </div>
                     <div class="header-navibox-2">
                         <ul class="yamm main-menu nav navbar-nav">
-                            <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Home<b
+                           <!-- <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Home<b
                                     class="caret"></b></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="home.html" tabindex="-1">Home one page</a>
@@ -188,10 +188,10 @@
                                     <li><a href="home-2.html" tabindex="-1">Home standart</a>
                                     </li>
                                 </ul>
+                            </li>-->
+                            <li><a href="{% url 'users:landing' %}">Inicio</a>
                             </li>
-                            <li><a href="repair-shop.html">Repair Shop</a>
-                            </li>
-                            <li><a href="car-rental.html">Car Rental</a>
+                               <li><a href="{% url 'users:home' %}">Perfil</a>
                             </li>
                             <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Listings<b
                                     class="caret"></b></a>
