@@ -8,11 +8,9 @@
                 <div class="row">
                     <div class="b-goods-1__img col-md-8">
                         <a class="js-zoom-images "
-
                            href="{{product.image2.url }}">
                             <img class="img-responsive center-block shop-image-product" style="height: 20vh;"
                                  src="{{product.image1.url }}" alt="foto"/>
-
                         </a>
                         <span class="b-goods-1_price hidden-th">{{ product.public_price }}</span>
                     </div>
@@ -20,23 +18,21 @@
                         <div class="b-goods-1_header col-md-8"><a class="b-goods-1_choose hidden-th"
                                                                   href="listing-1.html"><i
                                 class="icon fa fa-heart-o"></i></a>
-<<<<<<< HEAD
+
                             <h2 class="shop-item-title b-goods-1__name">{{ product.name }}</h2>
-=======
-                            <h2 class="b-goods-1__name shop-item-title">{{ product.name }}</h2>
->>>>>>> 0c3bcdf587f06e11b9000bdc8befd0b237a3102b
+
 
                         </div>
                         <div class="hidden product-id" value="{{ product.id }}">{{ product.id }}</div>
                         <div class="b-goods-1__info col-md-12"> {{ product.description }}
                         </div>
                         {% if user.is_retailer %}
-                            <span class="b-goods-1_price_th text-primary visible-th col-md-12 shop-item-price"
+                            <span class="shop-item-price b-goods-1_price_th text-primary visible-th col-md-12"
                                   value="{{ product.public_price }}">$ {{ product.public_price }}
                                             </span>
                         {% endif %}
                         {% if user.is_wholesaler %}
-                            <span class="b-goods-1_price_th text-primary visible-th col-md-12">$ {{ product.wholesale_price }}
+                            <span class="shop-item-price b-goods-1_price_th text-primary visible-th col-md-12">$ {{ product.wholesale_price }}
                                             </span>
                         {% endif %}
                         <div class="b-goods-1__section">

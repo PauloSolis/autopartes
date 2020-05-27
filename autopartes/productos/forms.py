@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Product
+from .models import Product, Category
 
 
 class Products(ModelForm):
@@ -21,7 +21,7 @@ class Products(ModelForm):
 
     class Meta:
         model = Product
-        fields = ['original_code', 'product_code', 'name', 'car_brand', 'car_model', 'car_year', 'description',
+        fields = ['original_code', 'product_code', 'name', 'category', 'car_brand', 'car_model', 'car_year', 'description',
                   'public_price', 'card_price', 'master_price', 'wholesale_price', 'dozen_price', 'image1', 'image2']
 
     def __init__(self, *args, **kwargs):
@@ -38,5 +38,19 @@ class Products(ModelForm):
         self.fields['master_price'].widget.attrs['class'] = 'form-control'
         self.fields['wholesale_price'].widget.attrs['class'] = 'form-control'
         self.fields['dozen_price'].widget.attrs['class'] = 'form-control'
+        self.fields['category'].widget.attrs['class'] = 'form-control'
+        self.fields['category'].queryset = Category.objects.filter()
+        self.fields['category'].label_from_instance = lambda obj: "%s " % obj.name
+
+class CategoryForm(ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name', ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs['class'] = 'form-control'
+
+
 
 
