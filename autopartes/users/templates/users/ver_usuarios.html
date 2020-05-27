@@ -11,6 +11,7 @@
                 <th scope="col">RUC</th>
                 <th scope="col">Correo electrónico</th>
                 <th scope="col">Rol actual</th>
+                <th scope="col">Puede comprar</th>
                 <th scope="col">Cambio de rol</th>
                 <th scope="col">Acitivar/Desactivar Cuenta</th>
                 <th></th>
@@ -32,14 +33,35 @@
                         Administrador
                     {% endif %}
                     </td>
-                    <td><a href="{% url  'users:rol' id=user.id %}"
+                    <td>
+                        {% if user.can_buy %}
+                            <a href="{% url  'users:cant_purchase' id=user.id %}"
+                               data-animation="blur" data-overlaycolor="#36404a">
+                                <button type="button" class=" btn btn-danger">
+                                    <i class="mdi mdi-account">Quitar permiso de compra
+                                    </i>
+                                </button>
+                            </a>
+                        {% else %}
+                            <a href="{% url  'users:can_purchase' id=user.id %}"
+                               data-animation="blur" data-overlaycolor="#36404a">
+                                <button type="button" class=" btn btn-success">
+                                    <i class="mdi mdi-account">Dar permiso de compra
+                                    </i>
+                                </button>
+                            </a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url  'users:rol' id=user.id %}"
                            data-animation="blur" data-overlaycolor="#36404a">
                         <button type="button" class="btn btn-success align-self-center"><i class="fa fa-tag"
                                                                                            aria-hidden="true"></i>
                         </button>
                     </a></td>
                     {% if user.is_active %}
-                        <td><a href="{% url  'users:deactivateUser' id=user.id %}"
+                        <td>
+                            <a href="{% url  'users:deactivateUser' id=user.id %}"
                                data-animation="blur" data-overlaycolor="#36404a">
                             <button type="button" class=" btn btn-danger"><i class="mdi mdi-account">Desactivar
                             </i>
