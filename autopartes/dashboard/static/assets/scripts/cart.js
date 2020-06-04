@@ -73,6 +73,7 @@ function purchaseClicked() {
         alert("elige una direccion de envio")
 
     } else {
+        cart.data.push(JSON.stringify({address: [selected_address]}))
         alert(selected_address)
         json = JSON.stringify(cart);
         var xhr = new XMLHttpRequest();
@@ -211,6 +212,7 @@ function updateCartTotal() {
     document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
 
     document.getElementsByClassName('cart-total-price-outside')[0].innerText = '$' + total
+    document.getElementsByClassName('cart-total-price-to-pay')[0].innerText = '$' + total
 
     var local = []
     for (var i = 0; i < cartRows.length; i++) {

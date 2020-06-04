@@ -424,7 +424,7 @@
                             {% endblock %}
                         </div>
                         <div class="modal-footer">
-                            <span class="modal-title total_price">Total:<span class="cart-total-price"></span> </span>
+
                             <span class="hidden " id="token" value="{% csrf_token %}">{% csrf_token %}</span>
                             <span class="hidden" value="{{ user.can_buy }}"></span>
                             {% if user.can_buy == True %}
@@ -464,7 +464,7 @@
                                 <div class="modal-footer">
 
                                 <span class="modal-title total_price">Total:<span
-                                        class="cart-total-price"></span> </span>
+                                        class="cart-total-price-to-pay"></span> </span>
                                 <span class="hidden " id="token" value="{% csrf_token %}">{% csrf_token %}</span>
                                 {% if user.can_buy == True %}
                                     <button type="button" class="btn btn-primary btn-purchase " href="#pagar"

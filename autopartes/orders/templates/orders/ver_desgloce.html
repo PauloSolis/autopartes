@@ -14,7 +14,24 @@
 
 
         <h1>Ordenes</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Direccion de entrega</h3>
+            </div>
+            <div class="col-md-3">
+                <span>Nombre: {{ address.nombre }}</span>
+            </div>
+            <div class="col-md-3">
+                <span>Estado: {{ address.state }}</span>
+            </div>
+            <div class="col-md-3">
+                <span>Ciudad: {{ address.city }}</span>
+            </div>
+            <div class="col-md-3">
+                <span>Calle: {{ address.address }}</span>
+            </div>
 
+        </div>
         <br>
         <table class="table">
             <thead>
