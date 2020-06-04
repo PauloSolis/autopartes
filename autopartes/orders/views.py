@@ -22,8 +22,8 @@ def crear_orden(request):
             prod_decoded = json.loads(product)
             aux_product = Product.objects.get(pk=prod_decoded['prod_id'])
             prod_ord = ProductsOrder(
-                order_id=order,
-                product_id=aux_product,
+                order=order,
+                product=aux_product,
                 quantity=prod_decoded['prod_quantity'],
                 price=prod_decoded['price_at_sale'])
             prod_ord.save()
@@ -44,7 +44,7 @@ def ver_desgloce(request, id):
     order = ProductsOrder.objects.filter(order_id=id)
     prod = []
     for o in order:
-        aux = Product.objects.get(id = o.product_id)
+        aux = Product.objects.get(id=o.product_id)
         prod.append(aux)
-
-    return render(request, '../templates/orders/ver_desgloce.html', {'order': order, 'products':prod})
+    logger.error(prod)
+    return render(request, '../templates/orders/ver_desgloce.html', {'order': order, 'products': prod})
