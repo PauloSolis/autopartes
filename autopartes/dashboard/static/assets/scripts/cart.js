@@ -109,6 +109,9 @@ function removeCartItem(event) {
     buttonClicked.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.remove()
     updateCartTotal()
 }
+function removeFromResume(prod_id){
+    document.getElementById("short_cart"+prod_id).remove()
+}
 
 function quantityChanged(event) {
     var input = event.target
@@ -124,18 +127,20 @@ function addToCartClicked(event) {
     var shopItem = button.parentElement.parentElement.parentElement.parentElement
     var prod_id = shopItem.getElementsByClassName('product-id')[0].innerText
     var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText
+    var description = shopItem.getElementsByClassName('product-description')[0].innerText
     var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText
     var quantity = shopItem.getElementsByClassName('shop-item-quantity')[0].value
     var image = shopItem.getElementsByClassName('shop-image-product')[0].src
-    addItemToCart(prod_id, title, quantity, price, image)
+    addItemToCart(prod_id, title,description, quantity, price, image)
     updateCartTotal()
 }
 
-function addItemToCart(prod_id, title, quantity, price, imageSrc) {
+function addItemToCart(prod_id, title, description, quantity, price, imageSrc) {
     var cartRow = document.createElement('div')
     cartRow.classList.add('cart-row')
     var cartItems = document.getElementsByClassName('cart-items')[0]
     var cartItemNames = cartItems.getElementsByClassName('cart-item-title')
+    var cartResume = document.getElementById('resumen')
     for (var i = 0; i < cartItemNames.length; i++) {
         if (cartItemNames[i].innerText == title) {
             alert('This item is already added to the cart')
@@ -164,9 +169,28 @@ function addItemToCart(prod_id, title, quantity, price, imageSrc) {
         </div>  
         `
 
+    var shortCart = `
+    <span id="short_cart${prod_id}">
+        <div class="col-md-3" >
+           <h6>${title}</h6>
+        </div>
+        <div class="col-md-3">
+            <h6>${description}</h6>
+        </div>
+        <div class="col-md-3">
+            <h6 type="number" value="${quantity}">${quantity}</h6>
+        </div>
+        <div class="col-md-3">
+            <h6 class="cart-price cart-column" >$${total_price}</h6>
+        </div>
+    </span>
+        `
+
+    cartResume.innerHTML += shortCart
     cartRow.innerHTML = cartRowContents
     cartItems.append(cartRow)
     cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem)
+    removeFromResume(prod_id)
     cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
 }
 
