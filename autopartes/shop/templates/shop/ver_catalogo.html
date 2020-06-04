@@ -8,9 +8,9 @@
                 <div class="row">
                     <div class="b-goods-1__img col-md-8">
                         <a class="js-zoom-images "
-                           href="{{ product.image2.url }}">
-                            <img class="img-responsive center-block shop-image-product"
-                                 src="{{ product.image1.url }}" alt="foto"/>
+                           href="{{product.image2.url }}">
+                            <img class="img-responsive center-block shop-image-product" style="height: 20vh;"
+                                 src="{{product.image1.url }}" alt="foto"/>
                         </a>
                         <span class="b-goods-1_price hidden-th">{{ product.public_price }}</span>
                     </div>
@@ -18,7 +18,9 @@
                         <div class="b-goods-1_header col-md-8"><a class="b-goods-1_choose hidden-th"
                                                                   href="listing-1.html"><i
                                 class="icon fa fa-heart-o"></i></a>
+
                             <h2 class="shop-item-title b-goods-1__name">{{ product.name }}</h2>
+
 
                         </div>
                         <div class="hidden product-id" value="{{ product.id }}">{{ product.id }}</div>

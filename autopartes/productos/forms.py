@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Product, Category
+from .models import Product, Category, SubCategory
 
 
 class Products(ModelForm):
@@ -21,7 +21,9 @@ class Products(ModelForm):
 
     class Meta:
         model = Product
-        fields = ['original_code', 'product_code', 'name', 'category', 'car_brand', 'car_model', 'car_year', 'description',
+        fields = ['original_code', 'product_code', 'name', 'category', 'subcategory', 'car_brand', 'car_model',
+                  'car_year',
+                  'description',
                   'public_price', 'card_price', 'master_price', 'wholesale_price', 'dozen_price', 'image1', 'image2']
 
     def __init__(self, *args, **kwargs):
@@ -41,6 +43,10 @@ class Products(ModelForm):
         self.fields['category'].widget.attrs['class'] = 'form-control'
         self.fields['category'].queryset = Category.objects.filter()
         self.fields['category'].label_from_instance = lambda obj: "%s " % obj.name
+        self.fields['subcategory'].widget.attrs['class'] = 'form-control'
+        self.fields['subcategory'].queryset = SubCategory.objects.filter()
+        self.fields['subcategory'].label_from_instance = lambda obj: "%s " % obj.name
+
 
 class CategoryForm(ModelForm):
     class Meta:
@@ -52,5 +58,16 @@ class CategoryForm(ModelForm):
         self.fields['name'].widget.attrs['class'] = 'form-control'
 
 
+class SubcategoryForm(ModelForm):
+    name = forms.CharField(label="Nombre")
 
+    class Meta:
+        model = SubCategory
+        fields = ['name', 'category']
 
+    def __init__(self, *args, **kwargs):
+        super(SubcategoryForm, self).__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs['class'] = 'form-control'
+        self.fields['category'].widget.attrs['class'] = 'form-control'
+        self.fields['category'].queryset = Category.objects.filter()
+        self.fields['category'].label_from_instance = lambda obj: "%s " % obj.name

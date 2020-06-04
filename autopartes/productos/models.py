@@ -6,12 +6,18 @@ class Category(models.Model):
     name = models.CharField(max_length=250, unique=True, null=False)
 
 
+class SubCategory(models.Model):
+    name = models.CharField(max_length=250, unique=True, null=False)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+
+
 class Product(models.Model):
     original_code = models.CharField(max_length=100, unique=True, null=False)
     product_code = models.CharField(max_length=100, unique=True, null=False)
     name = models.CharField(max_length=100, null=False)
     description = models.TextField(null=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     car_brand = models.CharField(max_length=100)
     car_model = models.CharField(max_length=100)
     car_year = models.IntegerField(null=False)

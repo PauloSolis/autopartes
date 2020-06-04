@@ -3140,14 +3140,15 @@ blockquote cite {
 }
 
 .list-goods_th .b-goods-1 {
-    display: inline-block;
-    width: 30%;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    padding: 40px 20px 20px 20px;
-    vertical-align: top;
-    border: 1px solid #ccc !important;
-    border-radius: 20px;
+
+  display: inline-block;
+  width: 30%;
+  margin: 16px;
+  padding: 40px 20px 20px 20px;
+  vertical-align: top;
+  border: 1px solid #ccc!important;
+  border-radius: 20px;
+
 }
 
 .list-goods_th .b-goods-1__inner {

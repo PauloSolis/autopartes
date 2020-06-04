@@ -5,12 +5,11 @@ from django.db import DatabaseError
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from users.decorators import admin_required
-from .forms import Products, CategoryForm
+from .forms import Products, CategoryForm, SubcategoryForm
 from .models import Product
 
 STATUS_SAVED = 'SAVED'
 STATUS_ERROR = 'ERROR'
-
 
 
 @login_required
@@ -33,7 +32,6 @@ def crear_producto(request):
         return render(request, '../templates/productos/crear_producto.html', context)
 
 
-
 @login_required
 @admin_required
 def ver_producto(request):
@@ -53,6 +51,7 @@ def delete_product(request, id):
     messages.success(request, 'Se ha eliminado correctamente el producto')
     return redirect('productos:ver_producto')
 
+
 @login_required
 @admin_required
 def edit_product(request, id):
@@ -67,6 +66,8 @@ def edit_product(request, id):
     return render(request, '../templates/productos/editar_producto.html', context)
 
 
+@login_required
+@admin_required
 def crear_categoria(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
@@ -83,3 +84,23 @@ def crear_categoria(request):
             'form': form,
         }
         return render(request, '../templates/productos/crear_categoria.html', context)
+
+
+@login_required
+@admin_required
+def create_subcategory(request):
+    if request.method == 'POST':
+        form = SubcategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Se guardó correctamente la Subcategoría')
+            return redirect("productos:ver_producto")
+        else:
+
+            return redirect("productos:ver_producto")
+    else:
+        form = SubcategoryForm
+        context = {
+            'form': form,
+        }
+        return render(request, '../templates/productos/create_subcategory.html', context)
