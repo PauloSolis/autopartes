@@ -141,6 +141,7 @@ function addItemToCart(prod_id, title, description, quantity, price, imageSrc) {
     var cartItems = document.getElementsByClassName('cart-items')[0]
     var cartItemNames = cartItems.getElementsByClassName('cart-item-title')
     var cartResume = document.getElementById('resumen')
+    alert(cartResume.innerHTML)
     for (var i = 0; i < cartItemNames.length; i++) {
         if (cartItemNames[i].innerText == title) {
             alert('This item is already added to the cart')
@@ -169,7 +170,8 @@ function addItemToCart(prod_id, title, description, quantity, price, imageSrc) {
         </div>  
         `
 
-    var shortCart = `
+
+    cartResume.innerHTML += `
     <span id="short_cart${prod_id}">
         <div class="col-md-3" >
            <h6>${title}</h6>
@@ -185,12 +187,10 @@ function addItemToCart(prod_id, title, description, quantity, price, imageSrc) {
         </div>
     </span>
         `
-
-    cartResume.innerHTML += shortCart
+    alert(cartResume.innerHTML)
     cartRow.innerHTML = cartRowContents
     cartItems.append(cartRow)
     cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem)
-    removeFromResume(prod_id)
     cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
 }
 
