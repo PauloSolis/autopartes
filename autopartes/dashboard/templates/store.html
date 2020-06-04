@@ -168,8 +168,11 @@
                                             <span class="header-cart-count bg-primary ">0</span>
                                         </a>
                                     </div>
-                                </button>
 
+                                </button>
+                                <span class="cart-total-price-outside">
+
+                                </span>
 
                                 <!--
 
@@ -432,7 +435,14 @@
             <div class="modal-footer">
                 <span class="modal-title total_price">Total:<span class="cart-total-price"></span> </span>
                 <span class="hidden " id="token" value="{% csrf_token %}">{% csrf_token %}</span>
-                <button type="button" class="btn btn-default btn-purchase">Checkout</button>
+                <span class="hidden" value="{{ user.can_buy }}"></span>
+                {% if user.can_buy == True %}
+                    <button type="button" class="btn btn-default btn-purchase">Checkout</button>
+                {% elif user.can_buy == False %}
+                    <button type="button" class="btn btn-default btn-debt">Tienes adeudo pendiente</button>
+                {% else %}
+                    <button type="button" class="btn btn-default btn-debt"><a href="">Registrate para poder comprar</button>
+                {% endif %}
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>

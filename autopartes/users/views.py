@@ -136,6 +136,24 @@ def activate_profile(request, id):
     return HttpResponseRedirect('/ver/')
 
 
+@login_required
+@admin_required
+def cant_purchase(request, id):
+    user = User.objects.get(id=id)
+    user.can_buy = False
+    user.save()
+    return HttpResponseRedirect('/ver/')
+
+
+@login_required
+@admin_required
+def can_purchase(request, id):
+    user = User.objects.get(id=id)
+    user.can_buy = True
+    user.save()
+    return HttpResponseRedirect('/ver/')
+
+
 class CustomLoginView(LoginView):
     authentication_form = AuthenticationForm
 

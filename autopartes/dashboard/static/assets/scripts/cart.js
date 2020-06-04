@@ -179,6 +179,8 @@ function updateCartTotal() {
     document.getElementsByClassName('header-cart-count')[0].innerHTML = cartRows.length
     document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
 
+    document.getElementsByClassName('cart-total-price-outside')[0].innerText = '$' + total
+
     var local =[]
     for (var i = 0; i < cartRows.length; i++) {
         var cartRow = cartRows[i]
