@@ -8,8 +8,8 @@ function ready() {
     //sc = shopping cart
     localStorage.clear()
     var sc = JSON.parse(localStorage.getItem('local_shopping_cart'));
-    if(sc != null){
-        for(i=0; i<sc.length;i++){
+    if (sc != null) {
+        for (i = 0; i < sc.length; i++) {
             var product = JSON.parse(sc[i])
             //alert(product)
             addItemToCart(product.prod_id, product.prod_title, product.prod_quantity, product.price_at_sale, product.prod_image)
@@ -43,7 +43,7 @@ function purchaseClicked() {
     var cartItemContainer = document.getElementsByClassName('cart-items')[0]
     var cartRows = cartItemContainer.getElementsByClassName('cart-row')
     var total = 0
-    var cart = { products : [] , data : [] };
+    var cart = {products: [], data: []};
     for (var i = 0; i < cartRows.length; i++) {
         var cartRow = cartRows[i]
         var idElement = cartRow.getElementsByClassName('cart-item-id')[0]
@@ -53,47 +53,55 @@ function purchaseClicked() {
         var price = parseFloat(priceElement.innerText.replace('$', ''))
         var quantity = quantityElement.value
 
-        var obj = { prod_id : id, prod_quantity: quantity, price_at_sale: price}
+        var obj = {prod_id: id, prod_quantity: quantity, price_at_sale: price}
         cart.products.push(JSON.stringify(obj))
 
         total = total + (price * quantity)
     }
 
-    //var responsable = document.getElementById('creator_name').value;
-    //var cliente = document.getElementById('customer_name').value;
-    //var estado = document.getElementById('state').value;
+    cart.data.push(JSON.stringify({total: [total]}));
 
-    //cart.data.push(JSON.stringify(responsable));
-    //cart.data.push(JSON.stringify(cliente));
-    cart.data.push(JSON.stringify( {total: [total]}));
-    //cart.data.push(JSON.stringify(estado));
-    //cart.data.push
-
-    json = JSON.stringify(cart);
-    var xhr = new XMLHttpRequest();
-    var url = "/orders/store_order/";
-    var token = getCookie('csrftoken');
-
-    var redirect = '';
-
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("X-CSRFToken", token);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var json = JSON.stringify(xhr.responseText);
-            console.log(json);
-
+    var addresses = document.getElementsByName('address');
+    var selected_address = false;
+    for (var i = 0; i < addresses.length; i++) {
+        if (addresses[i].checked) {
+            selected_address = addresses[i].value;
+            break;
         }
-    };
-
-    xhr.send(json);
-
-    var cartItems = document.getElementsByClassName('cart-items')[0]
-    while (cartItems.hasChildNodes()) {
-        cartItems.removeChild(cartItems.firstChild)
     }
-    updateCartTotal();
+    if (!selected_address) {
+        alert("elige una direccion de envio")
+
+    } else {
+        alert(selected_address)
+        json = JSON.stringify(cart);
+        var xhr = new XMLHttpRequest();
+        var url = "/orders/store_order/";
+        var token = getCookie('csrftoken');
+
+        var redirect = '';
+
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("X-CSRFToken", token);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var json = JSON.stringify(xhr.responseText);
+                console.log(json);
+
+            }
+        };
+
+        xhr.send(json);
+
+        var cartItems = document.getElementsByClassName('cart-items')[0]
+        while (cartItems.hasChildNodes()) {
+            cartItems.removeChild(cartItems.firstChild)
+        }
+        updateCartTotal();
+    }
+
+
 }
 
 function removeCartItem(event) {
@@ -119,7 +127,7 @@ function addToCartClicked(event) {
     var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText
     var quantity = shopItem.getElementsByClassName('shop-item-quantity')[0].value
     var image = shopItem.getElementsByClassName('shop-image-product')[0].src
-    addItemToCart(prod_id, title,quantity, price, image)
+    addItemToCart(prod_id, title, quantity, price, image)
     updateCartTotal()
 }
 
@@ -172,7 +180,7 @@ function updateCartTotal() {
         var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
         var price = parseFloat(priceElement.innerText.replace('$', ''))
         var quantity = quantityElement.value
-        cartRow.getElementsByClassName("cart-price")[0].innerHTML="$"+ price*quantity
+        cartRow.getElementsByClassName("cart-price")[0].innerHTML = "$" + price * quantity
         total = total + (price * quantity)
     }
     total = Math.round(total * 100) / 100
@@ -181,7 +189,7 @@ function updateCartTotal() {
 
     document.getElementsByClassName('cart-total-price-outside')[0].innerText = '$' + total
 
-    var local =[]
+    var local = []
     for (var i = 0; i < cartRows.length; i++) {
         var cartRow = cartRows[i]
         var idElement = cartRow.getElementsByClassName('cart-item-id')[0].innerText
@@ -191,7 +199,7 @@ function updateCartTotal() {
         var imageElement = cartRow.getElementsByClassName('cart-product-image')[0].src
 
         var obj = {
-            prod_id : idElement,
+            prod_id: idElement,
             prod_title: titleElement,
             prod_quantity: quantityElement,
             price_at_sale: priceElement,

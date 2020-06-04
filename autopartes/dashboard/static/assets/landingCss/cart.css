@@ -37,3 +37,11 @@
 .total_price{
     font-size: 20px;
 }
+
+.address{
+    border: solid #2b2e38 1px;
+    border-radius: 16px;
+    padding: 1em;
+    margin: 1em;
+
+}
