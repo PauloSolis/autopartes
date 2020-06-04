@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.core.paginator import Paginator
 from productos.models import Product
+from users.models import Address
 from orders.models import ProductsOrder
 from orders.models import Order
 import json
@@ -14,9 +15,12 @@ logger = logging.getLogger(__name__)
 def crear_orden(request):
     if request.method == 'POST':
         received_order = json.loads(request.body)
+        logger.error(received_order)
         data = json.loads(received_order['data'][0])
-        logger.error(data['total'])
-        order = Order(total_price=data['total'][0], status="pendiente")
+        address= json.loads(received_order['data'][1])
+        address = Address.objects.get(pk=address['address'][0])
+        logger.error(address)
+        order = Order(total_price=data['total'][0], status="pendiente", address=address)
         order.save()
         for product in received_order['products']:
             prod_decoded = json.loads(product)
@@ -42,9 +46,13 @@ def ver_ordenes(request):
 
 def ver_desgloce(request, id):
     order = ProductsOrder.objects.filter(order_id=id)
+    address = Address.objects.get(pk=id)
     prod = []
     for o in order:
         aux = Product.objects.get(id=o.product_id)
         prod.append(aux)
-    logger.error(prod)
-    return render(request, '../templates/orders/ver_desgloce.html', {'order': order, 'products': prod})
+
+    return render(request,
+                  '../templates/orders/ver_desgloce.html',
+                  {'order': order, 'products': prod, 'address': address})
+
