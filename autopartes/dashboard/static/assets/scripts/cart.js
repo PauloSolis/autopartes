@@ -106,6 +106,7 @@ function purchaseClicked() {
 
 function removeCartItem(event) {
     var buttonClicked = event.target
+    removeFromResume(buttonClicked.value)
     buttonClicked.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.remove()
     updateCartTotal()
 }
@@ -141,7 +142,6 @@ function addItemToCart(prod_id, title, description, quantity, price, imageSrc) {
     var cartItems = document.getElementsByClassName('cart-items')[0]
     var cartItemNames = cartItems.getElementsByClassName('cart-item-title')
     var cartResume = document.getElementById('resumen')
-    alert(cartResume.innerHTML)
     for (var i = 0; i < cartItemNames.length; i++) {
         if (cartItemNames[i].innerText == title) {
             alert('This item is already added to the cart')
@@ -163,7 +163,7 @@ function addItemToCart(prod_id, title, description, quantity, price, imageSrc) {
                     <input class="cart-quantity-input" type="number" value="${quantity}">
                     <span class="base-price hidden">${price}</span>
                     <span class="cart-price cart-column" >$${total_price}</span>
-                    <span><button class="btn btn-danger" type="button" style="float:right;"><i class="fa fa-trash fa-fw"></i></button></span>
+                    <span><button class="btn btn-danger" value="${prod_id}" type="button" style="float:right;"><i class="fa fa-trash fa-fw"></i></button></span>
                 </div>    
                 
             </div>
@@ -187,7 +187,6 @@ function addItemToCart(prod_id, title, description, quantity, price, imageSrc) {
         </div>
     </span>
         `
-    alert(cartResume.innerHTML)
     cartRow.innerHTML = cartRowContents
     cartItems.append(cartRow)
     cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem)
