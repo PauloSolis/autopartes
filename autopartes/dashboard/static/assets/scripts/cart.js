@@ -52,7 +52,7 @@ function purchaseClicked() {
         var id = parseInt(idElement.innerText)
         var price = parseFloat(priceElement.innerText.replace('$', ''))
         var quantity = quantityElement.value
-
+        removeFromResume(id)
         var obj = {prod_id: id, prod_quantity: quantity, price_at_sale: price}
         cart.products.push(JSON.stringify(obj))
 
@@ -186,6 +186,7 @@ function addItemToCart(prod_id, title, description, quantity, price, imageSrc) {
         <div class="col-md-3">
             <h6 class="cart-price cart-column" >$${total_price}</h6>
         </div>
+        <div class="col-md-12"></div>
     </span>
         `
     cartRow.innerHTML = cartRowContents
