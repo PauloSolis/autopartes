@@ -52,7 +52,7 @@ function purchaseClicked() {
         var id = parseInt(idElement.innerText)
         var price = parseFloat(priceElement.innerText.replace('$', ''))
         var quantity = quantityElement.value
-
+        removeFromResume(id)
         var obj = {prod_id: id, prod_quantity: quantity, price_at_sale: price}
         cart.products.push(JSON.stringify(obj))
 
@@ -73,6 +73,7 @@ function purchaseClicked() {
         alert("elige una direccion de envio")
 
     } else {
+        cart.data.push(JSON.stringify({address: [selected_address]}))
         alert(selected_address)
         json = JSON.stringify(cart);
         var xhr = new XMLHttpRequest();
@@ -185,6 +186,7 @@ function addItemToCart(prod_id, title, description, quantity, price, imageSrc) {
         <div class="col-md-3">
             <h6 class="cart-price cart-column" >$${total_price}</h6>
         </div>
+        <div class="col-md-12"></div>
     </span>
         `
     cartRow.innerHTML = cartRowContents
@@ -211,6 +213,7 @@ function updateCartTotal() {
     document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
 
     document.getElementsByClassName('cart-total-price-outside')[0].innerText = '$' + total
+    document.getElementsByClassName('cart-total-price-to-pay')[0].innerText = '$' + total
 
     var local = []
     for (var i = 0; i < cartRows.length; i++) {
