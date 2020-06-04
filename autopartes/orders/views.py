@@ -49,9 +49,10 @@ def ver_desgloce(request, id):
     address = Address.objects.get(pk=id)
     prod = []
     for o in order:
-        aux = Product.objects.get(id = o.product_id)
+        aux = Product.objects.get(id=o.product_id)
         prod.append(aux)
 
     return render(request,
                   '../templates/orders/ver_desgloce.html',
                   {'order': order, 'products': prod, 'address': address})
+
