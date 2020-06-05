@@ -41,7 +41,7 @@
             font-family: "Roboto", sans-serif;
             text-transform: uppercase;
             outline: 0;
-            background: #4CAF50;
+            background: #2778fe;
             width: 100%;
             border: 0;
             padding: 15px;
@@ -53,7 +53,7 @@
         }
 
         .form button:hover, .form button:active, .form button:focus {
-            background: #43A047;
+            background: #2778fe;
         }
 
         .form .message {
@@ -127,11 +127,8 @@
         }
 
         body {
-            background: #75a7f9; /* fallback for old browsers */
-            background: -webkit-linear-gradient(right,  #0060ff, #1d71fc);
-            background: -moz-linear-gradient(right,  #0060ff, #1d71fc);
-            background: -o-linear-gradient(right,  #0060ff, #1d71fc);
-            background: linear-gradient(to left,  #0060ff, #1d71fc);
+            background-image: url("/static/images/login.jpg"); /* fallback for old browsers */
+
             font-family: "Roboto", sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -154,7 +151,7 @@
         <form method="post" class="login-form">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">login</button>
+            <button type="submit">Ingresar</button>
             <p class="message"><a href="/login/">Acceder a tu cuenta en su lugar</a>
             </p>
         </form>
