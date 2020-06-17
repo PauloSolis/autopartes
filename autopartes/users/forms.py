@@ -5,6 +5,7 @@ from django.forms import ModelForm
 from phonenumber_field.formfields import PhoneNumberField
 from .models import User, Address
 from djmoney.models.fields import MoneyField
+from djmoney.forms.fields import MoneyField
 
 
 class UserRegister(UserCreationForm):
@@ -144,8 +145,8 @@ class EditProfileForm(UserChangeForm):
         self.fields['mobile'].widget.attrs['class'] = 'form-control'
 
 
-class EditBalance(UserChangeForm):
-    balance = forms.DecimalField(label='Cantidad Pagada')
+class EditBalance(ModelForm):
+    balance = forms.DecimalField(max_digits=10, decimal_places=2, label='')
 
     class Meta:
         model = User
