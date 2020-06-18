@@ -51,6 +51,7 @@
                 <th scope="col">Precio Maestro</th>
                 <th scope="col">Precio Mayoreo</th>
                 <th scope="col">Precio Docena</th>
+                <th scope="col">Stock</th>
             </tr>
             </thead>
             <tbody>
@@ -70,6 +71,7 @@
                         <td>${{ product.master_price }}</td>
                         <td>${{ product.wholesale_price }}</td>
                         <td>${{ product.dozen_price }}</td>
+                        <td>{{ product.in_stock }}</td>
                         <td><a href="{% url  'productos:edit_product' id=product.id %}"
                 data-animation="blur" data-overlaycolor="#36404a">
                 <button type="button" class=" btn btn-success"><i class="fa fa-edit"></i>
