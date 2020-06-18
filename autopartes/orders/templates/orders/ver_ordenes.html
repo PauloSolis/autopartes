@@ -20,7 +20,12 @@
             <thead>
             <tr>
                 <th scope="col">Id de Orden</th>
-                <th scope="col">Nombre del cliente</th>
+                {% if customers %}
+                    <th scope="col">Nombre del cliente</th>
+                {% else %}
+                    <th scope="col">Direccion de entrgega</th>
+                {% endif %}
+
                 <th scope="col">Precio total</th>
 
 
@@ -33,20 +38,31 @@
 
                     <tr>
                         <td>{{ order.id }}</td>
-                        <td>Nombre de cliente</td>
+                        <td>
+
+                        {% if customers %}
+                            {% for customer in customers %}
+                                {% if customer.id == order.user.id %}
+                                    {{ customer.username }}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {% for address in addresses %}
+                                {% if address.id == order.address.id %}
+                                    {{ address.name }},
+                                    {{ address.address }}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        </td>
                         <td>{{ order.total_price }}</td>
 
                         <td>
                         <a href="{% url  'orders:ver_desgloce' id=order.id %}"
                            data-animation="blur" data-overlaycolor="#36404a">
-                <button type="button" class=" btn btn-success"><i class="mdi mdi-account"></i>
+                <button type="button" class=" btn btn-success"><i class="fa fa-eye"></i>
                 </button>
 {#                </a>#}
-                        </td>
-                        <td>
-                            <button data-target="#delete-modal-{{ order.id }}" data-toggle="modal" type="button"
-                                    class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
                         </td>
 
                     </tr>
