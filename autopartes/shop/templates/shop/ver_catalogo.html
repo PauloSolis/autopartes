@@ -8,9 +8,9 @@
                 <div class="row">
                     <div class="b-goods-1__img col-md-8">
                         <a class="js-zoom-images "
-                           href="{{product.image2.url }}">
-                            <img class="img-responsive center-block shop-image-product" style="height: 20vh;"
-                                 src="{{product.image1.url }}" alt="foto"/>
+                           href="{{ product.image2.url }}">
+                            <img class="img-responsive center-block shop-image-product"
+                                 src="{{ product.image1.url }}" alt="foto"/>
                         </a>
                         <span class="b-goods-1_price hidden-th">{{ product.public_price }}</span>
                     </div>
@@ -18,13 +18,12 @@
                         <div class="b-goods-1_header col-md-8"><a class="b-goods-1_choose hidden-th"
                                                                   href="listing-1.html"><i
                                 class="icon fa fa-heart-o"></i></a>
-
-                            <h2 class="shop-item-title b-goods-1__name">{{ product.name }}</h2>
-
+                            <h2 class="shop-item-title b-goods-1__name">{{ product.name }} {{ product.description }}</h2>
+                            <br>
 
                         </div>
                         <div class="hidden product-id" value="{{ product.id }}">{{ product.id }}</div>
-                        <div class="b-goods-1__info col-md-12 product-description"> {{ product.description }}
+                        <div class="b-goods-1__info col-md-12 product-description"> {{ product.product_code }}
                         </div>
                         {% if user.is_retailer %}
                             <span class="shop-item-price b-goods-1_price_th text-primary visible-th col-md-12"
@@ -49,10 +48,22 @@
                             <div class="col-md-6">
                                 <input class="cart-quantity-input shop-item-quantity" type="number" value="1" min="1"
                                        max="1000" step="1"/>
+                                <br><br>
+                                {% if product.in_stock > 20 %}
+                                    <p style="color: #d01818; font-size: medium;">En stock</p>
+                                {% endif %}
+                                {% if product.in_stock > 0 and product.in_stock < 20%}
+                                    <p style="color: #d01818; font-size: medium;">{{ product.in_stock }} en stock</p>
+                                {% endif %}
+                                {% if product.in_stock == 0 %}
+                                    <p style="color: #d01818; font-size: medium;">No disponible</p>
+                                {% endif %}
                             </div>
-                            <div class="col-md-6">
-                                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
-                            </div>
+                            {% if product.in_stock != 0 %}
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                                </div>
+                            {% endif %}
                         </div>
 
 
@@ -71,7 +82,7 @@
             <div class="row address">
                 <div class="col-md-1">
 
-                    <input type="radio" id="{{ address.id }}" name="address" value="{{ address.id }}" >
+                    <input type="radio" id="{{ address.id }}" name="address" value="{{ address.id }}">
 
                 </div>
                 <div class="col-md-11">

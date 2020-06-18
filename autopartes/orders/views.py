@@ -27,6 +27,11 @@ def crear_orden(request):
         for product in received_order['products']:
             prod_decoded = json.loads(product)
             aux_product = Product.objects.get(pk=prod_decoded['prod_id'])
+            print(aux_product.name)
+            print(aux_product.in_stock)
+            aux_product.in_stock -= int(prod_decoded['prod_quantity'])
+            print(aux_product.in_stock)
+            aux_product.save()
             prod_ord = ProductsOrder(
                 order=order,
                 product=aux_product,

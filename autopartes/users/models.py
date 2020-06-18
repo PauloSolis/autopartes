@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from djmoney.models.validators import MinMoneyValidator
+from djmoney.money import Money
 from phonenumber_field.modelfields import PhoneNumberField
 from djmoney.models.fields import MoneyField
 
@@ -11,7 +13,13 @@ class User(AbstractUser):
     birthday = models.DateField(auto_now=False, null=True, blank=True)
     phone = PhoneNumberField(null=False, blank=False, unique=True)
     mobile = PhoneNumberField(null=False, blank=False, unique=True)
-    balance = MoneyField(max_digits=14, decimal_places=2, default_currency='USD', default=0)
+    #balance = models.DecimalField(default=0, max_digits=14, decimal_places=2)
+    balance = MoneyField(max_digits=14, decimal_places=2, default_currency='USD', default=0,
+                         validators=[
+                             MinMoneyValidator(0),
+                             MinMoneyValidator(Money(0, 'USD')),
+                         ]
+                         )
     is_administrator = models.BooleanField(default=False)
     is_wholesaler = models.BooleanField(default=False)
     is_retailer = models.BooleanField(default=True)

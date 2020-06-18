@@ -8,6 +8,7 @@ app_name = 'users'
 urlpatterns = [
     path('signup/', views.RegisterView.as_view(), name='signup'),
     path('ver/', views.displayUsers, name='ver'),
+    path('ver/<int:id>/', views.displayUsers, name='ver_pk'),
     path('ver/rol/<int:id>/', views.changeRole, name='rol'),
     path('index/', views.HomeView.as_view(), name='home'),
     path(r'^logout/$', LogoutView.as_view(), name='logout'),
