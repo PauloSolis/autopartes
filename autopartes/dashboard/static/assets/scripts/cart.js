@@ -12,7 +12,7 @@ function ready() {
         for (i = 0; i < sc.length; i++) {
             var product = JSON.parse(sc[i])
             //alert(product)
-            addItemToCart(product.prod_id, product.prod_title, product.prod_quantity, product.price_at_sale, product.prod_image)
+            addItemToCart(product.prod_id, product.prod_title, product.prod_description, product.prod_quantity, product.price_at_sale, product.prod_image)
         }
 
     }
@@ -44,22 +44,7 @@ function purchaseClicked() {
     var cartRows = cartItemContainer.getElementsByClassName('cart-row')
     var total = 0
     var cart = {products: [], data: []};
-    for (var i = 0; i < cartRows.length; i++) {
-        var cartRow = cartRows[i]
-        var idElement = cartRow.getElementsByClassName('cart-item-id')[0]
-        var priceElement = cartRow.getElementsByClassName('cart-price')[0]
-        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
-        var id = parseInt(idElement.innerText)
-        var price = parseFloat(priceElement.innerText.replace('$', ''))
-        var quantity = quantityElement.value
-        removeFromResume(id)
-        var obj = {prod_id: id, prod_quantity: quantity, price_at_sale: price}
-        cart.products.push(JSON.stringify(obj))
 
-        total = total + (price * quantity)
-    }
-
-    cart.data.push(JSON.stringify({total: [total]}));
 
     var addresses = document.getElementsByName('address');
     var selected_address = false;
@@ -73,6 +58,23 @@ function purchaseClicked() {
         alert("elige una direccion de envio")
 
     } else {
+        for (var i = 0; i < cartRows.length; i++) {
+            var cartRow = cartRows[i]
+            var idElement = cartRow.getElementsByClassName('cart-item-id')[0]
+            var priceElement = cartRow.getElementsByClassName('cart-price')[0]
+            var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
+            var id = parseInt(idElement.innerText)
+            var price = parseFloat(priceElement.innerText.replace('$', ''))
+            var quantity = quantityElement.value
+            removeFromResume(id)
+            var obj = {prod_id: id, prod_quantity: quantity, price_at_sale: price}
+            cart.products.push(JSON.stringify(obj))
+
+            total = total + (price * quantity)
+        }
+
+        cart.data.push(JSON.stringify({total: [total]}));
+
         cart.data.push(JSON.stringify({address: [selected_address]}))
 
         json = JSON.stringify(cart);
@@ -170,7 +172,7 @@ function addItemToCart(prod_id, title, description, quantity, price, imageSrc) {
                     <span class="cart-item-title">${title}</span>
                 </div>
                 <div class="cart-item cart-column">
-                    <span class="cart-item-title">${description}</span>
+                    <span class="cart-item-description">${description}</span>
                 </div>
                 <div class="cart-item-id cart-column" style="display:none">${prod_id}</div>
                 <div class="cart-quantity cart-column">
@@ -233,6 +235,7 @@ function updateCartTotal() {
         var cartRow = cartRows[i]
         var idElement = cartRow.getElementsByClassName('cart-item-id')[0].innerText
         var titleElement = cartRow.getElementsByClassName('cart-item-title')[0].innerText
+        var descriptionElement = cartRow.getElementsByClassName('cart-item-description')[0].innerText
         var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0].value
         var priceElement = cartRow.getElementsByClassName('cart-price')[0].innerText
         var imageElement = cartRow.getElementsByClassName('cart-product-image')[0].src
@@ -240,6 +243,7 @@ function updateCartTotal() {
         var obj = {
             prod_id: idElement,
             prod_title: titleElement,
+            prod_description: descriptionElement,
             prod_quantity: quantityElement,
             price_at_sale: priceElement,
             prod_image: imageElement
