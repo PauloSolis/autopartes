@@ -74,7 +74,7 @@ function purchaseClicked() {
 
     } else {
         cart.data.push(JSON.stringify({address: [selected_address]}))
-        alert(selected_address)
+
         json = JSON.stringify(cart);
         var xhr = new XMLHttpRequest();
         var url = "/orders/store_order/";
@@ -89,6 +89,11 @@ function purchaseClicked() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var json = JSON.stringify(xhr.responseText);
                 console.log(json);
+                var cartResume = document.getElementById('resumen');
+                cartResume.innerHTML += `
+                    <h1>Tu compra fue procesada Exitosamente</h1>
+                `;
+                setTimeout(reload_page,3000)
 
             }
         };
@@ -103,6 +108,10 @@ function purchaseClicked() {
     }
 
 
+}
+
+function reload_page(){
+    location.reload()
 }
 
 function removeCartItem(event) {
@@ -159,6 +168,10 @@ function addItemToCart(prod_id, title, description, quantity, price, imageSrc) {
             <div class="col-md-7">
                 <div class="cart-item cart-column">
                     <span class="cart-item-title">${title}</span>
+                </div>
+                <div class="cart-item cart-column">
+                    <span class="cart-item-title">${description}</span>
+                </div>
                 <div class="cart-item-id cart-column" style="display:none">${prod_id}</div>
                 <div class="cart-quantity cart-column">
                     <input class="cart-quantity-input" type="number" value="${quantity}">
