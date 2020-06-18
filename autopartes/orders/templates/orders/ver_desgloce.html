@@ -13,7 +13,9 @@
         {% endif %}
 
 
-        <h1>Ordenes</h1>
+        <h1>Orden: {{ order.id }}</h1>
+        <h3>Estatus: {{ order.status }}</h3>
+        <h3>Precio Total: {{ order.total_price }}</h3>
         <div class="row">
             <div class="col-md-12">
                 <h3>Direccion de entrega</h3>
@@ -43,7 +45,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% if order %}
+            {% if order_products %}
 
                 {% for product in products %}
 
@@ -51,14 +53,14 @@
                         <td>{{ product.id }}</td>
                         <td>{{ product.name }}, {{ product.description}}</td>
                         <td>
-                            {% for o in order %}
+                            {% for o in order_products %}
                                 {% if o.product_id == product.id  %}
                                     {{ o.quantity }}
                                 {% endif %}
                             {% endfor %}
                         </td>
                         <td>
-                            {% for o in order %}
+                            {% for o in order_products %}
                                 {% if o.product_id == product.id  %}
                                     {{ o.price }}
                                 {% endif %}

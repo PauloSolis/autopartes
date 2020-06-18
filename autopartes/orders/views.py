@@ -66,15 +66,15 @@ def ver_ordenes(request):
 
 
 def ver_desgloce(request, id):
-    order = ProductsOrder.objects.filter(order_id=id)
-    aux = Order.objects.get(pk=id)
-    address = Address.objects.get(pk=aux.address.id)
+    order_p = ProductsOrder.objects.filter(order_id=id)
+    order = Order.objects.get(pk=id)
+    address = Address.objects.get(pk=order.address.id)
     prod = []
-    for o in order:
+    for o in order_p:
         aux = Product.objects.get(id=o.product_id)
         prod.append(aux)
 
     return render(request,
                   '../templates/orders/ver_desgloce.html',
-                  {'order': order, 'products': prod, 'address': address})
+                  {'order_products': order_p, 'products': prod, 'address': address, 'order': order})
 
