@@ -18,13 +18,18 @@ class Products(ModelForm):
     dozen_price = forms.FloatField(label="Precio por Docena")
     image1 = forms.ImageField(label="Foto de Frente")
     image2 = forms.ImageField(label="Foto de Posterior")
+    in_stock = forms.IntegerField(label="Stock", min_value=0)
 
     class Meta:
         model = Product
         fields = ['original_code', 'product_code', 'name', 'category', 'subcategory', 'car_brand', 'car_model',
-                  'car_year',
-                  'description',
-                  'public_price', 'card_price', 'master_price', 'wholesale_price', 'dozen_price', 'image1', 'image2']
+                  'car_year', 'description','public_price', 'card_price', 'master_price', 'wholesale_price',
+                  'dozen_price', 'image1', 'image2', 'in_stock']
+
+        # widgets = {
+        # 'subcategory': autocomplete.ModelSelect2(url='subcategory-autocomplete',
+        # forward = ['category'])
+        # }
 
     def __init__(self, *args, **kwargs):
         super(Products, self).__init__(*args, **kwargs)
@@ -40,6 +45,7 @@ class Products(ModelForm):
         self.fields['master_price'].widget.attrs['class'] = 'form-control'
         self.fields['wholesale_price'].widget.attrs['class'] = 'form-control'
         self.fields['dozen_price'].widget.attrs['class'] = 'form-control'
+        self.fields['in_stock'].widget.attrs['class'] = 'form-control'
         self.fields['category'].widget.attrs['class'] = 'form-control'
         self.fields['category'].queryset = Category.objects.filter()
         self.fields['category'].label_from_instance = lambda obj: "%s " % obj.name
