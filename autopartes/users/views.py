@@ -13,10 +13,10 @@ from django.views.generic import TemplateView
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db import DatabaseError
+from djmoney.money import Money
 from .models import User, Address
 from .forms import UserRegister, AddressForm, EditProfileForm, EditBalance
 from django.contrib.auth.forms import UserChangeForm
-
 from .decorators import admin_required, wholesaler_required, retailer_required
 from .forms import AuthenticationForm
 
@@ -60,7 +60,19 @@ class RegisterView(SuccessMessageMixin, View):
 def displayUsers(request):
     users = User.objects.all().order_by('id')
     addresses = Address.objects.all()
-    form = EditBalance
+
+    if request.method == 'POST':
+        id = request.POST.get('id')
+        previous = User.objects.get(id=id)
+        token = previous.balance
+        form = EditBalance(request.POST or None, instance=previous)
+        if form.is_valid():
+            paid = form.cleaned_data.get('balance')
+            X = Money(paid, 'USD')
+            User.objects.filter(id=id).update(balance=(token - X))
+            return HttpResponseRedirect('/ver/')
+    else:
+        form = EditBalance()
     context = {
         'users': users,
         'form': form,

@@ -1,188 +1,201 @@
 {% extends 'home.html' %}
 {% block content %}
-    <div class="container-fluid">
-        <h1>Usuarios</h1>
-        <br>
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellidos</th>
-                <th scope="col">RUC</th>
-                <th scope="col">Correo electrónico</th>
-                <th scope="col">Rol actual</th>
-                <th scope="col">Puede comprar</th>
-                <th scope="col">Cambio de rol</th>
-                <th scope="col">Acitivar/Desactivar Cuenta</th>
-                <th></th>
+<div class="container-fluid">
+    <h1>Usuarios</h1>
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">RUC</th>
+            <th scope="col">Correo electrónico</th>
+            <th scope="col">Rol actual</th>
+            <th scope="col">Puede comprar</th>
+            <th scope="col">Cambio de rol</th>
+            <th scope="col">Acitivar/Desactivar Cuenta</th>
+            <th></th>
 
-            </tr>
-            </thead>
-            <tbody>
-            {% for user in users %}
-                <tr>
-                    <td scope="row">{{ user.first_name }}</td>
-                    <td>{{ user.last_name }}</td>
-                    <td>{{ user.ruc }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{% if user.is_retailer %}
-                        Minorista
-                    {% elif user.is_wholesaler %}
-                        Mayorista
-                    {% elif user.is_administrator %}
-                        Administrador
-                    {% endif %}
-                    </td>
-                    <td>
-                        {% if user.can_buy %}
-                            <a href="{% url  'users:cant_purchase' id=user.id %}"
-                               data-animation="blur" data-overlaycolor="#36404a">
-                                <button type="button" class=" btn btn-danger">
-                                    <i class="mdi mdi-account">Quitar permiso de compra
-                                    </i>
-                                </button>
-                            </a>
-                        {% else %}
-                            <a href="{% url  'users:can_purchase' id=user.id %}"
-                               data-animation="blur" data-overlaycolor="#36404a">
-                                <button type="button" class=" btn btn-success">
-                                    <i class="mdi mdi-account">Dar permiso de compra
-                                    </i>
-                                </button>
-                            </a>
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a href="{% url  'users:rol' id=user.id %}"
-                           data-animation="blur" data-overlaycolor="#36404a">
-                        <button type="button" class="btn btn-success align-self-center"><i class="fa fa-tag"
-                                                                                           aria-hidden="true"></i>
-                        </button>
-                    </a></td>
-                    {% if user.is_active %}
-                        <td>
-                            <a href="{% url  'users:deactivateUser' id=user.id %}"
-                               data-animation="blur" data-overlaycolor="#36404a">
-                            <button type="button" class=" btn btn-danger"><i class="mdi mdi-account">Desactivar
-                            </i>
-                            </button>
-                        </a></td>
-                    {% else %}
-                        <td><a href="{% url  'users:activateUser' id=user.id %}"
-                               data-animation="blur" data-overlaycolor="#36404a">
-                            <button type="button" class=" btn btn-primary"><i class="mdi mdi-account">Activar</i>
-                            </button>
-                        </a></td>
-                    {% endif %}
-                    <td>
-                        <button class=" btn btn-success" data-toggle="modal" data-target="#info{{ user.id }}"><i
-                                class="fa fa-info-circle" aria-hidden="true"></i></button>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    </body>
-    </html>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+        <tr>
+            <td scope="row">{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.ruc }}</td>
+            <td>{{ user.email }}</td>
+            <td>{% if user.is_retailer %}
+                Minorista
+                {% elif user.is_wholesaler %}
+                Mayorista
+                {% elif user.is_administrator %}
+                Administrador
+                {% endif %}
+            </td>
+            <td>
+                {% if user.can_buy %}
+                <a href="{% url  'users:cant_purchase' id=user.id %}"
+                   data-animation="blur" data-overlaycolor="#36404a">
+                    <button type="button" class=" btn btn-danger">
+                        <i class="mdi mdi-account">Quitar permiso de compra
+                        </i>
+                    </button>
+                </a>
+                {% else %}
+                <a href="{% url  'users:can_purchase' id=user.id %}"
+                   data-animation="blur" data-overlaycolor="#36404a">
+                    <button type="button" class=" btn btn-success">
+                        <i class="mdi mdi-account">Dar permiso de compra
+                        </i>
+                    </button>
+                </a>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url  'users:rol' id=user.id %}"
+                   data-animation="blur" data-overlaycolor="#36404a">
+                    <button type="button" class="btn btn-success align-self-center"><i class="fa fa-tag"
+                                                                                       aria-hidden="true"></i>
+                    </button>
+                </a></td>
+            {% if user.is_active %}
+            <td>
+                <a href="{% url  'users:deactivateUser' id=user.id %}"
+                   data-animation="blur" data-overlaycolor="#36404a">
+                    <button type="button" class=" btn btn-danger"><i class="mdi mdi-account">Desactivar
+                    </i>
+                    </button>
+                </a></td>
+            {% else %}
+            <td><a href="{% url  'users:activateUser' id=user.id %}"
+                   data-animation="blur" data-overlaycolor="#36404a">
+                <button type="button" class=" btn btn-primary"><i class="mdi mdi-account">Activar</i>
+                </button>
+            </a></td>
+            {% endif %}
+            <td>
+                <button class=" btn btn-success" data-toggle="modal" data-target="#info{{ user.id }}"><i
+                        class="fa fa-info-circle" aria-hidden="true"></i></button>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
 {% endblock %}
 
 {% block modals %}
-    {% if users %}
-        {% for user in users %}
+{% if users %}
+{% for user in users %}
 
-            <div class="modal fade" id="info{{ user.id }}" tabindex="-1" role="dialog"
-                 aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLabel">
-                                Información de {{ user.first_name }} {{ user.last_name }}</h4>
-                        </div>
-                        <div class="modal-body">
-                            <table class="table table-striped">
-                                <tbody>
-                                <tr>
-                                    <th scope="row">Nombres</th>
-                                    <td>{{ user.first_name }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Apellidos</th>
-                                    <td>{{ user.last_name }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">RUC</th>
-                                    <td>{{ user.ruc }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Fecha de Nacimiento</th>
-                                    <td>{{ user.birthday }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Teléfono Convencional</th>
-                                    <td>{{ user.phone }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Teléfono Celular</th>
-                                    <td>{{ user.mobile }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Rol del Sistema</th>
-                                    <td>{% if user.is_retailer %}
-                                        Minorista
-                                    {% elif user.is_wholesaler %}
-                                        Mayorista
-                                    {% elif user.is_administrator %}
-                                        Administrador
-                                    {% endif %}</td>
-                                </tr>
-                                {% if user.is_retailer or user.is_wholesaler %}
-                                    <tr>
-                                        <th scope="row">Deuda</th>
-                                        <td>{{ user.balance }}</td>
-                                    </tr>
+<div class="modal fade" id="info{{ user.id }}" tabindex="-1" role="dialog"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">
+                    Información de {{ user.first_name }} {{ user.last_name }}</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <th scope="row">Nombres</th>
+                        <td>{{ user.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Apellidos</th>
+                        <td>{{ user.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">RUC</th>
+                        <td>{{ user.ruc }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Fecha de Nacimiento</th>
+                        <td>{{ user.birthday }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Teléfono Convencional</th>
+                        <td>{{ user.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Teléfono Celular</th>
+                        <td>{{ user.mobile }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Rol del Sistema</th>
+                        <td>{% if user.is_retailer %}
+                            Minorista
+                            {% elif user.is_wholesaler %}
+                            Mayorista
+                            {% elif user.is_administrator %}
+                            Administrador
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% if user.is_retailer or user.is_wholesaler %}
+                    <tr>
+                        <th scope="row">Deuda</th>
+                        <td>{{ user.balance }}</td>
+                    </tr>
 
-                                    <tr>
-                                        <th scope="row">Direcciones</th>
-                                        <td>
+                    <tr>
+                        <th scope="row">Direcciones</th>
+                        <td>
 
-                                                {% for address in addresses %}
-                                                    {% if address.user_id == user.id %}
+                            {% for address in addresses %}
+                            {% if address.user_id == user.id %}
 
-                                                            Nombre de la sucursal : {{ address.name }}
-                                                            <br>
-                                                            Provincia : {{ address.state }}
-                                                            <br>
-                                                            Dirección : {{ address.address }}
-                                                            <br>
-                                                        Ciudad : {{ address.city }}
-                                                        <br>
-                                                        Código Postal : {{ address.postal_code }}
-                                                        <br><br>
+                            Nombre de la sucursal : {{ address.name }}
+                            <br>
+                            Provincia : {{ address.state }}
+                            <br>
+                            Dirección : {{ address.address }}
+                            <br>
+                            Ciudad : {{ address.city }}
+                            <br>
+                            Código Postal : {{ address.postal_code }}
+                            <br><br>
 
-                                                    {% endif %}
-                                                {% endfor %}
+                            {% endif %}
+                            {% endfor %}
 
 
-                                    </tr>
+                    </tr>
 
-                                {% endif %}
-                                <!---<tr>
-                                            <th scope="row">Deuda</th>
-                                            <td>{{ form.as_p }}</td>
-                                        </tr>-->
-                                </tbody>
-                            </table>
-                        </div>
+                    {% endif %}
+                    {% if user.is_wholesaler %}
+                    <th scope="row">Cantidad pagada</th>
+                    <form method="post" >
+                        <input type="hidden" name="id" value="{{ user.id }}">
+                        {% csrf_token %}
+                        <td>{{ form.as_p }}</td>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        </div>
-                    </div>
-                </div>
+                     {% endif %}
+                    </tbody>
+                </table>
             </div>
 
-        {% endfor %}
-    {% endif %}
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                {% if user.is_wholesaler %}
+                <button type="submit" class=" btn btn-primary"><i class="mdi mdi-account">Actualizar</i>
+                </button>
+                {% endif %}
+            </div>
+
+        </div>
+         </form>
+    </div>
+
+</div>
+</div>
+
+{% endfor %}
+{% endif %}
 
 {% endblock %}
