@@ -5,6 +5,7 @@ from productos.models import Product
 from users.models import Address
 from orders.models import ProductsOrder
 from orders.models import Order
+from orders.models import User
 import json
 import logging
 
@@ -20,7 +21,8 @@ def crear_orden(request):
         address= json.loads(received_order['data'][1])
         address = Address.objects.get(pk=address['address'][0])
         logger.error(address)
-        order = Order(total_price=data['total'][0], status="pendiente", address=address)
+        user_buying = User.objects.get(pk=request.user.id)
+        order = Order(total_price=data['total'][0], status="pendiente", address=address, user=user_buying)
         order.save()
         for product in received_order['products']:
             prod_decoded = json.loads(product)
@@ -35,18 +37,38 @@ def crear_orden(request):
 
 
 def ver_ordenes(request):
-    orders = Order.objects.all().order_by('-id')
-    paginator = Paginator(orders, 20)
+    if( request.user.is_administrator ):
+        orders = Order.objects.all().order_by('-id')
+        paginator = Paginator(orders, 20)
+        customers = []
+        for o in orders:
+            customer = User.objects.get(pk = o.user_id)
+            customers.append(customer)
 
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, '../templates/orders/ver_ordenes.html', {'orders': page_obj, 'customers': customers})
+    else:
+        orders_user = User.objects.get(pk=request.user.id)
+        orders = Order.objects.filter(user=orders_user).order_by('-id')
+        paginator = Paginator(orders, 20)
+        addresses = []
 
-    return render(request, '../templates/orders/ver_ordenes.html', {'orders': page_obj})
+        for o in orders:
+            address = Address.objects.get(pk=o.address.id)
+            addresses.append(address)
+
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, '../templates/orders/ver_ordenes.html', {'orders': page_obj, 'addresses': addresses})
+
+
 
 
 def ver_desgloce(request, id):
     order = ProductsOrder.objects.filter(order_id=id)
-    address = Address.objects.get(pk=id)
+    aux = Order.objects.get(pk=id)
+    address = Address.objects.get(pk=aux.address.id)
     prod = []
     for o in order:
         aux = Product.objects.get(id=o.product_id)

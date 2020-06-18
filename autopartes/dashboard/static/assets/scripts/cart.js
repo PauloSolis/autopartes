@@ -6,7 +6,7 @@ if (document.readyState == 'loading') {
 
 function ready() {
     //sc = shopping cart
-    localStorage.clear()
+    //localStorage.clear()
     var sc = JSON.parse(localStorage.getItem('local_shopping_cart'));
     if (sc != null) {
         for (i = 0; i < sc.length; i++) {
@@ -213,7 +213,7 @@ function updateCartTotal() {
     document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
 
     document.getElementsByClassName('cart-total-price-outside')[0].innerText = '$' + total
-    document.getElementsByClassName('cart-total-price-to-pay')[0].innerText = '$' + total
+    document.getElementsByClassName('cart-total-price-to-pay').innerText = '$' + total
 
     var local = []
     for (var i = 0; i < cartRows.length; i++) {
