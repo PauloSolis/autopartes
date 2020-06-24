@@ -42,32 +42,36 @@ def crear_orden(request):
 
 
 def ver_ordenes(request):
+
+
     if( request.user.is_administrator ):
         orders = Order.objects.all().order_by('-id')
         paginator = Paginator(orders, 20)
         customers = []
         for o in orders:
             customer = User.objects.get(pk = o.user_id)
-            customers.append(customer)
+            if customer not in customers:
+                customers.append(customer)
 
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         return render(request, '../templates/orders/ver_ordenes.html', {'orders': page_obj, 'customers': customers})
+
     else:
         orders_user = User.objects.get(pk=request.user.id)
         orders = Order.objects.filter(user=orders_user).order_by('-id')
         paginator = Paginator(orders, 20)
+
         addresses = []
 
         for o in orders:
             address = Address.objects.get(pk=o.address.id)
-            addresses.append(address)
+            if address not in addresses:
+                addresses.append(address)
 
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         return render(request, '../templates/orders/ver_ordenes.html', {'orders': page_obj, 'addresses': addresses})
-
-
 
 
 def ver_desgloce(request, id):

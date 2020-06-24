@@ -22,10 +22,11 @@
                 <th scope="col">Id de Orden</th>
                 {% if customers %}
                     <th scope="col">Nombre del cliente</th>
+                    <th scope="col">RUC</th>
                 {% else %}
                     <th scope="col">Direccion de entrgega</th>
                 {% endif %}
-
+                <th scope="col">Estatus</th>
                 <th scope="col">Precio total</th>
 
 
@@ -44,8 +45,12 @@
                             {% for customer in customers %}
                                 {% if customer.id == order.user.id %}
                                     {{ customer.username }}
+                                    <td>
+                                    {{ customer.ruc }}
+                                    </td>
                                 {% endif %}
                             {% endfor %}
+
                         {% else %}
                             {% for address in addresses %}
                                 {% if address.id == order.address.id %}
@@ -54,6 +59,9 @@
                                 {% endif %}
                             {% endfor %}
                         {% endif %}
+                        </td>
+                        <td>
+                            {{ order.status }}
                         </td>
                         <td>{{ order.total_price }}</td>
 
