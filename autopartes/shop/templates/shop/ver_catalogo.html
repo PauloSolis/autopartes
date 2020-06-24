@@ -9,13 +9,7 @@
                     <div class="b-filter-2__group">
                         <div class="row">
                             <div class="col-md-3">
-                                MARCA
-                                <div class="form-check">
-                                    {% for brand in brands %}
-                                        <input type="checkbox" class="form-check-input" id={{ brand.car_brand }}>
-                                        <label class="form-check-label" for={{ brand.car_brand }}>{{ brand.car_brand }}</label><br>
-                                    {% endfor %}
-                                </div>
+                               <input class="form-control" type="text" placeholder="Keyword..."/>
                             </div>
                             <div class="col-md-3">
                                 <input class="form-control" type="text" placeholder="Keyword..."/>
