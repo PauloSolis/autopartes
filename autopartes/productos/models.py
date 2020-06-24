@@ -18,9 +18,9 @@ class Product(models.Model):
     description = models.TextField(null=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
-    car_brand = models.CharField(max_length=100)
-    car_model = models.CharField(max_length=100)
-    car_year = models.IntegerField(null=False)
+    car_brand = models.CharField(max_length=100, null=True)
+    car_model = models.CharField(max_length=100, null=True)
+    car_year = models.IntegerField(null=True)
     public_price = models.FloatField(null=False)
     card_price = models.FloatField(null=True)
     master_price = models.FloatField(null=True)
@@ -28,9 +28,7 @@ class Product(models.Model):
     dozen_price = models.FloatField(null=True)
     image1 = models.ImageField(upload_to='images/%Y/%m/%d', blank=True)
     image2 = models.ImageField(upload_to='images/%Y/%m/%d', blank=True)
+    in_stock = models.IntegerField(null=True)
 
     def __str__(self):
         return self.name
-
-
-

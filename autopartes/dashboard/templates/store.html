@@ -82,7 +82,7 @@
     </div>
     <div data-off-canvas="slidebar-1 left overlay">
         <ul class="yamm main-menu nav navbar-nav">
-            <li class="dropdown"><a href="car-details.html">Inicio</a>
+            <li class="dropdown"><a href="{% url 'users:landing' %}">Inicio</a>
             </li>
             <li class="dropdown"><a>Nosotros</a>
             </li>
@@ -90,6 +90,10 @@
             </li>
             <li><a href="{% url "shop:ver_catalogo" %}">Catálogo de productos</a>
             </li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'users:login' %}">Perfil</a>
+                </li>
+            {% endif %}
 
         </ul>
     </div>
@@ -140,23 +144,18 @@
                     <div class="header-navibox-2">
                         <ul class="yamm main-menu nav navbar-nav">
 
-                            <!-- <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Home<b
-                                     class="caret"></b></a>
-                                 <ul class="dropdown-menu" role="menu">
-                                     <li><a href="home.html" tabindex="-1">Home one page</a>
-                                     </li>
-                                     <li><a href="home-2.html" tabindex="-1">Home standart</a>
-                                     </li>
-                                 </ul>
-                             </li>-->
-                            <li><a href="{% url 'users:landing' %}">Inicio</a>
+                            <li class="dropdown"><a href="{% url 'users:landing' %}">Inicio</a>
                             </li>
-                            <li><a href="{% url 'users:home' %}">Perfil</a>
-
+                            <li class="dropdown"><a>Nosotros</a>
+                            </li>
+                            <li><a href="repair-shop.html">Contáctanos</a>
                             </li>
                             <li><a href="{% url "shop:ver_catalogo" %}">Catálogo de productos</a>
                             </li>
-
+                            {% if user.is_authenticated %}
+                                <li><a href="{% url 'users:login' %}">Perfil</a>
+                                </li>
+                            {% endif %}
 
                             <li aria-haspopup="true" aria-expanded="false" class="btn-group dropdown">
                                 <button type="button" class="btn dropdown-button " data-toggle="modal"
@@ -170,9 +169,9 @@
                                     </div>
 
                                 </button>
-                                <span class="cart-total-price-outside">
+                                <strong><span class="cart-total-price-outside">
 
-                                </span>
+                                </span></strong>
 
                                 <!--
 
@@ -442,82 +441,96 @@
                             {% endif %}
                         </div>
                     </div>
-                        <div role="tabpanel" class="tab-pane" id="pagar">
+                    <div role="tabpanel" class="tab-pane" id="pagar">
 
-                            <div class="modal-body">
+                        <div class="modal-body">
 
                             {% if user.is_wholesaler %}
                                 <span class="modal-title"><h5>Resumen de compra</h5></span>
 
-                                    <div class="row" id="resumen">
-                                        <div class="col-md-3">
-                                            <h6>Producto</h6>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <h6>Descripcion</h6>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <h6>Cantidad</h6>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <h6>Costo</h6>
-                                        </div>
+                                <div class="row" id="resumen">
+                                    <div class="col-md-3">
+                                        <h6>Producto</h6>
                                     </div>
+                                    <div class="col-md-3">
+                                        <h6>Descripcion</h6>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6>Cantidad</h6>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6>Costo</h6>
+                                    </div>
+                                </div>
                                 <div class="modal-footer">
 
                                 <span class="modal-title total_price">Total:<span
                                         class="cart-total-price-to-pay"></span> </span>
-                                <span class="hidden " id="token" value="{% csrf_token %}">{% csrf_token %}</span>
-                                {% if user.can_buy == True %}
-                                    <button type="button" class="btn btn-primary btn-purchase " href="#pagar"
-                                            aria-controls="browseTab" role="tab" data-toggle="tab">Ordenar
-                                    </button>
-                                {% elif user.can_buy == False %}
-                                    <button type="button" class="btn btn-default btn-debt">Tienes adeudo pendiente
-                                    </button>
-                                {% else %}
-                                    <button type="button" class="btn btn-default btn-debt"><a href="">Registrate para
-                                        poder
-                                        comprar</a></button>
-                                {% endif %}
-                            </div>
+                                    <span class="hidden " id="token" value="{% csrf_token %}">{% csrf_token %}</span>
+                                    {% if user.can_buy == True %}
+                                        <button type="button" class="btn btn-primary btn-purchase " href="#pagar"
+                                                aria-controls="browseTab" role="tab" data-toggle="tab">Ordenar
+                                        </button>
+                                    {% elif user.can_buy == False %}
+                                        <button type="button" class="btn btn-default btn-debt">Tienes adeudo pendiente
+                                        </button>
+                                    {% else %}
+                                        <button type="button" class="btn btn-default btn-debt"><a href="">Registrate
+                                            para
+                                            poder
+                                            comprar</a></button>
+                                    {% endif %}
+                                </div>
                             {% else %}
-                                <div class="modal-body">
+
+                            <div class="modal-body">
                             </div>
+                            <div class="row" id="resumen">
+                                    <div class="col-md-3">
+                                        <h6>Producto</h6>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6>Descripcion</h6>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6>Cantidad</h6>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6>Costo</h6>
+                                    </div>
+                                </div>
                             <div class="modal-footer">
                                 <span class="modal-title total_price">Total:<span
                                         class="cart-total-price"></span> </span>
                                 <span class="hidden " id="token" value="{% csrf_token %}">{% csrf_token %}</span>
-                                {% if user.can_buy == True %}
+                                {% if user %}
                                     <button type="button" class="btn btn-primary btn-purchase " href="#pagar"
                                             aria-controls="browseTab" role="tab" data-toggle="tab">Pagar
                                     </button>
-                                {% elif user.can_buy == False %}
-                                    <button type="button" class="btn btn-default btn-debt">Tienes adeudo pendiente
-                                    </button>
+
                                 {% else %}
                                     <button type="button" class="btn btn-default btn-debt"><a href="">Registrate para
                                         poder
                                         comprar</a></button>
                                 {% endif %}
                             </div>
+
                             {% endif %}
 
-                            </div>
                         </div>
+                    </div>
 
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="pagar">
+                </div>
+                <div role="tabpanel" class="tab-pane" id="pagar">
 
 
-
-                        </div>
                 </div>
             </div>
-
         </div>
 
     </div>
+
+</div>
 </div>
 <!-- ++++++++++++-->
 <!-- MAIN SCRIPTS-->

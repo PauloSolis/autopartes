@@ -12,7 +12,6 @@
     </ul>
     {% endif %}
 
-
     <h1>Productos</h1>
     <div class="row">
         <form method='GET' action="{% url 'productos:search_product' %}"
@@ -43,8 +42,6 @@
             </button>
         </a>
     </div>
-
-
     <br>
     <table class="table">
         <thead>
@@ -60,13 +57,12 @@
             <th scope="col">Precio Maestro</th>
             <th scope="col">Precio Mayoreo</th>
             <th scope="col">Precio Docena</th>
+            <th scope="col">Stock</th>
         </tr>
         </thead>
         <tbody>
         {% if products %}
-
         {% for product in products %}
-
         <tr>
             <td>{{ product.original_code }}</td>
             <td>{{ product.product_code }}</td>
@@ -79,6 +75,7 @@
             <td>${{ product.master_price }}</td>
             <td>${{ product.wholesale_price }}</td>
             <td>${{ product.dozen_price }}</td>
+            <td>{{ product.in_stock }}</td>
             <td><a href="{% url  'productos:edit_product' id=product.id %}"
                    data-animation="blur" data-overlaycolor="#36404a">
                 <button type="button" class=" btn btn-success"><i class="fa fa-edit"></i>
