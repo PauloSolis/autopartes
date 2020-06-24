@@ -13,7 +13,12 @@ class User(AbstractUser):
     birthday = models.DateField(auto_now=False, null=True, blank=True)
     phone = PhoneNumberField(null=False, blank=False, unique=True)
     mobile = PhoneNumberField(null=False, blank=False, unique=True)
-    #balance = models.DecimalField(default=0, max_digits=14, decimal_places=2)
+    max = MoneyField(max_digits=14, decimal_places=2, default_currency='USD', default=0,
+                         validators=[
+                             MinMoneyValidator(0),
+                             MinMoneyValidator(Money(0, 'USD')),
+                         ]
+                         )
     balance = MoneyField(max_digits=14, decimal_places=2, default_currency='USD', default=0,
                          validators=[
                              MinMoneyValidator(0),

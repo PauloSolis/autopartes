@@ -139,6 +139,10 @@
                     </tr>
                     {% if user.is_retailer or user.is_wholesaler %}
                     <tr>
+                        <th scope="row">Deuda máxima</th>
+                        <td>{{ user.max }}</td>
+                    </tr>
+                    <tr>
                         <th scope="row">Deuda</th>
                         <td>{{ user.balance }}</td>
                     </tr>
@@ -169,13 +173,25 @@
 
                     {% endif %}
                     {% if user.is_wholesaler %}
-                    <th scope="row">Cantidad pagada</th>
+
+
                     <form method="post" >
                         <input type="hidden" name="id" value="{{ user.id }}">
+
+
                         {% csrf_token %}
-                        <td>{{ form.as_p }}</td>
+
+                        {% for field in form %}
+                         <tr>
+                        <th scope="row">{{ field.label_tag }}</th>
+                        <td>{{ field}}</td>
+
+                          </tr>
+
+                {% endfor %}
 
                      {% endif %}
+
                     </tbody>
                 </table>
             </div>
