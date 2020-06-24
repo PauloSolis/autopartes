@@ -98,12 +98,6 @@ function purchaseClicked() {
                 setTimeout(reload_page,2000)
 
             }
-            else {
-                document.getElementById("purchase-status-modal").removeAttribute("hidden");
-                document.getElementById("fail-purchase").removeAttribute("hidden");
-                document.getElementById("shopping-cart-modal").hidden=true;
-                
-            }
         };
 
         xhr.send(json);
