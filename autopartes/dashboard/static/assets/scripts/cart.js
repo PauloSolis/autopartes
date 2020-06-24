@@ -91,12 +91,18 @@ function purchaseClicked() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var json = JSON.stringify(xhr.responseText);
                 console.log(json);
-                var cartResume = document.getElementById('resumen');
-                cartResume.innerHTML += `
-                    <h1>Tu compra fue procesada Exitosamente</h1>
-                `;
-                setTimeout(reload_page,3000)
+                document.getElementById("purchase-status-modal").removeAttribute("hidden");
+                document.getElementById("success-purchase").removeAttribute("hidden");
+                document.getElementById("shopping-cart-modal").hidden=true;
 
+                setTimeout(reload_page,2000)
+
+            }
+            else {
+                document.getElementById("purchase-status-modal").removeAttribute("hidden");
+                document.getElementById("fail-purchase").removeAttribute("hidden");
+                document.getElementById("shopping-cart-modal").hidden=true;
+                
             }
         };
 
