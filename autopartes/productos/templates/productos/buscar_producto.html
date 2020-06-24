@@ -13,7 +13,15 @@
     {% endif %}
 
 
-    <h1>Productos</h1>
+    <div class="col mb-3">
+        <a href="{% url 'productos:ver_producto' %}">
+            <button class="btn btn-dark" type="button"><i
+                    class="fas fa-arrow-left"></i></button>
+        </a>
+    </div>
+    <h1>Resultados de busqueda para: {{query}}</h1>
+
+    <br>
     <div class="row">
         <form method='GET' action="{% url 'productos:search_product' %}"
               class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2">
@@ -94,7 +102,7 @@
         {% endfor %}
 
         {% else %}
-        <h1 id="msg">No hay productos registrados</h1>
+        <h1 id="msg">No hay productos con los críterios de búsqueda</h1>
         {% endif %}
 
 
