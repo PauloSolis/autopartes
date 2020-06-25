@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout, login, get_user_model
 from django.contrib.auth.views import LoginView
+from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import TemplateView
@@ -19,6 +20,8 @@ from .forms import UserRegister, AddressForm, EditProfileForm, EditBalance
 from django.contrib.auth.forms import UserChangeForm
 from .decorators import admin_required, wholesaler_required, retailer_required
 from .forms import AuthenticationForm
+from django.db.models import Q
+
 
 
 # Create your views here.
@@ -57,7 +60,7 @@ class RegisterView(SuccessMessageMixin, View):
 
 @login_required
 @admin_required
-def displayUsers(request):
+def displayUsers(request, help=None):
     users = User.objects.all().order_by('id')
     addresses = Address.objects.all()
 
@@ -68,8 +71,14 @@ def displayUsers(request):
         form = EditBalance(request.POST or None, instance=previous)
         if form.is_valid():
             paid = form.cleaned_data.get('balance')
-            X = Money(paid, 'USD')
-            User.objects.filter(id=id).update(balance=(token - X))
+            maximun = form.cleaned_data.get('max')
+            if paid:
+                X = Money(paid, 'USD')
+                User.objects.filter(id=id).update(balance=(token - X))
+            if maximun:
+                User.objects.filter(id=id).update(max=maximun)
+            if help:
+                return 1
             return HttpResponseRedirect('/ver/')
     else:
         form = EditBalance()
@@ -233,3 +242,25 @@ def edit_address(request, pk):
         'form': form,
     }
     return render(request, '../templates/users/edit_address.html', context)
+
+@login_required
+@admin_required
+def search(request):
+    query = request.GET.get('q', '')
+    addresses = Address.objects.all()
+    form = EditBalance()
+    template = '../templates/users/search.html'
+    if query:
+        queryset = (Q(first_name__icontains=query)) | (Q(username__icontains=query)) | (Q(last_name__icontains=query))
+        results = User.objects.filter(queryset).distinct()
+    else:
+        results = []
+    displayUsers(request, 1)
+    context = {
+        'users': results,
+        'query': query,
+        'form': form,
+        'addresses': addresses,
+    }
+
+    return render(request, template, context)

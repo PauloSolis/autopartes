@@ -7,7 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from users.decorators import admin_required
 from .forms import Products, CategoryForm, SubcategoryForm
 from .models import Product
-
+from django.db.models import Q
 STATUS_SAVED = 'SAVED'
 STATUS_ERROR = 'ERROR'
 
@@ -104,3 +104,22 @@ def create_subcategory(request):
             'form': form,
         }
         return render(request, '../templates/productos/create_subcategory.html', context)
+
+
+@login_required
+@admin_required
+def search_product(request):
+    query = request.GET.get('q', '')
+    template = '../templates/productos/buscar_producto.html'
+    if query:
+        queryset = (Q(product_code__icontains=query)) | (Q(name__icontains=query))
+        results = Product.objects.filter(queryset).distinct()
+    else:
+        results = []
+
+    context = {
+        'products': results,
+        'query': query,
+    }
+
+    return render(request, template, context)

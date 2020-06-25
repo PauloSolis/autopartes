@@ -128,7 +128,9 @@
 
         body {
             background-image: url("/static/images/login.jpg"); /* fallback for old browsers */
-
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
             font-family: "Roboto", sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -147,7 +149,7 @@
 {% endif %}
 <div class="login-page">
     <div class="form">
-         <strong style="font-size: xx-large">Crea tu cuenta</strong>
+        <strong style="font-size: xx-large">Crea tu cuenta</strong>
         <form method="post" class="login-form">
             {% csrf_token %}
             {{ form.as_p }}

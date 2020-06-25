@@ -146,12 +146,14 @@ class EditProfileForm(UserChangeForm):
 
 
 class EditBalance(ModelForm):
-    balance = forms.DecimalField(max_digits=10, decimal_places=2, label='')
+    balance = forms.DecimalField(max_digits=10, decimal_places=2, label='Cantidad pagada', required=False)
+    max = forms.DecimalField(max_digits=10, decimal_places=2, label='Adeudo máximo', required=False)
 
     class Meta:
         model = User
-        fields = ['balance']
+        fields = ['max','balance']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['max'].widget.attrs['class'] = 'form-control'
         self.fields['balance'].widget.attrs['class'] = 'form-control'

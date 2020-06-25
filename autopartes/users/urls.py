@@ -23,4 +23,5 @@ urlpatterns = [
     path('activate/<int:id>/', views.activate_profile, name='activateUser'),
     path('cant_purchase/<int:id>',views.cant_purchase, name="cant_purchase"),
     path('can_purchase/<int:id>',views.can_purchase, name="can_purchase"),
+    path('ver/search/', views.search, name='search'),
 ]

@@ -335,8 +335,28 @@
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
+        <div class="modal-content" id="purchase-status-modal" hidden>
+            <div class="row" id="success-purchase" hidden>
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <br>
+                    <h4>Tu orden fue procesada exitosamente</h4>
+                    <br>
+                </div>
+            </div>
+
+            <div class="row" id="fail-purchase" hidden>
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <br>
+                    <h4>Hemos tenido problemas para procesar tu orden</h4>
+                    <br>
+                </div>
+
+            </div>
+        </div>
         <!-- Modal content-->
-        <div class="modal-content">
+        <div class="modal-content" id="shopping-cart-modal">
 
             <div class="modal-header">
 
@@ -359,10 +379,15 @@
                         Pagar</h6></a>
 
                     </li>
+                    <li role="presentation"><a href="#resultado" aria-controls="browseTab" role="tab" data-toggle="tab"
+                                               hidden></a>
+
+                    </li>
+
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="carrito">
+                    <div role="tabpanel" class="tab-pane active no_top_padding" id="carrito">
                         <div class="modal-body">
                             <div class="cart-items">
 
@@ -387,7 +412,7 @@
                         </div>
 
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="direcciones">
+                    <div role="tabpanel" class="tab-pane no_top_padding" id="direcciones">
                         <div class="modal-body">
                             {% block user_addresses %}
                             {% endblock %}
@@ -409,7 +434,7 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="pagar">
+                    <div role="tabpanel" class="tab-pane no_top_padding" id="pagar">
 
                         <div class="modal-body">
 
@@ -451,9 +476,7 @@
                                 </div>
                             {% else %}
 
-                            <div class="modal-body">
-                            </div>
-                            <div class="row" id="resumen">
+                                <div class="row" id="resumen">
                                     <div class="col-md-3">
                                         <h6>Producto</h6>
                                     </div>
@@ -467,21 +490,22 @@
                                         <h6>Costo</h6>
                                     </div>
                                 </div>
-                            <div class="modal-footer">
+                                <div class="modal-footer">
                                 <span class="modal-title total_price">Total:<span
                                         class="cart-total-price"></span> </span>
-                                <span class="hidden " id="token" value="{% csrf_token %}">{% csrf_token %}</span>
-                                {% if user %}
-                                    <button type="button" class="btn btn-primary btn-purchase " href="#pagar"
-                                            aria-controls="browseTab" role="tab" data-toggle="tab">Pagar
-                                    </button>
+                                    <span class="hidden " id="token" value="{% csrf_token %}">{% csrf_token %}</span>
+                                    {% if user %}
+                                        <button type="button" class="btn btn-primary btn-purchase " href="#pagar"
+                                                aria-controls="browseTab" role="tab" data-toggle="tab">Pagar
+                                        </button>
 
-                                {% else %}
-                                    <button type="button" class="btn btn-default btn-debt"><a href="">Registrate para
-                                        poder
-                                        comprar</a></button>
-                                {% endif %}
-                            </div>
+                                    {% else %}
+                                        <button type="button" class="btn btn-default btn-debt"><a href="">Registrate
+                                            para
+                                            poder
+                                            comprar</a></button>
+                                    {% endif %}
+                                </div>
 
                             {% endif %}
 
@@ -489,10 +513,7 @@
                     </div>
 
                 </div>
-                <div role="tabpanel" class="tab-pane" id="pagar">
 
-
-                </div>
             </div>
         </div>
 

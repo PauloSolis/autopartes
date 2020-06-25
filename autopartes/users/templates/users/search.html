@@ -1,7 +1,11 @@
 {% extends 'home.html' %}
 {% block content %}
 <div class="container-fluid">
-    <h1>Usuarios</h1>
+    <div class="col mb-3">
+       <a href="{% url 'users:ver' %}"><button class="btn btn-dark" type="button" ><i
+                class="fas fa-arrow-left"></i></button></a>
+    </div>
+    <h1>Resultados de busqueda para: {{query}}</h1>
 
     <br>
     <div class="row">
