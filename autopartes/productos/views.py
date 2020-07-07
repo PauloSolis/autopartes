@@ -112,7 +112,7 @@ def search_product(request):
     query = request.GET.get('q', '')
     template = '../templates/productos/buscar_producto.html'
     if query:
-        queryset = (Q(product_code__icontains=query)) | (Q(name__icontains=query))
+        queryset = (Q(product_code__icontains=query)) | (Q(name__icontains=query)) | (Q(original_code__icontains=query))
         results = Product.objects.filter(queryset).distinct()
     else:
         results = []
