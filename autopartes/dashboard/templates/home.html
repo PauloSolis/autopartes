@@ -64,7 +64,7 @@
         <a  class="logo">Auto 1 Partes</a>
         <button type="button" class="button-close fa fa-times js__menu_close"></button>
         <div class="user">
-            <h5 class="name"><a>{{ request.user.first_name }}</a></h5>
+            <h5 class="name">{{ request.user.first_name }}</h5>
             <h5 class="position">
                 {% if user.is_retailer %}
                 Cliente Minorista

@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <title>Motor Land / Home</title>
+    <title>Auto1Partes</title>
     <meta content="" name="description"/>
     <meta content="" name="keywords"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -16,7 +16,16 @@
     <!--[if lt IE 9 ]>
     <script src="{% static 'assets/landingJs/separate-js/html5shiv-3.7.2.min.js' %}" type="text/javascript"></script>
     <meta content="no" http-equiv="imagetoolbar">
+
     <![endif]-->
+    <style>
+        .carousel-inner > .item > img,
+        .carousel-inner > .item > a > img {
+            display: block;
+            max-width: 100%;
+            height: 464px !important;
+        }
+    </style>
 </head>
 <body>
 <!-- Loader end-->
@@ -46,8 +55,8 @@
                 <li><a href="{% url 'shop:ver_catalogo' %}">Catálogo de productos</a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'users:login' %}">Perfil</a>
-                    </li>
+                <li><a href="{% url 'users:login' %}">Perfil</a>
+                </li>
                 {% endif %}
             </ul>
         </div>
@@ -141,16 +150,16 @@
                         <!-- Mobile Trigger End-->
                         <a class="navbar-brand scroll" href="home.html">
                             <img class="normal-logo img-responsive"
-                                 src="{% static 'assets/landingMedia/general/logo.png' %}" alt="logo"/>
+                                 src="{% static 'images/logoNB.png' %}" alt="logo" width="202" height="44"/>
                             <img class="scroll-logo hidden-xs img-responsive"
-                                 src="{% static 'assets/landingMedia/general/logo-dark.png' %}" alt="logo"/>
+                                 src="{% static 'images/logoNB.png' %}" alt="logo" width="202" height="44"/>
                         </a>
                     </div>
                     <div class="header-navibox-3">
                         {% if not user.is_authenticated %}
-                            <a class="btn btn-primary" href="{% url 'users:login' %}">
-                                Iniciar sesión
-                            </a>
+                        <a class="btn btn-primary" href="{% url 'users:login' %}">
+                            Iniciar sesión
+                        </a>
                         {% endif %}
                     </div>
                     <div class="header-navibox-2">
@@ -165,8 +174,8 @@
                             <li><a href="{% url 'shop:ver_catalogo' %}">Catálogo de productos</a>
                             </li>
                             {% if user.is_authenticated %}
-                                <li><a href="{% url 'users:login' %}">Perfil</a>
-                                </li>
+                            <li><a href="{% url 'users:login' %}">Perfil</a>
+                            </li>
                             {% endif %}
 
                         </ul>
@@ -224,35 +233,51 @@
                 <li data-target="#Carousel" data-slide-to="0" class="active"></li>
                 <li data-target="#Carousel" data-slide-to="1"></li>
                 <li data-target="#Carousel" data-slide-to="2"></li>
+                <li data-target="#Carousel" data-slide-to="3"></li>
+                <li data-target="#Carousel" data-slide-to="4"></li>
             </ol>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
 
                 <div class="item active">
-                    <img src="/static/images/testing.jpg" alt="Car1" style="width:100%;">
+                    <img src="{% static 'images/carrousel1.jfif' %}"  alt="Car1" style="width:100%;">
                     <div class="carousel-caption">
                         <h3></h3>
-                        <p>Mini cooper</p>
+                        <p></p>
                     </div>
                 </div>
 
                 <div class="item">
-                    <img src="/static/images/login.jpg" alt="Car2" style="width:100%;">
+                    <img src="{% static 'images/carrousel2.jfif' %}" alt="Car2" style="width:100%;">
                     <div class="carousel-caption">
                         <h3></h3>
-                        <p>Vehiculos</p>
+                        <p></p>
                     </div>
                 </div>
 
                 <div class="item">
-                    <img src="/static/images/testing.jpg" alt="Car 3" style="width:100%;">
+                    <img src="{% static 'images/carrousel3.jfif' %}"  alt="Car 3" style="width:100%;">
                     <div class="carousel-caption">
                         <h3></h3>
-                        <p>Auto</p>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="{% static 'images/carrousel4.jfif' %}"  alt="Car4" style="width:100%;">
+                    <div class="carousel-caption">
+                        <h3></h3>
+                        <p></p>
                     </div>
                 </div>
 
+                <div class="item">
+                    <img src="{% static 'images/carrousel5.jfif' %}" alt="Car5" style="width:100%;">
+                    <div class="carousel-caption">
+                        <h3></h3>
+                        <p></p>
+                    </div>
+                </div>
             </div>
 
             <!-- Left and right controls -->
