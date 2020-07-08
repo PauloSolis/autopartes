@@ -23,7 +23,6 @@ from .forms import AuthenticationForm
 from django.db.models import Q
 
 
-
 # Create your views here.
 class RegisterView(SuccessMessageMixin, View):
     form_class = UserRegister
@@ -243,6 +242,7 @@ def edit_address(request, pk):
     }
     return render(request, '../templates/users/edit_address.html', context)
 
+
 @login_required
 @admin_required
 def search(request):
@@ -251,7 +251,8 @@ def search(request):
     form = EditBalance()
     template = '../templates/users/search.html'
     if query:
-        queryset = (Q(first_name__icontains=query)) | (Q(username__icontains=query)) | (Q(last_name__icontains=query))
+        queryset = (Q(first_name__icontains=query)) | (Q(username__icontains=query)) | (
+            Q(last_name__icontains=query)) | (Q(ruc__icontains=query))
         results = User.objects.filter(queryset).distinct()
     else:
         results = []

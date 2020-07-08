@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -10,6 +11,8 @@ import json
 import logging
 
 # Create your views here.
+
+
 logger = logging.getLogger(__name__)
 
 
@@ -18,7 +21,7 @@ def crear_orden(request):
         received_order = json.loads(request.body)
         logger.error(received_order)
         data = json.loads(received_order['data'][0])
-        address= json.loads(received_order['data'][1])
+        address = json.loads(received_order['data'][1])
         address = Address.objects.get(pk=address['address'][0])
         logger.error(address)
         user_buying = User.objects.get(pk=request.user.id)
@@ -41,20 +44,23 @@ def crear_orden(request):
     return render(request, '../templates/landing.html')
 
 
-def ver_ordenes(request):
-
-
-    if( request.user.is_administrator ):
-        orders = Order.objects.all().order_by('-id')
+def ver_ordenes(request, search=None):
+    if request.user.is_administrator:
+        if search:
+            orders = search
+        else:
+            orders = Order.objects.all().order_by('-id')
         paginator = Paginator(orders, 20)
         customers = []
         for o in orders:
-            customer = User.objects.get(pk = o.user_id)
+            customer = User.objects.get(pk=o.user_id)
             if customer not in customers:
                 customers.append(customer)
 
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
+        if search:
+            return page_obj, customers
         return render(request, '../templates/orders/ver_ordenes.html', {'orders': page_obj, 'customers': customers})
 
     else:
@@ -87,3 +93,24 @@ def ver_desgloce(request, id):
                   '../templates/orders/ver_desgloce.html',
                   {'order_products': order_p, 'products': prod, 'address': address, 'order': order})
 
+
+def search_order(request):
+    query = request.GET.get('q', '')
+    template = '../templates/orders/buscar_orden.html'
+    if query:
+        queryset = (Q(id__icontains=query)) | (Q(user__ruc__icontains=query))
+        results = Order.objects.filter(queryset).distinct().order_by('id')
+    else:
+        results = []
+    if results:
+        page_obj, customers = ver_ordenes(request, results)
+    else:
+        page_obj = None
+        customers = None
+    context = {
+        'orders': page_obj,
+        'customers': customers,
+        'query': query,
+    }
+
+    return render(request, template, context)
