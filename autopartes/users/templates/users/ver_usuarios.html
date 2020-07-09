@@ -7,9 +7,9 @@
     <div class="row">
         <form method='GET' action="{% url 'users:search' %}"
               class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2">
-            <input class="form-control" type="text" name="q" placeholder="Nombre, apellido, corporativo"/>
+            <input class="form-control" type="text" name="q" placeholder="Nombre, apellido, corporativo, RUC"/>
 
-            <button type="submit" value="{{ query|escape }}" class=" btn btn-primary"><i
+            <button type="submit" value="{{ query|escape }}" class=" btn btn-danger"><i
                     class="mdi mdi-account">Buscar</i>
             </button>
         </form>
@@ -58,7 +58,7 @@
                 {% else %}
                 <a href="{% url  'users:can_purchase' id=user.id %}"
                    data-animation="blur" data-overlaycolor="#36404a">
-                    <button type="button" class=" btn btn-info">
+                    <button type="button" class=" btn btn-secondary">
                         <i class="mdi mdi-account">Dar permiso de compra
                         </i>
                     </button>
@@ -68,7 +68,7 @@
             <td>
                 <a href="{% url  'users:rol' id=user.id %}"
                    data-animation="blur" data-overlaycolor="#36404a">
-                    <button type="button" class="btn btn-info align-self-center"><i class="fa fa-tag"
+                    <button type="button" class="btn btn-success align-self-center"><i class="fa fa-tag"
                                                                                        aria-hidden="true"></i>
                     </button>
                 </a></td>
@@ -83,12 +83,12 @@
             {% else %}
             <td><a href="{% url  'users:activateUser' id=user.id %}"
                    data-animation="blur" data-overlaycolor="#36404a">
-                <button type="button" class=" btn btn-primary"><i class="mdi mdi-account">Activar</i>
+                <button type="button" class=" btn btn-secondary"><i class="mdi mdi-account">Activar</i>
                 </button>
             </a></td>
             {% endif %}
             <td>
-                <button class=" btn btn-info" data-toggle="modal" data-target="#info{{ user.id }}"><i
+                <button class=" btn btn-success " data-toggle="modal" data-target="#info{{ user.id }}"><i
                         class="fa fa-info-circle" aria-hidden="true"></i></button>
             </td>
         </tr>
@@ -152,11 +152,11 @@
                     </tr>
                     {% if user.is_retailer or user.is_wholesaler %}
                     <tr>
-                        <th scope="row">Deuda máxima</th>
+                        <th scope="row">Saldo</th>
                         <td>{{ user.max }}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Deuda</th>
+                        <th scope="row">Saldo a cancelar</th>
                         <td>{{ user.balance }}</td>
                     </tr>
 

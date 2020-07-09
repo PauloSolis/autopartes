@@ -17,7 +17,7 @@
         <form method='GET' action="{% url 'productos:search_product' %}"
               class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2">
             <input class="form-control" type="text" name="q" placeholder="Código de producto"/>
-            <button type="submit" value="{{ query|escape }}" class=" btn btn-primary"><i
+            <button type="submit" value="{{ query|escape }}" class=" btn btn-danger"><i
                     class="mdi mdi-account">Buscar</i>
             </button>
         </form>
@@ -27,17 +27,17 @@
     <div class="justify-content-end">
         <a href="{% url 'productos:crear' %}">
             <button type="button"
-                    class="btn btn-success "> + Agregar Producto
+                    class="btn btn-danger"> + Agregar Producto
             </button>
         </a>
         <a href="{% url 'productos:crear_categoria' %}">
             <button type="button"
-                    class="btn btn-primary "> + Agregar Categoría
+                    class="btn btn-danger "> + Agregar Categoría
             </button>
         </a>
         <a href="{% url 'productos:create_subcategory' %}">
             <button type="button"
-                    class="btn btn-primary "> + Agregar Subcategoría
+                    class="btn btn-danger "> + Agregar Subcategoría
             </button>
         </a>
     </div>
