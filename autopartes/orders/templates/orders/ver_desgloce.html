@@ -30,16 +30,21 @@
                 <td>{{ order.id }}</td>
             </tr>
             <tr>
-                <th scope="col">Estado</th>
-                <td>
-                    {{ order.status }}
-
-                </td>
+                <th scope="col">Nombre del Cliente</th>
+                <td>{{ user.name }}</td>
             </tr>
             <tr>
-                <th scope="col">Última Actualización</th>
+                <th scope="col">RUC</th>
+                <td>{{ user.ruc }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Teléfono:</th>
+                <td>{{ user.phone }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Estado</th>
                 <td>
-                    {{ order.status_update }}
+                    {{ order.status }}, última actualización {{ order.status_update }}
 
                 </td>
             </tr>
@@ -61,7 +66,7 @@
                 <th scope="col">Código de producto</th>
                 <th scope="col">Nombre del producto</th>
                 <th scope="col">cantidad</th>
-                <th scope="col">Precio a la venta</th>
+                <th scope="col">Precio Unitario</th>
             </tr>
             </thead>
             <tbody>
@@ -86,8 +91,6 @@
                                 {% endif %}
                             {% endfor %}
                         </td>
-
-
                     </tr>
                 {% endfor %}
 
