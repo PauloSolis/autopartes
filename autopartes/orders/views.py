@@ -91,13 +91,14 @@ def ver_desgloce(request, id):
     order = Order.objects.get(pk=id)
     address = Address.objects.get(pk=order.address.id)
     prod = []
+    user = User.objects.get(id=order.user_id)
     for o in order_p:
         aux = Product.objects.get(id=o.product_id)
         prod.append(aux)
 
     return render(request,
                   '../templates/orders/ver_desgloce.html',
-                  {'order_products': order_p, 'products': prod, 'address': address, 'order': order})
+                  {'order_products': order_p, 'products': prod, 'address': address, 'order': order, 'user':user})
 
 
 

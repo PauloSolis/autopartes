@@ -1,31 +1,33 @@
 <!DOCTYPE html>
+
 {% load static %}
 <html lang="zxx">
 
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <title>Motor Land / Portfolio</title>
+    <title>Auto1Partes</title>
     <meta content="" name="description"/>
     <meta content="" name="keywords"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta content="telephone=no" name="format-detection"/>
     <meta name="HandheldFriendly" content="true"/>
-    <link rel="stylesheet" href="{% static 'assets/LandingCss/master.css' %}"/>
-    <link rel="stylesheet" href="{% static 'assets/LandingCss/cart.css' %}"/>
-
-    <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+    <link rel="stylesheet" href="{% static 'assets/landingCss/master.css' %}"/>
     <!--[if lt IE 9 ]>
+    <script src="{% static 'assets/landingJs/separate-js/html5shiv-3.7.2.min.js' %}" type="text/javascript"></script>
+    <meta content="no" http-equiv="imagetoolbar">
 
-    <script src="{% static 'assets/landingJs/separate-js/html5shiv-3.7.2.min.js'%}" type="text/javascript"></script><meta content="no" http-equiv="imagetoolbar">
-
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<![endif]-->
+    <![endif]-->
+    <style>
+        .carousel-inner > .item > img,
+        .carousel-inner > .item > a > img {
+            display: block;
+            max-width: 100%;
+            height: 464px !important;
+        }
+    </style>
 </head>
-
 <body>
-<!-- Loader-->
 <!-- Loader end-->
 <!-- ==========================-->
 <!-- MOBILE MENU-->
@@ -41,20 +43,48 @@
         <li>
             <h4><a href="">Mobile sidebar</a></h4>
         </li>
+        <div class="header-navibox-2">
 
-        <li>
-            <a href="home.html" tabindex="-1">Home one page</a>
-        </li>
-
-        <li>
-            <a href="repair-shop.html">Nosotros</a>
-        </li>
-        <li><a href="car-rental.html">Catalogo</a>
-        </li>
+            <ul class="yamm main-menu nav navbar-nav">
+                <li class="dropdown"><a href="{% url 'users:landing' %}">Inicio</a>
+                </li>
+                <li class="dropdown"><a href="{% url 'dashboard:nosotros' %}">Nosotros</a>
+                </li>
+                <li><a href="{% url 'dashboard:contacto' %}">Contáctanos</a>
+                </li>
+                <li><a href="{% url 'shop:ver_catalogo' %}">Catálogo de productos</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'users:login' %}">Perfil</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
     </ul>
 </div>
 <div class="l-theme animated-css" data-header="sticky" data-header-top="200" data-canvas="container">
-
+    <!-- Start Switcher-->
+    <div class="switcher-wrapper">
+        <div class="demo_changer">
+            <div class="demo-icon text-primary"><i class="fa fa-cog fa-spin fa-2x"></i>
+            </div>
+            <div class="form_holder">
+                <div class="predefined_styles">
+                    <div class="skin-theme-switcher">
+                        <h4>Color</h4>
+                        <a class="styleswitch" href="javascript:void(0);" data-switchcolor="color1"
+                           style="background-color:#d01818"></a>
+                        <a class="styleswitch" href="javascript:void(0);" data-switchcolor="color2"
+                           style="background-color:#FFAC3A"></a>
+                        <a class="styleswitch" href="javascript:void(0);" data-switchcolor="color3"
+                           style="background-color:#28af0f"></a>
+                        <a class="styleswitch" href="javascript:void(0);" data-switchcolor="color4"
+                           style="background-color:#e425e9"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- end switcher-->
     <!-- ==========================-->
     <!-- SEARCH MODAL-->
@@ -80,23 +110,7 @@
         <button class="search-close close" type="button"><i class="fa fa-times"></i>
         </button>
     </div>
-    <div data-off-canvas="slidebar-1 left overlay">
-        <ul class="yamm main-menu nav navbar-nav">
-            <li class="dropdown"><a href="{% url 'users:landing' %}">Inicio</a>
-            </li>
-            <li class="dropdown"><a>Nosotros</a>
-            </li>
-            <li><a href="repair-shop.html">Contáctanos</a>
-            </li>
-            <li><a href="{% url "shop:ver_catalogo" %}">Catálogo de productos</a>
-            </li>
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'users:login' %}">Perfil</a>
-                </li>
-            {% endif %}
 
-        </ul>
-    </div>
     <header class="header header-boxed-width navbar-fixed-top header-background-white header-color-black header-topbar-dark header-logo-black header-topbarbox-1-left header-topbarbox-2-right header-navibox-1-left header-navibox-2-right header-navibox-3-right header-navibox-4-right">
         <div class="container container-boxed-width">
             <div class="top-bar">
@@ -133,47 +147,34 @@
                         </button>
                         <!-- Mobile Trigger End-->
                         <a class="navbar-brand scroll" href="home.html">
-                            <img class="normal-logo img-responsive" src="/static/images/logoNB.png" alt="logo" width="202" height="44">
-                            <img class="scroll-logo hidden-xs img-responsive" src="/static/images/logoNB.png" alt="logo" width="202" height="44">
+                            <img class="normal-logo img-responsive"
+                                 src="{% static 'images/logoNB.png' %}" alt="logo" width="202" height="44"/>
+                            <img class="scroll-logo hidden-xs img-responsive"
+                                 src="{% static 'images/logoNB.png' %}" alt="logo" width="202" height="44"/>
                         </a>
                     </div>
+                    <div class="header-navibox-3">
+                        {% if not user.is_authenticated %}
+                        <a class="btn btn-primary" href="{% url 'users:login' %}">
+                            Iniciar sesión
+                        </a>
+                        {% endif %}
+                    </div>
                     <div class="header-navibox-2">
-                        <ul class="yamm main-menu nav navbar-nav">
 
+                        <ul class="yamm main-menu nav navbar-nav">
                             <li class="dropdown"><a href="{% url 'users:landing' %}">Inicio</a>
                             </li>
-<li class="dropdown"><a href="{% url 'dashboard:nosotros' %}">Nosotros</a>
-                </li>
-                <li><a href="{% url 'dashboard:contacto' %}">Contáctanos</a>
+                            <li class="dropdown"><a href="{% url 'dashboard:nosotros' %}">Nosotros</a>
                             </li>
-                            <li><a href="{% url "shop:ver_catalogo" %}">Catálogo de productos</a>
+                            <li><a href="repair-shop.html">Contáctanos</a>
+                            </li>
+                            <li><a href="{% url 'shop:ver_catalogo' %}">Catálogo de productos</a>
                             </li>
                             {% if user.is_authenticated %}
-                                <li><a href="{% url 'users:login' %}">Perfil</a>
-                                </li>
-                            {% endif %}
-
-                            <li aria-haspopup="true" aria-expanded="false" class="btn-group dropdown">
-                                <button type="button" class="btn dropdown-button " data-toggle="modal"
-                                        data-target="#myModal">
-                                    <div class="header-cart">
-                                        <a href="#">
-                                            <i class="icon fa fa-shopping-basket no-background-color"
-                                               aria-hidden="true"></i>
-                                            <span class="header-cart-count bg-primary ">0</span>
-                                        </a>
-                                    </div>
-
-                                </button>
-                                <strong><span class="cart-total-price-outside">
-
-                                </span></strong>
-
-                                <!--
-
-
-                                -->
+                            <li><a href="{% url 'users:login' %}">Perfil</a>
                             </li>
+                            {% endif %}
 
                         </ul>
                     </div>
@@ -182,33 +183,52 @@
         </div>
     </header>
     <!-- end .header-->
+
+    <!-- end .main-slider-->
     <div class="section-title-page area-bg area-bg_dark area-bg_op_70">
         <div class="area-bg__inner">
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h1 class="b-title-page bg-primary_a">Productos</h1>
+                        <h1 class="b-title-page bg-primary_a">Nosotros</h1>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- end .b-title-page-->
 
-    <div class="container">
-        <div class="row">
-
-                        {% block content %}
-                        {% endblock %}
-                        <!-- end .b-goods-1-->
+    <br><br><br>
+    <!-- end .b-about-->
+    <div class="info-group block-table block-table_md">
+        <div class="info-group__section col-md-6">
+            <section class="b-info b-info_mod-a area-bg area-bg_op_80 area-bg_prim parallax"
+                     style="background-image: url(assets/media/content/bg/bg-4.jpg)">
+                <div class="area-bg__inner">
+                    <h2 class="b-info__title"><strong class="b-info__title_lg">MISION</strong>
+                    </h2>
+                    <div class="b-info__desc">MotorLand is nisi aliquip exa con velit esse cillum dolore fugiatal sint
+                        occaecat excepteur ipsum dolor sit amet consectetur.
                     </div>
-                    <!-- end .goods-group-2-->
-                </main>
-                <!-- end .l-main-content-->
-            </div>
-
+                </div>
+            </section>
+        </div>
+        <div class="info-group__section col-md-6">
+            <section class="b-info b-info_mod-b area-bg area-bg_op_80 area-bg_dark-2 parallax"
+                     style="background-image: url(assets/media/content/bg/bg-3.jpg)">
+                <div class="area-bg__inner">
+                    <h2 class="b-info__title"><strong class="b-info__title_lg">VISION</strong>
+                    </h2>
+                    <div class="b-info__desc">MotorLand is nisi aliquip exa con velit esse cillum dolore fugiatal sint
+                        occaecat excepteur ipsum dolor sit amet consectetur.
+                    </div>
+                </div>
+            </section>
+            <br><br>
         </div>
     </div>
+
+
+    <!-- end .block-table-->
     <footer class="footer area-bg">
         <div class="area-bg__inner">
             <div class="footer__main">
@@ -217,8 +237,7 @@
                         <div class="col-md-3">
                             <div class="footer-section">
                                 <a class="footer__logo" href="home.html">
-                                    <img class="img-responsive"
-                                         src="{% static 'assets/landingMedia/general/logo.png' %}" alt="Logo"/>
+                                    <img class="img-responsive" src="assets/media/general/logo.png" alt="Logo"/>
                                 </a>
                                 <div class="footer__info">Duis aute irure reprehend voluptate velit ese acium fugiat
                                     nula pariatur exceptus ipsum dolor sit amet consectetur adipisic elita sed eiusmod
@@ -312,223 +331,47 @@
                                 </ul>
                             </section>
                         </div>
-
-                        </nav>
+                        <div class="col-md-3">
+                            <section class="footer-section">
+                                <h3 class="footer-section__title ui-title-inner">Address Information</h3>
+                                <div class="footer-contact footer-contact_lg">Call us<span class="text-primary"> (042) 789 35490</span>
+                                </div>
+                                <div class="footer-contact"><i class="icon icon-xs fa fa-envelope-o"></i>support@motorland.com
+                                </div>
+                                <div class="footer-contact"><i class="icon icon-lg fa fa-map-marker"></i>Fairview Ave,
+                                    El Monte, CA, 91732
+                                </div>
+                                <div class="footer-contact"><i class="icon fa fa-clock-o"></i>Mon - Fri : 0900am to
+                                    0600pm
+                                </div>
+                            </section>
+                        </div>
                     </div>
-
-
                 </div>
             </div>
-            <!-- end .b-title-page-->
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">Copyrights 2017<a class="copyright__brand" href="home.html">
+                            MOTORLAND</a> All Rights Reserved<a class="copyright__link" href="privacy-policy.html">Privacy
+                            Policy</a><a class="copyright__link" href="terms-of-use.html">Terms & Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="btn-up" id="toTop">TOP</span>
         </div>
-
-        <!-- .footer-->
+    </footer>
+    <!-- .footer-->
 </div>
 <!-- end layout-theme-->
 
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <div class="modal-content" id="purchase-status-modal" hidden>
-            <div class="row" id="success-purchase" hidden>
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
-                    <br>
-                    <h4>Tu orden fue procesada exitosamente</h4>
-                    <br>
-                </div>
-            </div>
-
-            <div class="row" id="fail-purchase" hidden>
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
-                    <br>
-                    <h4>Hemos tenido problemas para procesar tu orden</h4>
-                    <br>
-                </div>
-
-            </div>
-        </div>
-        <!-- Modal content-->
-        <div class="modal-content" id="shopping-cart-modal">
-
-            <div class="modal-header">
-
-                <h4 class="modal-title">Mi Orden
-                    <button type="button" class="close align-right" style="float: right;" data-dismiss="modal"
-                            aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                </h4>
-            </div>
-            <div role="tabpanel">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#carrito" aria-controls="uploadTab" role="tab"
-                                                              data-toggle="tab"><h6>Mi Carrito</h6></a>
-                    </li>
-                    <li role="presentation"><a href="#direcciones" aria-controls="browseTab" role="tab"
-                                               data-toggle="tab"><h6>Mis Direcciones</h6></a>
-                    </li>
-                    <li role="presentation"><a href="#pagar" aria-controls="browseTab" role="tab" data-toggle="tab"><h6>
-                        Pagar</h6></a>
-
-                    </li>
-                    <li role="presentation"><a href="#resultado" aria-controls="browseTab" role="tab" data-toggle="tab"
-                                               hidden></a>
-
-                    </li>
-
-                </ul>
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active no_top_padding" id="carrito">
-                        <div class="modal-body">
-                            <div class="cart-items">
-
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <span class="modal-title total_price">Total:<span class="cart-total-price"></span> </span>
-                            <span class="hidden " id="token" value="{% csrf_token %}">{% csrf_token %}</span>
-                            <span class="hidden" value="{{ user.can_buy }}"></span>
-                            {% if user.can_buy == True %}
-                                <button type="button" class="btn btn-primary" href="#direcciones"
-                                        aria-controls="browseTab" role="tab" data-toggle="tab">Seleccionar Direccion de
-                                    entrega
-                                </button>
-                                </button>
-                            {% elif user.can_buy == False %}
-                                <button type="button" class="btn btn-default btn-debt">Tienes adeudo pendiente</button>
-                            {% else %}
-                                <button type="button" class="btn btn-default btn-debt"><a href="">Registrate para poder
-                                    comprar</a></button>
-                            {% endif %}
-                        </div>
-
-                    </div>
-                    <div role="tabpanel" class="tab-pane no_top_padding" id="direcciones">
-                        <div class="modal-body">
-                            {% block user_addresses %}
-                            {% endblock %}
-                        </div>
-                        <div class="modal-footer">
-
-                            <span class="hidden " id="token" value="{% csrf_token %}">{% csrf_token %}</span>
-                            <span class="hidden" value="{{ user.can_buy }}"></span>
-                            {% if user.can_buy == True %}
-                                <button type="button" class="btn btn-primary" href="#pagar" aria-controls="browseTab"
-                                        role="tab" data-toggle="tab">Proceder al pago
-                                </button>
-                                </button>
-                            {% elif user.can_buy == False %}
-                                <button type="button" class="btn btn-default btn-debt">Tienes adeudo pendiente</button>
-                            {% else %}
-                                <button type="button" class="btn btn-default btn-debt"><a href="">Registrate para poder
-                                    comprar</a></button>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane no_top_padding" id="pagar">
-
-                        <div class="modal-body">
-
-                            {% if user.is_wholesaler %}
-                                <span class="modal-title"><h5>Resumen de compra</h5></span>
-
-                                <div class="row" id="resumen">
-                                    <div class="col-md-3">
-                                        <h6>Producto</h6>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <h6>Descripcion</h6>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <h6>Cantidad</h6>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <h6>Costo</h6>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-
-                                <span class="modal-title total_price">Total:<span
-                                        class="cart-total-price-to-pay"></span> </span>
-                                    <span class="hidden " id="token" value="{% csrf_token %}">{% csrf_token %}</span>
-                                    {% if user.can_buy == True %}
-                                        <button type="button" class="btn btn-primary btn-purchase " href="#pagar"
-                                                aria-controls="browseTab" role="tab" data-toggle="tab">Ordenar
-                                        </button>
-                                    {% elif user.can_buy == False %}
-                                        <button type="button" class="btn btn-default btn-debt">Tienes adeudo pendiente
-                                        </button>
-                                    {% else %}
-                                        <button type="button" class="btn btn-default btn-debt"><a href="">Registrate
-                                            para
-                                            poder
-                                            comprar</a></button>
-                                    {% endif %}
-                                </div>
-                            {% else %}
-
-                                <div class="row" id="resumen">
-
-                                    <div class="col-md-2">
-                                        <h6>Código de producto</h6>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h6>Descripción</h6>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <h6>Cantidad</h6>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <h6>P. Unitario</h6>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <h6>P. Total</h6>
-                                    </div>
-                                <div class="col-md-12">
-                                        &nbsp;
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                <span class="modal-title total_price">Total:<span
-                                        class="cart-total-price"></span> </span>
-                                    <span class="hidden " id="token" value="{% csrf_token %}">{% csrf_token %}</span>
-                                    {% if user %}
-                                        <button type="button" class="btn btn-primary btn-purchase " href="#pagar"
-                                                aria-controls="browseTab" role="tab" data-toggle="tab">Pagar
-                                        </button>
-
-                                    {% else %}
-                                        <button type="button" class="btn btn-default btn-debt"><a href="">Registrate
-                                            para
-                                            poder
-                                            comprar</a></button>
-                                    {% endif %}
-                                </div>
-
-                            {% endif %}
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
-</div>
-</div>
 <!-- ++++++++++++-->
 <!-- MAIN SCRIPTS-->
 <!-- ++++++++++++-->
 <script src="{% static 'assets/landingLibs/jquery-1.12.4.min.js' %}"></script>
-<script src="{% static 'assets/landingLibs/jquery-migrate-1.2.1.js' %}"></script>
+<script src="{% static 'assets/landingLibs//jquery-migrate-1.2.1.js' %}"></script>
 <!-- Bootstrap-->
 <script src="{% static 'assets/landingLibs/bootstrap/bootstrap.min.js' %}"></script>
 <!-- User customization-->
@@ -536,17 +379,10 @@
 <!-- Headers scripts-->
 <script src="{% static 'assets/landingPlugins/headers/slidebar.js' %}"></script>
 <script src="{% static 'assets/landingPlugins/headers/header.js' %}"></script>
-<!-- Color scheme-->
-<script src="{% static 'assets/landingPlugins/switcher/js/dmss.js' %}"></script>
-<!-- Select customization & Color scheme-->
-<script src="{% static 'assets/landingPlugins/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
 <!-- Slider-->
 <script src="{% static 'assets/landingPlugins/owl-carousel/owl.carousel.min.js' %}"></script>
 <!-- Pop-up window-->
 <script src="{% static 'assets/landingPlugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
-<!-- Mail scripts-->
-<script src="{% static 'assets/landingPlugins/jqBootstrapValidation.js' %}"></script>
-<script src="{% static 'assets/landingPlugins/contact_me.js' %}"></script>
 <!-- Filter and sorting images-->
 <script src="{% static 'assets/landingPlugins/isotope/isotope.pkgd.min.js' %}"></script>
 <script src="{% static 'assets/landingPlugins/isotope/imagesLoaded.js' %}"></script>
@@ -558,9 +394,10 @@
 <script src="{% static 'assets/landingPlugins/noUiSlider/wNumb.js' %}"></script>
 <!-- Animations-->
 <script src="{% static 'assets/landingPlugins/scrollreveal/scrollreveal.min.js' %}"></script>
-<!-- cart -->
-<script src="{% static 'assets/scripts/cart.js' %}"></script>
-
-</body>
-
+<!-- Main slider-->
+<script src="{% static 'assets/landingPlugins/slider-pro/jquery.sliderPro.min.js' %}"></script>
+<!-- User map-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqQ_bBw186KJnMcRByvn5ffZueg88wp1E"></script>
+<!-- Maps customization-->
+<script src="{% static 'assets/landingJs/map-custom.js' %}"></script>
 </html>
