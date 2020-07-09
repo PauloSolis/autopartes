@@ -1,12 +1,13 @@
 from django.db import models
 from productos.models import Product
 from users.models import Address, User
-import productos
+import datetime
 
 
 class Order(models.Model):
     total_price = models.FloatField(null=False)
     status = models.TextField(null=False)
+    status_update = models.DateField(default=datetime.date.today)
     products = models.ManyToManyField(Product)
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
