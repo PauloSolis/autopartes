@@ -12,15 +12,36 @@
             </ul>
         {% endif %}
 
-        <table  class="table table-bordered">
+        <div>
+            {% if user.is_administrator %}
+                <a href="{% url  'orders:change_status' id=order.id %}"
+                   data-animation="blur" data-overlaycolor="#36404a" class="col-md">
+                    <button type="button" class=" btn btn-success"> Actualizar Estado
+                    </button>
+                </a>
+
+            {% endif %}
+        </div>
+        <br>
+        <table class="table table-bordered">
             <tbody>
             <tr>
                 <th scope="col">Número de orden</th>
                 <td>{{ order.id }}</td>
             </tr>
-             <tr>
+            <tr>
                 <th scope="col">Estado</th>
-                <td>{{ order.status }}</td>
+                <td>
+                    {{ order.status }}
+
+                </td>
+            </tr>
+            <tr>
+                <th scope="col">Última Actualización</th>
+                <td>
+                    {{ order.status_update }}
+
+                </td>
             </tr>
             <tr>
                 <th scope="col">Dirección de entrega</th>

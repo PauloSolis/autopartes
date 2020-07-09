@@ -8,11 +8,16 @@ from orders.models import Order
 from orders.models import User
 import json
 import logging
+from django.contrib.auth.decorators import login_required
+from users.decorators import admin_required
+from django.shortcuts import render, redirect
+from .forms import Status
+
 
 # Create your views here.
 logger = logging.getLogger(__name__)
 
-
+@login_required
 def crear_orden(request):
     if request.method == 'POST':
         received_order = json.loads(request.body)
@@ -40,7 +45,8 @@ def crear_orden(request):
             prod_ord.save()
     return render(request, '../templates/landing.html')
 
-
+@login_required
+@admin_required
 def ver_ordenes(request):
 
 
@@ -74,6 +80,7 @@ def ver_ordenes(request):
         return render(request, '../templates/orders/ver_ordenes.html', {'orders': page_obj, 'addresses': addresses})
 
 
+@login_required
 def ver_desgloce(request, id):
     order_p = ProductsOrder.objects.filter(order_id=id)
     order = Order.objects.get(pk=id)
@@ -87,3 +94,16 @@ def ver_desgloce(request, id):
                   '../templates/orders/ver_desgloce.html',
                   {'order_products': order_p, 'products': prod, 'address': address, 'order': order})
 
+
+@login_required
+@admin_required
+def change_status(request, id):
+    order = Order.objects.get(id = id)
+    form = Status(request.POST or None, instance=order)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('orders:ver_ordenes')
+    context = {
+        'form': form,
+    }
+    return render(request, '../templates/orders/change_status.html', context)
