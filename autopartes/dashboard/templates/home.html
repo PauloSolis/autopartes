@@ -63,16 +63,17 @@
     <header class="header">
         <a  class="logo">Auto 1 Partes</a>
         <button type="button" class="button-close fa fa-times js__menu_close"></button>
+
         <div class="user">
-            <h5 class="name">{{ request.user.first_name }}</h5>
-            <h5 class="position">
+            <h4 class="name d-flex justify-content-start" style="color: white">{{ request.user.first_name }}</h4>
+            <h4 class="position d-flex justify-content-start">
                 {% if user.is_retailer %}
                 Cliente Minorista
                 {% elif user.is_wholesaler %}
                 Cliente Mayorista
                 {% elif user.is_administrator %}
                 Administrador
-                {% endif %}</h5>
+                {% endif %}</h4>
             <!-- /.name -->
             <div class="control-wrap js__drop_down">
                 <i class="fa fa-caret-down js__drop_down_button"></i>
