@@ -70,7 +70,7 @@ function purchaseClicked() {
             var obj = {prod_id: id, prod_quantity: quantity, price_at_sale: price}
             cart.products.push(JSON.stringify(obj))
 
-            total = total + (price * quantity)
+            total = total + (price)
         }
 
         cart.data.push(JSON.stringify({total: [total]}));
