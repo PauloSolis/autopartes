@@ -17,3 +17,7 @@ def ver_landing(request):
 
 def about_us(request):
     return render(request, '../templates/about_us.html')
+
+
+def contact_us(request):
+    return render(request, '../templates/contact-us.html')
