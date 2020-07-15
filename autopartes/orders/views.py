@@ -48,7 +48,6 @@ def crear_orden(request):
 
 
 @login_required
-@admin_required
 def ver_ordenes(request, search=None):
     if request.user.is_administrator:
         if search:

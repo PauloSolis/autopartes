@@ -71,14 +71,18 @@ def displayUsers(request, help=None):
         if form.is_valid():
             paid = form.cleaned_data.get('balance')
             maximun = form.cleaned_data.get('max')
+            zero = Money(0, 'USD')
             if paid:
                 X = Money(paid, 'USD')
-                User.objects.filter(id=id).update(balance=(token - X))
+                new = token - X
+                if new > zero:
+                    User.objects.filter(id=id).update(balance=(new))
+
             if maximun:
                 User.objects.filter(id=id).update(max=maximun)
             if help:
                 return 1
-            return HttpResponseRedirect('/ver/')
+        return HttpResponseRedirect('/ver/')
     else:
         form = EditBalance()
     context = {

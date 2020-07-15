@@ -4,6 +4,7 @@ from djmoney.models.validators import MinMoneyValidator
 from djmoney.money import Money
 from phonenumber_field.modelfields import PhoneNumberField
 from djmoney.models.fields import MoneyField
+from django.core.validators import MinValueValidator
 
 
 # Create your models here.
@@ -17,6 +18,7 @@ class User(AbstractUser):
                          validators=[
                              MinMoneyValidator(0),
                              MinMoneyValidator(Money(0, 'USD')),
+
                          ]
                          )
     balance = MoneyField(max_digits=14, decimal_places=2, default_currency='USD', default=0,

@@ -4,7 +4,6 @@ from django.forms import DateInput
 from django.forms import ModelForm
 from phonenumber_field.formfields import PhoneNumberField
 from .models import User, Address
-from djmoney.models.fields import MoneyField
 from djmoney.forms.fields import MoneyField
 
 
@@ -147,7 +146,7 @@ class EditProfileForm(UserChangeForm):
 
 class EditBalance(ModelForm):
     balance = forms.DecimalField(max_digits=10, decimal_places=2, label='Cantidad pagada', required=False)
-    max = forms.DecimalField(max_digits=10, decimal_places=2, label='Adeudo máximo', required=False)
+    max = forms.DecimalField(max_digits=10, decimal_places=2, label='Cupo máximo', required=False)
 
     class Meta:
         model = User
