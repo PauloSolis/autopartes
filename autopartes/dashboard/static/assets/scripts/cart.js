@@ -70,7 +70,7 @@ function purchaseClicked() {
             var obj = {prod_id: id, prod_quantity: quantity, price_at_sale: price}
             cart.products.push(JSON.stringify(obj))
 
-            total = total + (price * quantity)
+            total = total + (price)
         }
 
         cart.data.push(JSON.stringify({total: [total]}));
@@ -93,9 +93,9 @@ function purchaseClicked() {
                 console.log(json);
                 document.getElementById("purchase-status-modal").removeAttribute("hidden");
                 document.getElementById("success-purchase").removeAttribute("hidden");
-                document.getElementById("shopping-cart-modal").hidden=true;
+                document.getElementById("shopping-cart-modal").hidden = true;
 
-                setTimeout(reload_page,2000)
+                setTimeout(reload_page, 2000)
 
             }
         };
@@ -112,7 +112,7 @@ function purchaseClicked() {
 
 }
 
-function reload_page(){
+function reload_page() {
     location.reload()
 }
 
@@ -122,8 +122,9 @@ function removeCartItem(event) {
     buttonClicked.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.remove()
     updateCartTotal()
 }
-function removeFromResume(prod_id){
-    document.getElementById("short_cart"+prod_id).remove()
+
+function removeFromResume(prod_id) {
+    document.getElementById("short_cart" + prod_id).remove()
 }
 
 function quantityChanged(event) {
@@ -139,16 +140,17 @@ function addToCartClicked(event) {
     var button = event.target
     var shopItem = button.parentElement.parentElement.parentElement.parentElement
     var prod_id = shopItem.getElementsByClassName('product-id')[0].innerText
+    var prod_code = shopItem.getElementsByClassName('product-code')[0].innerText
     var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText
     var description = shopItem.getElementsByClassName('product-description')[0].innerText
     var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText
     var quantity = shopItem.getElementsByClassName('shop-item-quantity')[0].value
     var image = shopItem.getElementsByClassName('shop-image-product')[0].src
-    addItemToCart(prod_id, title,description, quantity, price, image)
+    addItemToCart(prod_id, prod_code, title, description, quantity, price, image)
     updateCartTotal()
 }
 
-function addItemToCart(prod_id, title, description, quantity, price, imageSrc) {
+function addItemToCart(prod_id, prod_code, title, description, quantity, price, imageSrc) {
     var cartRow = document.createElement('div')
     cartRow.classList.add('cart-row')
     var cartItems = document.getElementsByClassName('cart-items')[0]
@@ -171,9 +173,6 @@ function addItemToCart(prod_id, title, description, quantity, price, imageSrc) {
                 <div class="cart-item cart-column">
                     <span class="cart-item-title">${title}</span>
                 </div>
-                <div class="cart-item cart-column">
-                    <span class="cart-item-description">${description}</span>
-                </div>
                 <div class="cart-item-id cart-column" style="display:none">${prod_id}</div>
                 <div class="cart-quantity cart-column">
                     <input class="cart-quantity-input" type="number" value="${quantity}">
@@ -189,19 +188,25 @@ function addItemToCart(prod_id, title, description, quantity, price, imageSrc) {
 
     cartResume.innerHTML += `
     <span id="short_cart${prod_id}">
-        <div class="col-md-3" >
-           <h6>${title}</h6>
-        </div>
-        <div class="col-md-3">
-            <h6>${description}</h6>
-        </div>
-        <div class="col-md-3">
-            <h6 type="number" value="${quantity}">${quantity}</h6>
-        </div>
-        <div class="col-md-3">
-            <h6 class="cart-price cart-column" >$${total_price}</h6>
-        </div>
-        <div class="col-md-12"></div>
+        <div class="col-md-2">
+                                        <h8>${prod_code}</h8>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h8>${description}</h8>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h8>${quantity}</h8>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h8>${price}</h8>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h8>$ ${total_price}</h8>
+                                    </div>
+        <div class="col-md-2" ></div>
+        <div class="col-md-12">
+                                        &nbsp;
+                                    </div>
     </span>
         `
     cartRow.innerHTML = cartRowContents
@@ -234,7 +239,6 @@ function updateCartTotal() {
     for (var i = 0; i < cartRows.length; i++) {
         var cartRow = cartRows[i]
         var idElement = cartRow.getElementsByClassName('cart-item-id')[0].innerText
-        var titleElement = cartRow.getElementsByClassName('cart-item-title')[0].innerText
         var descriptionElement = cartRow.getElementsByClassName('cart-item-description')[0].innerText
         var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0].value
         var priceElement = cartRow.getElementsByClassName('cart-price')[0].innerText
@@ -242,7 +246,6 @@ function updateCartTotal() {
 
         var obj = {
             prod_id: idElement,
-            prod_title: titleElement,
             prod_description: descriptionElement,
             prod_quantity: quantityElement,
             price_at_sale: priceElement,
