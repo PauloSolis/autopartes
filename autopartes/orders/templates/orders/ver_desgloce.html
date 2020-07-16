@@ -1,133 +1,129 @@
 {% extends 'home.html' %}
 {% block content %}
-    <div class="container-fluid ">
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <br>
-                    <div class="alert alert-success" role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            </ul>
+<div class="container-fluid ">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <br>
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div>
+         {% if user.is_seller %}
+        <a href="{% url  'orders:change_status' id=order.id %}"
+           data-animation="blur" data-overlaycolor="#36404a" class="col-md">
+            <button type="button" class=" btn btn-success"> Actualizar Estado
+            </button>
+        </a>
+
+        {% endif %}
+    </div>
+    <br>
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <th scope="col">Número de orden</th>
+            <td>{{ order.id }}</td>
+        </tr>
+        <tr>
+            <th scope="col">Nombre del Cliente</th>
+            <td>{{ user.name }}</td>
+        </tr>
+        <tr>
+            <th scope="col">RUC</th>
+            <td>{{ user.ruc }}</td>
+        </tr>
+        <tr>
+            <th scope="col">Teléfono:</th>
+            <td>{{ user.phone }}</td>
+        </tr>
+        <tr>
+            <th scope="col">Estado</th>
+            <td>
+                {{ order.status }}, última actualización {{ order.status_update }}
+
+            </td>
+        </tr>
+        <tr>
+            <th scope="col">Dirección de entrega</th>
+            <td>{{ address.state }}, {{ address.city }}, {{ address.address }}</td>
+        </tr>
+        <tr>
+            <th scope="col">Total de la orden</th>
+            <td>{{ order.total_price }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <table class="table table-bordered" align="center">
+        <thead>
+        <tr>
+            <th scope="col">Código de producto</th>
+            <th scope="col">Nombre del producto</th>
+            <th scope="col">cantidad</th>
+            <th scope="col">Precio Unitario</th>
+            <th scope="col">Importe</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if order_products %}
+        {% for product in products %}
+        <tr>
+            <td>{{ product.product_code }}</td>
+            <td>{{ product.name }}, {{ product.description }}</td>
+            {% for o in order_products %}
+            {% if o.product_id == product.id %}
+            <td> {{ o.quantity }}</td>
+            <td> {{ o.price }}</td>
+            <td> {{ o.total }}</td>
+            {% endif %}
+            {% endfor %}
+        </tr>
+
+        {% endfor %}
+         <tr>
+            <th colspan="4">Total:</th>
+            <td>{{ order.total_price }}</td>
+        </tr>
         {% endif %}
 
-        <div>
-            {% if user.is_administrator %}
-                <a href="{% url  'orders:change_status' id=order.id %}"
-                   data-animation="blur" data-overlaycolor="#36404a" class="col-md">
-                    <button type="button" class=" btn btn-success"> Actualizar Estado
-                    </button>
-                </a>
 
-            {% endif %}
-        </div>
-        <br>
-        <table class="table table-bordered">
-            <tbody>
-            <tr>
-                <th scope="col">Número de orden</th>
-                <td>{{ order.id }}</td>
-            </tr>
-            <tr>
-                <th scope="col">Nombre del Cliente</th>
-                <td>{{ user.name }}</td>
-            </tr>
-            <tr>
-                <th scope="col">RUC</th>
-                <td>{{ user.ruc }}</td>
-            </tr>
-            <tr>
-                <th scope="col">Teléfono:</th>
-                <td>{{ user.phone }}</td>
-            </tr>
-            <tr>
-                <th scope="col">Estado</th>
-                <td>
-                    {{ order.status }}, última actualización {{ order.status_update }}
-
-                </td>
-            </tr>
-            <tr>
-                <th scope="col">Dirección de entrega</th>
-                <td>{{ address.state }}, {{ address.city }}, {{ address.address }}</td>
-            </tr>
-            <tr>
-                <th scope="col">Valor total</th>
-                <td>{{ order.total_price }}</td>
-            </tr>
-            </tbody>
-        </table>
-
-
-        <table class="table table-bordered" align="center">
-            <thead>
-            <tr>
-                <th scope="col">Código de producto</th>
-                <th scope="col">Nombre del producto</th>
-                <th scope="col">cantidad</th>
-                <th scope="col">Precio Unitario</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% if order_products %}
-
-                {% for product in products %}
-
-                    <tr>
-                        <td>{{ product.product_code }}</td>
-                        <td>{{ product.name }}, {{ product.description }}</td>
-                        <td>
-                            {% for o in order_products %}
-                                {% if o.product_id == product.id %}
-                                    {{ o.quantity }}
-                                {% endif %}
-                            {% endfor %}
-                        </td>
-                        <td>
-                            {% for o in order_products %}
-                                {% if o.product_id == product.id %}
-                                    {{ o.price }}
-                                {% endif %}
-                            {% endfor %}
-                        </td>
-                    </tr>
-                {% endfor %}
-
-            {% endif %}
-
-
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
+</div>
 {% endblock %}
 
 {% block modals %}
-    {% if products %}
-        {% for product in products %}
+{% if products %}
+{% for product in products %}
 
-            <div class="modal fade" id="delete-modal-{{ product.id }}" tabindex="-1" role="dialog"
-                 aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            ¿Estás seguro de que quieres eliminar el producto "{{ product.name }}" permanentemente?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <a class="btn btn-danger waves-effect waves-light mr-1"
-                               href="{% url 'productos:delete_product' product.id %}">Eliminar</a>
-                        </div>
-                    </div>
-                </div>
+<div class="modal fade" id="delete-modal-{{ product.id }}" tabindex="-1" role="dialog"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        {% endfor %}
-    {% endif %}
+            <div class="modal-body">
+                ¿Estás seguro de que quieres eliminar el producto "{{ product.name }}" permanentemente?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <a class="btn btn-danger waves-effect waves-light mr-1"
+                   href="{% url 'productos:delete_product' product.id %}">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
 
 {% endblock %}

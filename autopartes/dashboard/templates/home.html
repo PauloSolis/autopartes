@@ -71,6 +71,8 @@
                 Cliente Minorista
                 {% elif user.is_wholesaler %}
                 Cliente Mayorista
+                {% elif user.is_seller %}
+                Vendedor
                 {% elif user.is_administrator %}
                 Administrador
                 {% endif %}</h4>
@@ -139,7 +141,8 @@
 <div class="fixed-navbar">
     <div class="pull-left">
         <button type="button" class="menu-mobile-button glyphicon glyphicon-menu-hamburger js__menu_mobile"></button>
-        <h1 class="page-title">Home</h1>
+        <h1 class="page-title"> <img class="normal-logo img-responsive"
+                                 src="{% static 'images/logoNB.png' %}" alt="logo" width="202" height="44"/></h1>
         <!-- /.page-title -->
     </div>
     <!-- /.pull-left -->

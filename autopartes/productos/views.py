@@ -8,6 +8,7 @@ from users.decorators import admin_required
 from .forms import Products, CategoryForm, SubcategoryForm
 from .models import Product
 from django.db.models import Q
+
 STATUS_SAVED = 'SAVED'
 STATUS_ERROR = 'ERROR'
 
@@ -112,7 +113,8 @@ def search_product(request):
     query = request.GET.get('q', '')
     template = '../templates/productos/buscar_producto.html'
     if query:
-        queryset = (Q(product_code__icontains=query)) | (Q(name__icontains=query)) | (Q(original_code__icontains=query))
+        queryset = (Q(product_code__icontains=query)) | (Q(name__icontains=query)) | (
+            Q(original_code__icontains=query)) | (Q(description__icontains=query))
         results = Product.objects.filter(queryset).distinct()
     else:
         results = []

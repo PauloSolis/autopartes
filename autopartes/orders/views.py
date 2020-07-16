@@ -10,7 +10,7 @@ from orders.models import User
 import json
 import logging
 from django.contrib.auth.decorators import login_required
-from users.decorators import admin_required
+from users.decorators import admin_required, seller_required
 from django.shortcuts import render, redirect
 from .forms import Status
 
@@ -48,7 +48,6 @@ def crear_orden(request):
 
 
 @login_required
-@admin_required
 def ver_ordenes(request, search=None):
     if request.user.is_administrator:
         if search:
@@ -103,7 +102,7 @@ def ver_desgloce(request, id):
 
 
 @login_required
-@admin_required
+@seller_required
 def change_status(request, id):
     order = Order.objects.get(id = id)
     form = Status(request.POST or None, instance=order)
