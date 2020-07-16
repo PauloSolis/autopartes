@@ -6,7 +6,7 @@ if (document.readyState == 'loading') {
 
 function ready() {
     //sc = shopping cart
-    //localStorage.clear()
+    localStorage.clear()
     var sc = JSON.parse(localStorage.getItem('local_shopping_cart'));
     if (sc != null) {
         for (i = 0; i < sc.length; i++) {
@@ -213,6 +213,8 @@ function addItemToCart(prod_id, prod_code, title, description, quantity, price, 
     cartItems.append(cartRow)
     cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem)
     cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
+
+    var resume_final_total = document.getElementsByClassName('cart-total-price-to-pay')[0].innerHTML = '$' + total_price
 }
 
 function updateCartTotal() {
@@ -233,13 +235,13 @@ function updateCartTotal() {
     document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
 
     document.getElementsByClassName('cart-total-price-outside')[0].innerText = '$' + total
-    document.getElementsByClassName('cart-total-price-to-pay').innerText = '$' + total
+    document.getElementsByClassName('cart-total-price-to-pay')[0].innerText = '$' + total
 
     var local = []
     for (var i = 0; i < cartRows.length; i++) {
         var cartRow = cartRows[i]
         var idElement = cartRow.getElementsByClassName('cart-item-id')[0].innerText
-        var descriptionElement = cartRow.getElementsByClassName('cart-item-description')[0].innerText
+        var descriptionElement = cartRow.getElementsByClassName('cart-item-title')[0].innerText
         var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0].value
         var priceElement = cartRow.getElementsByClassName('cart-price')[0].innerText
         var imageElement = cartRow.getElementsByClassName('cart-product-image')[0].src
