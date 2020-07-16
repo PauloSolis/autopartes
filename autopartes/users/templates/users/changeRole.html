@@ -26,6 +26,8 @@
                             Minorista
                         {% elif usuario.is_wholesaler %}
                             Mayorista
+                        {% elif usuario.is_seller %}
+                            Vendedor
                         {% elif usuario.is_administrator %}
                             Administrador
                         {% endif %}</td>
@@ -44,7 +46,8 @@
                         <option value="0">Sin cambios</option>
                         <option value="1">Minorista</option>
                         <option value="2">Mayorista</option>
-                        <option value="3">Administrador</option>
+                        <option value="3">Vendedor</option>
+                        <option value="4">Administrador</option>
                     </select>
                 </div>
             </div>

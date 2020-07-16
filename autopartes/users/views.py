@@ -107,14 +107,22 @@ def changeRole(request, id):
                     usuario.is_retailer = True
                     usuario.is_wholesaler = False
                     usuario.is_administrator = False
+                    usuario.is_seller = False
                 if request.POST.get('rol') == "2":
                     usuario.is_retailer = False
                     usuario.is_wholesaler = True
                     usuario.is_administrator = False
+                    usuario.is_seller = False
                 if request.POST.get('rol') == "3":
                     usuario.is_retailer = False
                     usuario.is_wholesaler = False
+                    usuario.is_administrator = False
+                    usuario.is_seller = True
+                if request.POST.get('rol') == "4":
+                    usuario.is_retailer = False
+                    usuario.is_wholesaler = False
                     usuario.is_administrator = True
+                    usuario.is_seller = False
 
             usuario.save()
             return HttpResponseRedirect('/ver/')

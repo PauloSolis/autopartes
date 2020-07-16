@@ -13,11 +13,14 @@ STATUS_CHOICES = [
 
 class Status(ModelForm):
     status = forms.CharField(label='Estado', widget=forms.Select(choices=STATUS_CHOICES))
-
+    carrier = forms.CharField(label='Paquetería')
+    tracking_code = forms.CharField(label='Código de rastreo')
     class Meta:
         model = Order
-        fields = ['status', ]
+        fields = ['status', 'carrier', 'tracking_code']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['status'].widget.attrs['class'] = 'form-control'
+        self.fields['carrier'].widget.attrs['class'] = 'form-control'
+        self.fields['tracking_code'].widget.attrs['class'] = 'form-control'

@@ -35,6 +35,8 @@
             <th scope="col">Direccion de entrega</th>
             {% endif %}
             <th scope="col">Estatus</th>
+            <th scope="col">Paquetería</th>
+            <th scope="col">Rastreo</th>
             <th scope="col">Precio total</th>
 
 
@@ -72,6 +74,8 @@
             <td>
                 {{ order.status }}
             </td>
+            <td>{{ order.carrier }}</td>
+            <td>{{ order.tracking_code }}</td>
             <td>{{ order.total_price }}</td>
 
             <td>
@@ -79,7 +83,7 @@
                    data-animation="blur" data-overlaycolor="#36404a">
                     <button type="button" class=" btn btn-success"><i class="fa fa-eye"></i>
                     </button>
-                    {# </a>#}
+                </a>
             </td>
 
         </tr>

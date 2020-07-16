@@ -7,6 +7,7 @@ from .models import User, Address
 from djmoney.forms.fields import MoneyField
 
 
+
 class UserRegister(UserCreationForm):
     username = forms.CharField(label='Nombre Comercial')
     first_name = forms.CharField(label='Nombre')

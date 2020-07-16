@@ -42,6 +42,8 @@
                 Minorista
                 {% elif user.is_wholesaler %}
                 Mayorista
+                {% elif user.is_seller %}
+                Vendedor
                 {% elif user.is_administrator %}
                 Administrador
                 {% endif %}
@@ -50,7 +52,7 @@
                 {% if user.can_buy %}
                 <a href="{% url  'users:cant_purchase' id=user.id %}"
                    data-animation="blur" data-overlaycolor="#36404a">
-                    <button type="button" class=" btn btn-danger">
+                    <button type="button" class=" btn btn-secondary">
                         <i class="mdi mdi-account">Quitar permiso de compra
                         </i>
                     </button>
@@ -58,7 +60,7 @@
                 {% else %}
                 <a href="{% url  'users:can_purchase' id=user.id %}"
                    data-animation="blur" data-overlaycolor="#36404a">
-                    <button type="button" class=" btn btn-secondary">
+                    <button type="button" class=" btn btn-danger">
                         <i class="mdi mdi-account">Dar permiso de compra
                         </i>
                     </button>
@@ -76,14 +78,14 @@
             <td>
                 <a href="{% url  'users:deactivateUser' id=user.id %}"
                    data-animation="blur" data-overlaycolor="#36404a">
-                    <button type="button" class=" btn btn-danger"><i class="mdi mdi-account">Desactivar
+                    <button type="button" class=" btn btn-secondary"><i class="mdi mdi-account">Desactivar
                     </i>
                     </button>
                 </a></td>
             {% else %}
             <td><a href="{% url  'users:activateUser' id=user.id %}"
                    data-animation="blur" data-overlaycolor="#36404a">
-                <button type="button" class=" btn btn-secondary"><i class="mdi mdi-account">Activar</i>
+                <button type="button" class=" btn btn-danger"><i class="mdi mdi-account">Activar</i>
                 </button>
             </a></td>
             {% endif %}

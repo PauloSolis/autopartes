@@ -30,6 +30,7 @@ class User(AbstractUser):
     is_administrator = models.BooleanField(default=False)
     is_wholesaler = models.BooleanField(default=False)
     is_retailer = models.BooleanField(default=True)
+    is_seller = models.BooleanField(default=False)
     can_buy = models.BooleanField(default=True)
 
     def __str__(self):
