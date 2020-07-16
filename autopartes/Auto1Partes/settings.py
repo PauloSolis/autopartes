@@ -25,7 +25,7 @@ SECRET_KEY = ')g=v9vc)-k&yrup0i5***r&m0=0u2*xo^i!fv_t25&67o(x(6n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['164.90.148.82']
 
 # Application definition
 
@@ -85,10 +85,10 @@ WSGI_APPLICATION = 'Auto1Partes.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'auto1partes',
-        'USER': 'postgres',
-        'PASSWORD': '1234567890',
+        'USER': 'auto1partespostgresql',
+        'PASSWORD': '6CgFEA7DZ$!+wcCB',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -129,6 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = "/media/"
 AUTH_USER_MODEL = 'users.User'
