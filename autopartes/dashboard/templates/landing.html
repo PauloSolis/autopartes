@@ -456,18 +456,21 @@
                         <div class="col-md-3 col-sm-6">
                             <div class="b-goods-ac">
                                 <div class="b-goods-ac__wrap">
-                                    <div class="b-goods-ac__img">
-                                        <img class="img-responsive" src="assets/media/components/b-goods/access-2.jpg"
-                                             alt="foto"/>
-                                    </div>
-                                    <div class="b-goods-ac__inner">
-                                        <div class="b-goods-ac__info">
-                                            <div class="b-goods-ac__name">Sport Seats</div>
-                                            <div class="b-goods-ac__category">Interior</div>
+                                    {% for product in products %}
+                                        <div class="b-goods-ac__img">
+                                            <img class="img-responsive" src="{{ product.image1.url }}"
+                                                 alt="foto"/>
                                         </div>
-                                        <div class="b-goods-ac__price">$649
+                                        <br>
+                                        <div class="b-goods-ac__inner">
+                                            <div class="b-goods-ac__info">
+                                                <div class="b-goods-ac__name">{{ product.name }}</div>
+                                                <div class="b-goods-ac__category">{{ product.car_brand }}, {{ product.car_brand }} {{product.car_year}} - {{ product.description }}</div>
+                                            </div>
+                                            <div class="b-goods-ac__price">$649
+                                            </div>
                                         </div>
-                                    </div>
+                                    {% endfor %}
                                     <ul class="b-goods-links list-unstyled">
                                         <li class="b-goods-links__item"><a class="b-goods-links__link" href="home.html"><i
                                                 class="fa fa-shopping-basket"></i></a>
@@ -487,7 +490,7 @@
                             <!-- end .b-goods-access-->
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
             <!-- end .goods-group-1-->
         </div>
