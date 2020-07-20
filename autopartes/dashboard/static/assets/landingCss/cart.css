@@ -49,3 +49,17 @@
 .no_top_padding{
     padding-top:0px !important;
 }
+
+
+.btn-danger-search{
+    background:#ea4335;
+    outline: none!important;
+    font-size: 13px;
+    line-height: 26px;
+    padding: 8px 24px;
+    border: none;
+    font-weight: 500;
+    color: #fff;
+    margin-top: 10px;
+    text-align: center;
+}

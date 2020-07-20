@@ -11,8 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta content="telephone=no" name="format-detection"/>
     <meta name="HandheldFriendly" content="true"/>
-    <link rel="stylesheet" href="{% static 'assets/LandingCss/master.css' %}"/>
-    <link rel="stylesheet" href="{% static 'assets/LandingCss/cart.css' %}"/>
+    <link rel="stylesheet" href="{% static 'assets/landingCss/master.css' %}"/>
+    <link rel="stylesheet" href="{% static 'assets/landingCss/cart.css' %}"/>
 
     <link rel="icon" type="image/x-icon" href="favicon.ico"/>
     <!--[if lt IE 9 ]>
@@ -196,7 +196,7 @@
     <!-- end .b-title-page-->
 
     <div class="container">
-        <div class="row">
+        <div class="row" id="productos">
 
                         {% block content %}
                         {% endblock %}
@@ -542,8 +542,6 @@
 <!-- Headers scripts-->
 <script src="{% static 'assets/landingPlugins/headers/slidebar.js' %}"></script>
 <script src="{% static 'assets/landingPlugins/headers/header.js' %}"></script>
-<!-- Color scheme-->
-<script src="{% static 'assets/landingPlugins/switcher/js/dmss.js' %}"></script>
 <!-- Select customization & Color scheme-->
 <script src="{% static 'assets/landingPlugins/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
 <!-- Slider-->
@@ -552,7 +550,6 @@
 <script src="{% static 'assets/landingPlugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
 <!-- Mail scripts-->
 <script src="{% static 'assets/landingPlugins/jqBootstrapValidation.js' %}"></script>
-<script src="{% static 'assets/landingPlugins/contact_me.js' %}"></script>
 <!-- Filter and sorting images-->
 <script src="{% static 'assets/landingPlugins/isotope/isotope.pkgd.min.js' %}"></script>
 <script src="{% static 'assets/landingPlugins/isotope/imagesLoaded.js' %}"></script>
@@ -566,6 +563,7 @@
 <script src="{% static 'assets/landingPlugins/scrollreveal/scrollreveal.min.js' %}"></script>
 <!-- cart -->
 <script src="{% static 'assets/scripts/cart.js' %}"></script>
+<script src="{% static 'assets/scripts/filters.js' %}"></script>
 
 </body>
 
