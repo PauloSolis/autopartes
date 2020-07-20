@@ -1,54 +1,140 @@
-{% extends 'store.html' %}
-{% load static %}
-{% block content %}
-    <div class="col-md-12">
-        <aside>
-            <div class="b-filter-2 bg-grey">
-                <h3 class="b-filter-2__title">Opciones de Busqueda</h3>
-                <div class="b-filter-2__inner">
-                    <div class="b-filter-2__group">
-                        <form method='POST' action="{% url 'shop:get_filtered' %}">
-                        {% csrf_token %}
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <select id="brand_car_filter" name="brand_filter" class="browser-default custom-select form-control">
-                                        <option disabled selected value> Selecciona una Marca </option>>
-                                        {% for brand in brands %}
-                                            <option  value="{{ brand.car_brand }}">{{ brand.car_brand }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <select id="model_car_filter" name="model_filter" class="browser-default custom-select form-control">
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <select id="year_car_filter" name="year_filter" class="browser-default custom-select form-control">
+$(document).ready(function () {
+    var request;
 
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <button type="submit" id="filter-search-button " class="btn-danger-search btn">Buscar</button>
-                                </div>
-                            </div>
-                        </form>
+    request = $.ajax({
+        url: "/shop/get_models/",
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'Content-Type': "application/json;charset=UTF-8"
+        },
+        data:
+            {
+                brand: $("#brand_car_filter").val()
+            }
+    });
 
-                    </div>
+    request.done(function (msg) {
+        $("#model_car_filter").empty()
+        var models = JSON.parse(msg);
+        $.each(models, function (i, val) {
+            $("#model_car_filter").append(new Option(val, val));
+        });
 
-                </div>
-            </div>
-            <!-- end .b-filter-->
-        </aside>
-        <!-- end .l-sidebar-->
-    </div>
-    <div class="col-md-12">
-    <main class="l-main-content">
-    <!-- end .filter-goods-->
-    <div class="goods-group-2 list-goods list-goods_th">
-    {% if products %}
-        {% for product in products %}
-            <section class="b-goods-1 b-goods-1_mod-a">
+        var aux;
+
+        aux = $.ajax({
+            url: "/shop/get_years/",
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+                'Content-Type': "application/json;charset=UTF-8"
+            },
+            data:
+                {
+                    model: $("#model_car_filter").val()
+                }
+        });
+
+        aux.done(function (msg) {
+            $("#year_car_filter").empty()
+            var years = JSON.parse(msg);
+            $.each(years, function (i, val) {
+                $("#year_car_filter").append(new Option(val, val));
+            });
+        });
+
+    });
+});
+
+$("#brand_car_filter").change(function () {
+    var request;
+
+    request = $.ajax({
+        url: "/shop/get_models/",
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'Content-Type': "application/json;charset=UTF-8"
+        },
+        data:
+            {
+                brand: $("#brand_car_filter").val()
+            }
+    });
+
+    request.done(function (msg) {
+        $("#model_car_filter").empty()
+        var models = JSON.parse(msg);
+        $.each(models, function (i, val) {
+            $("#model_car_filter").append(new Option(val, val));
+        });
+
+        var aux;
+
+        aux = $.ajax({
+            url: "/shop/get_years/",
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+                'Content-Type': "application/json;charset=UTF-8"
+            },
+            data:
+                {
+                    model: $("#model_car_filter").val()
+                }
+        });
+
+        aux.done(function (msg) {
+            $("#year_car_filter").empty()
+            var years = JSON.parse(msg);
+            $.each(years, function (i, val) {
+                $("#year_car_filter").append(new Option(val, val));
+            });
+        });
+
+    });
+});
+
+$("#model_car_filter").change(function () {
+    var request;
+
+    request = $.ajax({
+        url: "/shop/get_years/",
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'Content-Type': "application/json;charset=UTF-8"
+        },
+        data:
+            {
+                model: $("#model_car_filter").val()
+            }
+    });
+
+    request.done(function (msg) {
+        $("#year_car_filter").empty()
+        var years = JSON.parse(msg);
+        $.each(years, function (i, val) {
+            $("#year_car_filter").append(new Option(val, val));
+        });
+    });
+});
+
+
+/*
+<section class="b-goods-1 b-goods-1_mod-a">
                 <div class="row">
                     <div>
                         <div class="b-goods-1__img col-md-8">
@@ -120,36 +206,4 @@
                     </div>
                 </div>
             </section>
-
-        {% endfor %}
-    {% endif %}
-{% endblock %}
-
-
-{% block user_addresses %}
-    {% if addresses %}
-        {% for address in addresses %}
-            <div class="row address">
-                <div class="col-md-1">
-
-                    <input type="radio" id="{{ address.id }}" name="address" value="{{ address.id }}">
-
-                </div>
-                <div class="col-md-11">
-
-                    <div>
-
-                        <span>{{ address.name }}</span><br>
-                        <span>{{ address.state }}, {{ address.city }}</span><br>
-                        <span>{{ address.address }}</span><br>
-                        <span>{{ address.postal_code }}</span>
-
-                        <label for="{{ address.id }}"></label>
-                    </div>
-                </div>
-
-            </div>
-
-        {% endfor %}
-    {% endif %}
-{% endblock %}
+ */
