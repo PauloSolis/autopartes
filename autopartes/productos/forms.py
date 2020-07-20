@@ -19,12 +19,13 @@ class Products(ModelForm):
     image1 = forms.ImageField(label="Foto de Frente")
     image2 = forms.ImageField(label="Foto de Posterior")
     in_stock = forms.IntegerField(label="Stock", min_value=0)
+    is_new = forms.BooleanField(label="¿Producto Nuevo o en Promoción?")
 
     class Meta:
         model = Product
         fields = ['original_code', 'product_code', 'name', 'category', 'subcategory', 'car_brand', 'car_model',
                   'car_year', 'description','public_price', 'card_price', 'master_price', 'wholesale_price',
-                  'dozen_price', 'image1', 'image2', 'in_stock']
+                  'dozen_price', 'image1', 'image2', 'in_stock', 'is_new']
 
         # widgets = {
         # 'subcategory': autocomplete.ModelSelect2(url='subcategory-autocomplete',
@@ -52,6 +53,7 @@ class Products(ModelForm):
         self.fields['subcategory'].widget.attrs['class'] = 'form-control'
         self.fields['subcategory'].queryset = SubCategory.objects.filter()
         self.fields['subcategory'].label_from_instance = lambda obj: "%s " % obj.name
+        self.fields['is_new'].widget.attrs['class'] = 'form-control'
 
 
 class CategoryForm(ModelForm):

@@ -29,6 +29,7 @@ class Product(models.Model):
     image1 = models.ImageField(upload_to='images/%Y/%m/%d', blank=True)
     image2 = models.ImageField(upload_to='images/%Y/%m/%d', blank=True)
     in_stock = models.IntegerField(null=True)
+    is_new = models.BooleanField(null=True, default=False)
 
     def __str__(self):
         return self.name
