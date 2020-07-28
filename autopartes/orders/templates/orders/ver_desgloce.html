@@ -13,7 +13,7 @@
     {% endif %}
 
     <div>
-         {% if user.is_seller %}
+        {% if user.is_administrator or user.is_seller%}
         <a href="{% url  'orders:change_status' id=order.id %}"
            data-animation="blur" data-overlaycolor="#36404a" class="col-md">
             <button type="button" class=" btn btn-success"> Actualizar Estado
@@ -31,17 +31,17 @@
         </tr>
         <tr>
             <th scope="col">Nombre del Cliente</th>
-            <td>{{ user.first_name }}
-            {{ user.last_name }}
+            <td>{{ client.first_name }}
+            {{ client.last_name }}
             </td>
         </tr>
         <tr>
             <th scope="col">RUC</th>
-            <td>{{ user.ruc }}</td>
+            <td>{{ client.ruc }}</td>
         </tr>
         <tr>
             <th scope="col">Teléfono:</th>
-            <td>{{ user.phone }}</td>
+            <td>{{ client.phone }}</td>
         </tr>
         <tr>
             <th scope="col">Estado</th>
@@ -89,7 +89,7 @@
 
         {% endfor %}
          <tr>
-            <th colspan="4">Total:</th>
+            <th colspan="4" style="text-align:right; color:#FF0000">Total (IVA incluido):    </th>
             <td>{{ order.total_price }}</td>
         </tr>
         {% endif %}
@@ -98,34 +98,4 @@
         </tbody>
     </table>
 </div>
-{% endblock %}
-
-{% block modals %}
-{% if products %}
-{% for product in products %}
-
-<div class="modal fade" id="delete-modal-{{ product.id }}" tabindex="-1" role="dialog"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ¿Estás seguro de que quieres eliminar el producto "{{ product.name }}" permanentemente?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <a class="btn btn-danger waves-effect waves-light mr-1"
-                   href="{% url 'productos:delete_product' product.id %}">Eliminar</a>
-            </div>
-        </div>
-    </div>
-</div>
-{% endfor %}
-{% endif %}
-
 {% endblock %}

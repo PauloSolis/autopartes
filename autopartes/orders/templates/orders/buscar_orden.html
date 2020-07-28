@@ -23,8 +23,8 @@
     <div class="row">
         <form method='GET' action="{% url 'orders:search' %}"
               class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2">
-            <input class="form-control" type="text" name="q" placeholder="Preguntar"/>
-            <button type="submit" value="{{ query|escape }}" class=" btn btn-danger"><i
+            <input class="form-control" type="text" name="q" placeholder="Número de orden, RUC"/>
+            <button type="submit" class=" btn btn-danger"><i
                     class="mdi mdi-account">Buscar</i>
             </button>
         </form>

@@ -49,7 +49,7 @@ def crear_orden(request):
 
 @login_required
 def ver_ordenes(request, search=None):
-    if request.user.is_administrator:
+    if request.user.is_administrator | request.user.is_seller:
         if search:
             orders = search
         else:
@@ -97,7 +97,7 @@ def ver_desgloce(request, id):
 
     return render(request,
                   '../templates/orders/ver_desgloce.html',
-                  {'order_products': order_p, 'products': prod, 'address': address, 'order': order, 'user':user})
+                  {'order_products': order_p, 'products': prod, 'address': address, 'order': order, 'client':user})
 
 
 
