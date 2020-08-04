@@ -95,9 +95,17 @@ def ver_desgloce(request, id):
         aux = Product.objects.get(id=o.product_id)
         prod.append(aux)
 
+    total = 0
+
+    if order.total_price < 300:
+        total = order.total_price + 4
+    else:
+        total = order.total_price
+    print(total)
     return render(request,
                   '../templates/orders/ver_desgloce.html',
-                  {'order_products': order_p, 'products': prod, 'address': address, 'order': order, 'client':user})
+                  {'order_products': order_p, 'products': prod, 'address': address, 'order': order, 'client': user,
+                   'total': total})
 
 
 
