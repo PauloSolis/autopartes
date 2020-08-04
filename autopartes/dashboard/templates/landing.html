@@ -19,6 +19,19 @@
 
     <![endif]-->
     <style>
+        .column {
+            float: left;
+            width: 40.33%;
+            padding: 5px;
+        }
+
+        /* Clear floats after image containers */
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
         .carousel-inner > .item > img,
         .carousel-inner > .item > a > img {
             display: block;
@@ -55,8 +68,8 @@
                 <li><a href="{% url 'shop:ver_catalogo' %}">Catálogo de productos</a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'users:login' %}">Perfil</a>
-                    </li>
+                <li><a href="{% url 'users:login' %}">Perfil</a>
+                </li>
                 {% endif %}
             </ul>
         </div>
@@ -150,15 +163,23 @@
                         <a class="navbar-brand scroll" href="home.html">
                             <img class="normal-logo img-responsive"
                                  src="{% static 'images/logoNB.png' %}" alt="logo" width="202" height="44"/>
-                            <img class="scroll-logo hidden-xs img-responsive"
-                                 src="{% static 'images/logoNB.png' %}" alt="logo" width="252" height="94"/>
+                            <img class="normal-logo img-responsive"
+                                 src="{% static 'images/logo2NB.png' %}" alt="logo" width="202" height="44"/>
+                            <div class="row">
+                                <div class="column"><img class="scroll-logo hidden-xs img-responsive"
+                                                         src="{% static 'images/logoNB.png' %}" alt="logo" width="252"
+                                                         height="94"/></div>
+                                <div class="column"><img class="scroll-logo hidden-xs img-responsive"
+                                                         src="{% static 'images/logo2NB.png' %}" alt="logo" width="252"
+                                                         height="94"/></div>
+                            </div>
                         </a>
                     </div>
                     <div class="header-navibox-3">
                         {% if not user.is_authenticated %}
-                            <a class="btn btn-primary" href="{% url 'users:login' %}">
-                                Iniciar sesión
-                            </a>
+                        <a class="btn btn-primary" href="{% url 'users:login' %}">
+                            Iniciar sesión
+                        </a>
                         {% endif %}
                     </div>
                     <div class="header-navibox-2">
@@ -173,8 +194,8 @@
                             <li><a href="{% url 'shop:ver_catalogo' %}">Catálogo de productos</a>
                             </li>
                             {% if user.is_authenticated %}
-                                <li><a href="{% url 'users:login' %}">Perfil</a>
-                                </li>
+                            <li><a href="{% url 'users:login' %}">Perfil</a>
+                            </li>
                             {% endif %}
 
                         </ul>
@@ -457,19 +478,21 @@
                             <div class="b-goods-ac">
                                 <div class="b-goods-ac__wrap">
                                     {% for product in products %}
-                                        <div class="b-goods-ac__img">
-                                            <img class="img-responsive" src="{{ product.image1.url }}"
-                                                 alt="foto"/>
-                                        </div>
-                                        <br>
-                                        <div class="b-goods-ac__inner">
-                                            <div class="b-goods-ac__info">
-                                                <div class="b-goods-ac__name">{{ product.name }}</div>
-                                                <div class="b-goods-ac__category">{{ product.car_brand }}, {{ product.car_model }} {{product.car_year}} - {{ product.description }}</div>
+                                    <div class="b-goods-ac__img">
+                                        <img class="img-responsive" src="{{ product.image1.url }}"
+                                             alt="foto"/>
+                                    </div>
+                                    <br>
+                                    <div class="b-goods-ac__inner">
+                                        <div class="b-goods-ac__info">
+                                            <div class="b-goods-ac__name">{{ product.name }}</div>
+                                            <div class="b-goods-ac__category">{{ product.car_brand }}, {{
+                                                product.car_model }} {{product.car_year}} - {{ product.description }}
                                             </div>
-                                            <div class="b-goods-ac__price">{{ product.public_price }}
-                                            </div>
                                         </div>
+                                        <div class="b-goods-ac__price">{{ product.public_price }}
+                                        </div>
+                                    </div>
                                     {% endfor %}
                                     <ul class="b-goods-links list-unstyled">
                                         <li class="b-goods-links__item"><a class="b-goods-links__link" href="home.html"><i
@@ -544,7 +567,7 @@
         </div>
         <div class="block-table__cell col-md-6">
             <div class="block-table__inner">
-                <div class="map" >
+                <div class="map">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6709.979479559868!2d-79.1791403319506!3d-0.25864092600105393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d547df6e7c68ab%3A0x1c89e2622f9d7ef8!2sEl%20Palacio%20Del%20Accesorio!5e0!3m2!1ses-419!2smx!4v1594942007200!5m2!1ses-419!2smx"
                             height="900" width="749.44" frameborder="0" style="border:0;" allowfullscreen=""
                             aria-hidden="false" tabindex="0"></iframe>

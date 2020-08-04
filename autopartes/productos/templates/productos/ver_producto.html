@@ -12,12 +12,22 @@
     </ul>
     {% endif %}
 
+    {% if query %}
+    <div class="col mb-3">
+        <a href="{% url 'productos:ver_producto' %}">
+            <button class="btn btn-dark" type="button"><i
+                    class="fas fa-arrow-left"></i></button>
+        </a>
+    </div>
+    <h1>Resultados de busqueda para: {{query}}</h1>
+    {% else %}
     <h1>Productos</h1>
+      {% endif %}
     <div class="row">
         <form method='GET' action="{% url 'productos:search_product' %}"
               class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2">
-            <input class="form-control" type="text" name="q" placeholder="Código de producto"/>
-            <button type="submit" value="{{ query|escape }}" class=" btn btn-danger"><i
+            <input class="form-control" type="text" name="q" placeholder="Código de producto, código original, nombre, descripción"/>
+            <button type="submit" class=" btn btn-danger"><i
                     class="mdi mdi-account">Buscar</i>
             </button>
         </form>

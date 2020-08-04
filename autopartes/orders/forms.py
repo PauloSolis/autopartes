@@ -13,8 +13,8 @@ STATUS_CHOICES = [
 
 class Status(ModelForm):
     status = forms.CharField(label='Estado', widget=forms.Select(choices=STATUS_CHOICES))
-    carrier = forms.CharField(label='Paquetería', required=False)
-    tracking_code = forms.CharField(label='Código de rastreo', required=False)
+    carrier = forms.CharField(label='Transporte', required=False)
+    tracking_code = forms.CharField(label='Número de guía', required=False)
 
     class Meta:
         model = Order
