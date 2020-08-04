@@ -218,24 +218,35 @@ function addItemToCart(prod_id, prod_code, title, description, quantity, price, 
 }
 
 function updateCartTotal() {
-    var cartItemContainer = document.getElementsByClassName('cart-items')[0]
-    var cartRows = cartItemContainer.getElementsByClassName('cart-row')
+    var cartItemContainer = document.getElementsByClassName('cart-items')[0];
+    var cartRows = cartItemContainer.getElementsByClassName('cart-row');
     var total = 0
     for (var i = 0; i < cartRows.length; i++) {
         var cartRow = cartRows[i]
-        var priceElement = cartRow.getElementsByClassName('base-price')[0]
-        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
-        var price = parseFloat(priceElement.innerText.replace('$', ''))
+        var priceElement = cartRow.getElementsByClassName('base-price')[0];
+        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0];
+        var price = parseFloat(priceElement.innerText.replace('$', ''));
         var quantity = quantityElement.value
-        cartRow.getElementsByClassName("cart-price")[0].innerHTML = "$" + price * quantity
+        cartRow.getElementsByClassName("cart-price")[0].innerHTML = "$" + price * quantity;
         total = total + (price * quantity)
     }
     total = Math.round(total * 100) / 100
-    document.getElementsByClassName('header-cart-count')[0].innerHTML = cartRows.length
-    document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
 
-    document.getElementsByClassName('cart-total-price-outside')[0].innerText = '$' + total
-    document.getElementsByClassName('cart-total-price-to-pay')[0].innerText = '$' + total
+    var aux = 0;
+
+    if(total <300){
+        aux = total+4
+    }else{
+        aux=total
+    }
+
+    document.getElementsByClassName('header-cart-count')[0].innerHTML = cartRows.length;
+
+    document.getElementsByClassName('cart-total-price')[0].innerText = '$' + aux;
+    document.getElementsByClassName('cart-total-price-outside')[0].innerText = '$' + aux;
+    document.getElementsByClassName('cart-total-price-to-pay')[0].innerText = '$' + aux;
+
+
 
     var local = []
     for (var i = 0; i < cartRows.length; i++) {
