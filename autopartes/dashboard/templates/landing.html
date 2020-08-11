@@ -166,11 +166,11 @@
                             <img class="normal-logo img-responsive"
                                  src="{% static 'images/logo2NB.png' %}" alt="logo" width="202" height="44"/>
                             <div class="row">
-                                <div class="column"><img class="scroll-logo hidden-xs img-responsive"
-                                                         src="{% static 'images/logoNB.png' %}" alt="logo" width="252"
+                                <div class="column"><img class="scroll-logo hidden-md img-responsive"
+                                                         src="{% static 'images/logoNB.png' %}" alt="logo" width="200"
                                                          height="94"/></div>
-                                <div class="column"><img class="scroll-logo hidden-xs img-responsive"
-                                                         src="{% static 'images/logo2NB.png' %}" alt="logo" width="252"
+                                <div class="column"><img class="scroll-logo hidden-md img-responsive"
+                                                         src="{% static 'images/logo2NB.png' %}" alt="logo" width="200"
                                                          height="94"/></div>
                             </div>
                         </a>
@@ -187,7 +187,7 @@
                         <ul class="yamm main-menu nav navbar-nav">
                             <li class="dropdown"><a href="{% url 'users:landing' %}">Inicio</a>
                             </li>
-                            <li class="dropdown"><a>Nosotros</a>
+                            <li class="dropdown"><a href="{% url 'dashboard:nosotros' %}">Nosotros</a>
                             </li>
                             <li><a href="repair-shop.html">Contáctanos</a>
                             </li>
@@ -279,30 +279,30 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="section-advantages-1">
-                    <section class="b-advantages-1"><i class="b-advantages-1__icon flaticon-gearbox"></i>
+                    <section class="b-advantages-1"><i class="b-advantages-1__icon flaticon-081-box"></i>
                         <h3 class="b-advantages-1__title">Envíos a Domicilio</h3>
                         <div class="b-advantages-1__info">Ecuador continental
                         </div>
                         <span class="ui-decor-2"></span>
                     </section>
                     <!-- end .b-advantages-->
-                    <section class="b-advantages-1 active"><i class="b-advantages-1__icon flaticon-steering-wheel"></i>
+                    <section class="b-advantages-1 active"><i class="b-advantages-1__icon flaticon-093-tag"></i>
                         <h3 class="b-advantages-1__title">Productos nuevos</h3>
                         <div class="b-advantages-1__info">Todas las semanas
                         </div>
                         <span class="ui-decor-2"></span>
                     </section>
                     <!-- end .b-advantages-->
-                    <section class="b-advantages-1"><i class="b-advantages-1__icon flaticon-wrench"></i>
+                    <section class="b-advantages-1"><i class="b-advantages-1__icon flaticon-092-shield"></i>
                         <h3 class="b-advantages-1__title">Pago 100% Seguro</h3>
                         <div class="b-advantages-1__info">Seguridad en sus transacciones
                         </div>
                         <span class="ui-decor-2"></span>
                     </section>
                     <!-- end .b-advantages-->
-                    <section class="b-advantages-1 active"><i class="b-advantages-1__icon flaticon-steering-wheel"></i>
-                        <h3 class="b-advantages-1__title">Productos nuevos</h3>
-                        <div class="b-advantages-1__info">Todas las semanas
+                    <section class="b-advantages-1 active"><i class="b-advantages-1__icon flaticon-060-headset"></i>
+                        <h3 class="b-advantages-1__title">Atención al cliente</h3>
+                        <div class="b-advantages-1__info">Toda la semana
                         </div>
                         <span class="ui-decor-2"></span>
                     </section>
@@ -321,8 +321,7 @@
                     <div class="col-xs-12">
                         <div class="text-center">
                             <h2 class="ui-title-block">Productos y Servicios</h2>
-                            <div class="ui-subtitle-block">Tempor incididunt labore dolore duis lorem magna aliqua sed
-                                ipsum
+                            <div class="ui-subtitle-block">La mejor calidad y atención
                             </div>
                             <div class="ui-decor"></div>
                         </div>
@@ -330,7 +329,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3 col-sm-6">
-                        <section class="b-advantages-2"><i class="b-advantages-2__icon flaticon-painting"></i>
+                        <section class="b-advantages-2"><i class="b-advantages-2__icon flaticon-030-invoice-2"></i>
                             <h3 class="b-advantages-2__title"><strong>Instalación de luces </strong></h3>
 
                             <div class="b-advantages-2__info">Barras Led <br>Luces de Xenon <br>Luces Led
@@ -340,7 +339,7 @@
                         <!-- end .b-advantages-->
                     </div>
                     <div class="col-md-3 col-sm-6">
-                        <section class="b-advantages-2"><i class="b-advantages-2__icon flaticon-inspection"></i>
+                        <section class="b-advantages-2"><i class="b-advantages-2__icon flaticon-057-shop"></i>
                             <h3 class="b-advantages-2__title"><strong>Asesoría para tu negocio</strong></h3>
                             <div class="b-advantages-2__info">Innovación y calidad garantizada<br><br><br>
                             </div>
@@ -349,16 +348,16 @@
                         <!-- end .b-advantages-->
                     </div>
                     <div class="col-md-3 col-sm-6">
-                        <section class="b-advantages-2"><i class="b-advantages-2__icon flaticon-wheel-alignment"></i>
+                        <section class="b-advantages-2"><i class="b-advantages-2__icon flaticon-063-like"></i>
                             <h3 class="b-advantages-2__title"><strong>Garantía de productos</strong></h3>
-                            <div class="b-advantages-2__info">Plastinnova y Línea tailandés <br><br><br>
+                            <div class="b-advantages-2__info">En los artículos de Plastinnova y Línea tailandés <br><br><br>
                             </div>
                             <span class="ui-decor-2"></span>
                         </section>
                         <!-- end .b-advantages-->
                     </div>
                     <div class="col-md-3 col-sm-6">
-                        <section class="b-advantages-2"><i class="b-advantages-2__icon flaticon-gearstick"></i>
+                        <section class="b-advantages-2"><i class="b-advantages-2__icon flaticon-033-delivery"></i>
                             <h3 class="b-advantages-2__title"><strong>Atención Post Venta </strong></h3>
                             <div class="b-advantages-2__info">Revisamos tus requerimientos con nuestros técnicos
                                 especializados.
