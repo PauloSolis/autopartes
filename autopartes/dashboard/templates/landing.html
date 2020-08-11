@@ -138,16 +138,18 @@
                     </div>
                     <div class="header-topbarbox-2">
                         <ul class="social-links">
-                            <li><a href="/" target="_blank"><i class="social_icons fa fa-twitter"></i></a>
+                            <!-- <li><a href="/" target="_blank"><i class="social_icons fa fa-twitter"></i></a>
+                             </li>-->
+                            <li><a href="https://www.facebook.com/AUTO1PARTESIMPORTACIONES/" target="_blank"><i
+                                    class="social_icons fa fa-facebook"></i></a>
                             </li>
-                            <li><a href="/" target="_blank"><i class="social_icons fa fa-facebook"></i></a>
+                            <!--<li><a href="/" target="_blank"><i class="social_icons fa fa-linkedin"></i></a>
+                            </li>-->
+                            <li class="li-last"><a href="https://www.instagram.com/auto1partes/" target="_blank"><i
+                                    class="social_icons fa fa-instagram"></i></a>
                             </li>
-                            <li><a href="/" target="_blank"><i class="social_icons fa fa-linkedin"></i></a>
-                            </li>
-                            <li class="li-last"><a href="/" target="_blank"><i class="social_icons fa fa-instagram"></i></a>
-                            </li>
-                            <li><a href="/" target="_blank"><i class="social_icons fa fa-youtube-play"></i></a>
-                            </li>
+                            <!-- <li><a href="/" target="_blank"><i class="social_icons fa fa-youtube-play"></i></a>
+                             </li>-->
                         </ul>
                     </div>
                 </div>
@@ -189,7 +191,7 @@
                             </li>
                             <li class="dropdown"><a href="{% url 'dashboard:nosotros' %}">Nosotros</a>
                             </li>
-                            <li><a href="repair-shop.html">Contáctanos</a>
+                            <li><a href="{% url 'dashboard:contacto' %}">Contáctanos</a>
                             </li>
                             <li><a href="{% url 'shop:ver_catalogo' %}">Catálogo de productos</a>
                             </li>
@@ -207,6 +209,7 @@
     <!-- end .header-->
     <!-- end .main-slider-->
     <br><br>
+    {% block content %}
     <!-- begin Carousel-->
     <div class="container">
         <div id="Carousel" style="margin-top: 120px; " class="carousel slide" data-ride="carousel">
@@ -281,14 +284,14 @@
                 <div class="section-advantages-1">
                     <section class="b-advantages-1"><i class="b-advantages-1__icon flaticon-081-box"></i>
                         <h3 class="b-advantages-1__title">Envíos a Domicilio</h3>
-                        <div class="b-advantages-1__info">Ecuador continental
+                        <div class="b-advantages-1__info">A todos las ciudades del país
                         </div>
                         <span class="ui-decor-2"></span>
                     </section>
                     <!-- end .b-advantages-->
                     <section class="b-advantages-1 active"><i class="b-advantages-1__icon flaticon-093-tag"></i>
                         <h3 class="b-advantages-1__title">Productos nuevos</h3>
-                        <div class="b-advantages-1__info">Todas las semanas
+                        <div class="b-advantages-1__info">Amplio stock
                         </div>
                         <span class="ui-decor-2"></span>
                     </section>
@@ -302,7 +305,7 @@
                     <!-- end .b-advantages-->
                     <section class="b-advantages-1 active"><i class="b-advantages-1__icon flaticon-060-headset"></i>
                         <h3 class="b-advantages-1__title">Atención al cliente</h3>
-                        <div class="b-advantages-1__info">Toda la semana
+                        <div class="b-advantages-1__info">Conseguimos su accesorio
                         </div>
                         <span class="ui-decor-2"></span>
                     </section>
@@ -371,33 +374,33 @@
         </div>
     </section>
     <!-- end .section-advantages-2-->
-    <div class="section-default">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <ul class="b-progress-list js-progress-list list-unstyled">
-                        <li class="b-progress-list__item clearfix"><span class="b-progress-list__percent js-chart"
-                                                                         data-percent="3874"><span
-                                class="js-percent"></span><span></span></span><span class="b-progress-list__name">Productos en Stock</span>
-                        </li>
-                        <li class="b-progress-list__item clearfix"><span class="b-progress-list__percent js-chart"
-                                                                         data-percent="299"><span
-                                class="js-percent"></span><span>+</span></span><span class="b-progress-list__name">Negocios atendidos</span>
-                        </li>
-                        <li class="b-progress-list__item clearfix"><span class="b-progress-list__percent js-chart"
-                                                                         data-percent="6403"><span
-                                class="js-percent"></span><span></span></span><span class="b-progress-list__name">Clientes felices</span>
-                        </li>
-                        <li class="b-progress-list__item clearfix"><span class="b-progress-list__percent js-chart"
-                                                                         data-percent="1450+"><span
-                                class="js-percent"></span><span>+</span></span><span class="b-progress-list__name">Productos en promoción</span>
-                        </li>
-                    </ul>
-                    <!-- end .b-progress-->
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- <div class="section-default">
+       <div class="container">
+           <div class="row">
+               <div class="col-xs-12">
+                   <ul class="b-progress-list js-progress-list list-unstyled">
+                       <li class="b-progress-list__item clearfix"><span class="b-progress-list__percent js-chart"
+                                                                        data-percent="3874"><span
+                               class="js-percent"></span><span></span></span><span class="b-progress-list__name">Productos en Stock</span>
+                       </li>
+                       <li class="b-progress-list__item clearfix"><span class="b-progress-list__percent js-chart"
+                                                                        data-percent="299"><span
+                               class="js-percent"></span><span>+</span></span><span class="b-progress-list__name">Negocios atendidos</span>
+                       </li>
+                       <li class="b-progress-list__item clearfix"><span class="b-progress-list__percent js-chart"
+                                                                        data-percent="6403"><span
+                               class="js-percent"></span><span></span></span><span class="b-progress-list__name">Clientes felices</span>
+                       </li>
+                       <li class="b-progress-list__item clearfix"><span class="b-progress-list__percent js-chart"
+                                                                        data-percent="1450+"><span
+                               class="js-percent"></span><span>+</span></span><span class="b-progress-list__name">Productos en promoción</span>
+                       </li>
+                   </ul>
+               end .b-progress
+               </div>
+           </div>
+       </div>
+   </div>-->
     <!-- end .section-default-->
     <section class="b-about section-default">
         <div class="container">
@@ -520,10 +523,10 @@
     </section>
     <!-- end .section-default-->
 
-    <div class="block-table">
+    <!-- <div class="block-table">
         <div class="block-table__cell col-md-6">
             <div class="block-table__inner">
-                <section class="section-form-contacts">
+                  <section class="section-form-contacts">
                     <div class="section-form-contacts__label">Get in Touch</div>
                     <h2 class="section-form-contacts__title">Send Us Message</h2>
                     <div class="section-form-contacts__info">MotorLand is nisi aliquip exa con velit esse cillum dolore
@@ -562,7 +565,7 @@
                         </div>
                     </form>
                 </section>
-                <!-- end .b-form-contact-->
+              end .b-form-contact
             </div>
         </div>
         <div class="block-table__cell col-md-6">
@@ -574,7 +577,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
+    {% endblock %}
     <!-- end .block-table-->
     <footer class="footer area-bg">
         <div class="area-bg__inner">
@@ -584,78 +588,43 @@
                         <div class="col-md-3">
                             <div class="footer-section">
                                 <a class="footer__logo" href="home.html">
-                                    <img class="img-responsive" src="assets/media/general/logo.png" alt="Logo"/>
+                                    <img class="img-responsive" src="{% static 'images/logoNB.png' %}" alt="Logo"/>
                                 </a>
-                                <div class="footer__info">Duis aute irure reprehend voluptate velit ese acium fugiat
-                                    nula pariatur exceptus ipsum dolor sit amet consectetur adipisic elita sed eiusmod
-                                    tempor.
+                                <div class="footer__info">Auto1Partes es una empresa ecuatoriana dedicada a brindar
+                                    seguridad a sus clientes.Contamos con iluminación para vehículos livianos, transporte de carga pesada y
+                                buses. Nos caracterizamos por contar con variedad de productos innovadores, de calidad y al
+                                mejor precio del mercado.
                                 </div>
                                 <ul class="social-net list-inline">
                                     <li class="social-net__item"><a class="social-net__link text-primary_h"
-                                                                    href="facebook.com"><i
+                                                                    href="https://www.facebook.com/AUTO1PARTESIMPORTACIONES/"><i
                                             class="icon fa fa-facebook"></i></a>
                                     </li>
-                                    <li class="social-net__item"><a class="social-net__link text-primary_h"
+                                    <!--<li class="social-net__item"><a class="social-net__link text-primary_h"
                                                                     href="twitter.com"><i
                                             class="icon fa fa-twitter"></i></a>
-                                    </li>
-                                    <li class="social-net__item"><a class="social-net__link text-primary_h"
+                                    </li>-->
+                                    <!--<li class="social-net__item"><a class="social-net__link text-primary_h"
                                                                     href="linkedin.com"><i
                                             class="icon fa fa-linkedin"></i></a>
-                                    </li>
+                                    </li>-->
                                     <li class="social-net__item"><a class="social-net__link text-primary_h"
-                                                                    href="instagram.com"><i
+                                                                    href="https://www.instagram.com/auto1partes/"><i
                                             class="icon fa fa-instagram"></i></a>
                                     </li>
-                                    <li class="social-net__item"><a class="social-net__link text-primary_h"
+                                    <!--<li class="social-net__item"><a class="social-net__link text-primary_h"
                                                                     href="youtube.com"><i
                                             class="icon fa fa-youtube-play"></i></a>
-                                    </li>
+                                    </li>-->
                                 </ul>
                                 <!-- end .social-list-->
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <section class="footer-section footer-section_list-columns">
-                                <h3 class="footer-section__title ui-title-inner">Top Brands</h3>
-                                <ul class="footer-list footer-list_columns list-unstyled">
-                                    <li class="footer-list__item"><a class="footer-list__link" href="about.html">Alfa
-                                        Romeo</a>
-                                    </li>
-                                    <li class="footer-list__item"><a class="footer-list__link"
-                                                                     href="about.html">Ferrari</a>
-                                    </li>
-                                    <li class="footer-list__item"><a class="footer-list__link" href="about.html">BMW
-                                        Series</a>
-                                    </li>
-                                    <li class="footer-list__item"><a class="footer-list__link" href="about.html">Mercedes</a>
-                                    </li>
-                                    <li class="footer-list__item"><a class="footer-list__link" href="about.html">Aston
-                                        Martin</a>
-                                    </li>
-                                    <li class="footer-list__item"><a class="footer-list__link"
-                                                                     href="about.html">Toyota</a>
-                                    </li>
-                                    <li class="footer-list__item"><a class="footer-list__link"
-                                                                     href="about.html">Opel</a>
-                                    </li>
-                                    <li class="footer-list__item"><a class="footer-list__link" href="about.html">Land
-                                        Rover</a>
-                                    </li>
-                                    <li class="footer-list__item"><a class="footer-list__link"
-                                                                     href="about.html">Mclaren</a>
-                                    </li>
-                                    <li class="footer-list__item"><a class="footer-list__link"
-                                                                     href="about.html">Peogeot</a>
-                                    </li>
-                                    <li class="footer-list__item"><a class="footer-list__link"
-                                                                     href="about.html">Renault</a>
-                                    </li>
-                                </ul>
-                            </section>
+
                         </div>
                         <div class="col-md-2">
-                            <section class="footer-section footer-section_list-one">
+                           <!-- <section class="footer-section footer-section_list-one">
                                 <h3 class="footer-section__title ui-title-inner">Categories</h3>
                                 <ul class="footer-list list-unstyled">
                                     <li class="footer-list__item"><a class="footer-list__link"
@@ -676,19 +645,21 @@
                                         Cars</a>
                                     </li>
                                 </ul>
-                            </section>
+                            </section>-->
                         </div>
                         <div class="col-md-3">
                             <section class="footer-section">
-                                <h3 class="footer-section__title ui-title-inner">Address Information</h3>
-                                <div class="footer-contact footer-contact_lg">Call us<span class="text-primary"> (042) 789 35490</span>
+                                <h3 class="footer-section__title ui-title-inner">Dirrección</h3>
+                                <div class="footer-contact footer-contact_lg">Llámanos<span class="text-primary"> <br> +593 996695218 <br> +593 999956811</span>
                                 </div>
-                                <div class="footer-contact"><i class="icon icon-xs fa fa-envelope-o"></i>support@motorland.com
+                                <div class="footer-contact"><i class="icon icon-xs fa fa-envelope-o"></i>Auto1partes@hotmail.com
                                 </div>
-                                <div class="footer-contact"><i class="icon icon-lg fa fa-map-marker"></i>Fairview Ave,
-                                    El Monte, CA, 91732
+                                <div class="footer-contact"><i class="icon icon-lg fa fa-map-marker"></i>Avenida Quevedo y Juan Pio Montufar 408. Santo Domingo
                                 </div>
-                                <div class="footer-contact"><i class="icon fa fa-clock-o"></i>Lunes a Viernes : 08:00 to
+                                <div class="footer-contact"><i class="icon fa fa-clock-o"></i>Lunes a viernes : 08:00 a
+                                    18:00
+                                </div>
+                                <div class="footer-contact"><i class="icon fa fa-clock-o"></i>Sábado : 08:00 a
                                     16:00
                                 </div>
                             </section>
@@ -699,9 +670,9 @@
             <div class="copyright">
                 <div class="container">
                     <div class="row">
-                        <div class="col-xs-12">Copyrights 2017<a class="copyright__brand" href="home.html">
-                            MOTORLAND</a> All Rights Reserved<a class="copyright__link" href="privacy-policy.html">Privacy
-                            Policy</a><a class="copyright__link" href="terms-of-use.html">Terms & Conditions</a>
+                        <div class="col-xs-12">Powered by<a class="copyright__brand" href="https://www.krownter.com">
+                            Krownter</a> <!-- All Rights Reserved<a class="copyright__link" href="">Privacy
+                            Policy</a><a class="copyright__link" href="">Terms & Conditions</a>-->
                         </div>
                     </div>
                 </div>
@@ -713,6 +684,7 @@
 </div>
 <!-- end layout-theme-->
 
+</body>
 
 <!-- ++++++++++++-->
 <!-- MAIN SCRIPTS-->
