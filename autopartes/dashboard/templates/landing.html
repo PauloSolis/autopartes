@@ -474,53 +474,95 @@
                     </div>
                 </div>
             </div>
-            <div class="goods-group-1 wrap-inl-block">
-                <div class="js-scroll-content">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="b-goods-ac">
-                                <div class="b-goods-ac__wrap">
-                                    {% for product in products %}
-                                    <div class="b-goods-ac__img">
-                                        <img class="img-responsive" src="{{ product.image1.url }}"
-                                             alt="foto"/>
+            <div class="col-md-12">
+                <main class="l-main-content">
+                    <!-- end .filter-goods-->
+                    <div class="goods-group-2 list-goods list-goods_th">
+                        {% if products %}
+                        {% for product in products %}
+                        <section class="b-goods-1 b-goods-1_mod-a">
+                            <div class="row">
+                                <div>
+                                    <div class="b-goods-1__img col-md-8">
+                                        <a class="js-zoom-images "
+                                           href="{{ product.image2.url }}">
+                                            <img class="img-responsive center-block shop-image-product"
+                                                 src="{{ product.image1.url }}" alt="foto"/>
+                                        </a>
+                                        <span class="b-goods-1_price hidden-th">{{ product.public_price }}</span>
                                     </div>
-                                    <br>
-                                    <div class="b-goods-ac__inner">
-                                        <div class="b-goods-ac__info">
-                                            <div class="b-goods-ac__name">{{ product.name }}</div>
-                                            <div class="b-goods-ac__category">{{ product.car_brand }}, {{
-                                                product.car_model }} {{product.car_year}} - {{ product.description }}
+                                    <div class="b-goods-1__inner row">
+                                        <div class="b-goods-1_header col-md-8"><a class="b-goods-1_choose hidden-th"
+                                                                                  href="listing-1.html"><i
+                                                class="icon fa fa-heart-o"></i></a>
+                                            <h2 class="shop-item-title b-goods-1__name">{{ product.name }}
+                                                {{product.description }}</h2>
+                                            <div hidden class="product-description"> {{ product.name }}
+                                                {{product.description }}
+                                            </div>
+                                            <br>
+
+                                        </div>
+                                        <div class="hidden product-id" value="{{ product.id }}">{{ product.id }}</div>
+                                        <div class="b-goods-1__info col-md-12 product-code"> {{ product.product_code }}
+                                        </div>
+                                        {% if user.is_retailer %}
+                                        <span class="shop-item-price b-goods-1_price_th text-primary visible-th col-md-12"
+                                              value="{{ product.public_price }}">$ {{ product.public_price }}
+                                            </span>
+                                        {% endif %}
+                                        {% if user.is_wholesaler %}
+                                        <span class="shop-item-price b-goods-1_price_th text-primary visible-th col-md-12">$ {{ product.wholesale_price }}
+                                            </span>
+                                        {% endif %}
+                                        <div class="b-goods-1__section">
+                                            <div class="collapse in" id="desc-1">
+                                                <ul class="b-goods-1__desc list-unstyled">
+                                                    <li class="b-goods-1__desc-item">{{ product.car_brand }}</li>
+                                                    <li class="b-goods-1__desc-item">{{ product.car_model }}</li>
+                                                    <li class="b-goods-1__desc-item">{{ product.car_year }}</li>
+                                                </ul>
                                             </div>
                                         </div>
-                                        <div class="b-goods-ac__price">{{ product.public_price }}
+                                        <br>
+                                        <div class="row">
+
+                                           <!-- <input class="cart-quantity-input shop-item-quantity" type="number"
+                                                   value="1"
+                                                   min="1"
+                                                   max="1000" step="1"/>
+                                                   -->
+                                            <br>
+                                            <!--{% if product.in_stock > 20 %}
+                                            <p style="color: #d01818; font-size: medium;">En stock</p>
+                                            {% endif %}
+                                            {% if product.in_stock > 0 and product.in_stock < 20 %}
+                                            <p style="color: #d01818; font-size: medium;">{{ product.in_stock }} en
+                                                stock</p>
+                                            {% endif %}
+                                            {% if product.in_stock == 0 %}
+                                            <p style="color: #d01818; font-size: medium;">No disponible</p>
+                                            {% endif %}
+
+                                            -->
                                         </div>
+
                                     </div>
-                                    {% endfor %}
-                                    <ul class="b-goods-links list-unstyled">
-                                        <li class="b-goods-links__item"><a class="b-goods-links__link" href="home.html"><i
-                                                class="fa fa-shopping-basket"></i></a>
-                                        </li>
-                                        <li class="b-goods-links__item"><a class="b-goods-links__link js-zoom-images"
-                                                                           href="assets/media/components/b-goods/access-2.jpg"><i
-                                                class="fa fa-search-plus"></i><img class="hidden"
-                                                                                   src="assets/media/components/b-goods/access-2.jpg"
-                                                                                   alt="foto"/></a>
-                                        </li>
-                                        <li class="b-goods-links__item"><a class="b-goods-links__link" href="home.html"><i
-                                                class="fa fa-heart-o"></i></a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
-                            <!-- end .b-goods-access-->
-                        </div>
+                        </section>
+
+                        {% endfor %}
+                        {% endif %}
                     </div>
-                </div>
+                </main>
             </div>
+
             <!-- end .goods-group-1-->
         </div>
+
     </section>
+
     <!-- end .section-default-->
 
     <!-- <div class="block-table">
@@ -591,9 +633,11 @@
                                     <img class="img-responsive" src="{% static 'images/logoNB.png' %}" alt="Logo"/>
                                 </a>
                                 <div class="footer__info">Auto1Partes es una empresa ecuatoriana dedicada a brindar
-                                    seguridad a sus clientes.Contamos con iluminación para vehículos livianos, transporte de carga pesada y
-                                buses. Nos caracterizamos por contar con variedad de productos innovadores, de calidad y al
-                                mejor precio del mercado.
+                                    seguridad a sus clientes.Contamos con iluminación para vehículos livianos,
+                                    transporte de carga pesada y
+                                    buses. Nos caracterizamos por contar con variedad de productos innovadores, de
+                                    calidad y al
+                                    mejor precio del mercado.
                                 </div>
                                 <ul class="social-net list-inline">
                                     <li class="social-net__item"><a class="social-net__link text-primary_h"
@@ -624,28 +668,28 @@
 
                         </div>
                         <div class="col-md-2">
-                           <!-- <section class="footer-section footer-section_list-one">
-                                <h3 class="footer-section__title ui-title-inner">Categories</h3>
-                                <ul class="footer-list list-unstyled">
-                                    <li class="footer-list__item"><a class="footer-list__link"
-                                                                     href="about.html">Trucks</a>
-                                    </li>
-                                    <li class="footer-list__item"><a class="footer-list__link" href="about.html">Sports
-                                        Cars</a>
-                                    </li>
-                                    <li class="footer-list__item"><a class="footer-list__link" href="about.html">Crossovers</a>
-                                    </li>
-                                    <li class="footer-list__item"><a class="footer-list__link" href="about.html">Hybrid
-                                        Cars</a>
-                                    </li>
-                                    <li class="footer-list__item"><a class="footer-list__link" href="about.html">Hybrid
-                                        SUVs</a>
-                                    </li>
-                                    <li class="footer-list__item"><a class="footer-list__link" href="about.html">Future
-                                        Cars</a>
-                                    </li>
-                                </ul>
-                            </section>-->
+                            <!-- <section class="footer-section footer-section_list-one">
+                                 <h3 class="footer-section__title ui-title-inner">Categories</h3>
+                                 <ul class="footer-list list-unstyled">
+                                     <li class="footer-list__item"><a class="footer-list__link"
+                                                                      href="about.html">Trucks</a>
+                                     </li>
+                                     <li class="footer-list__item"><a class="footer-list__link" href="about.html">Sports
+                                         Cars</a>
+                                     </li>
+                                     <li class="footer-list__item"><a class="footer-list__link" href="about.html">Crossovers</a>
+                                     </li>
+                                     <li class="footer-list__item"><a class="footer-list__link" href="about.html">Hybrid
+                                         Cars</a>
+                                     </li>
+                                     <li class="footer-list__item"><a class="footer-list__link" href="about.html">Hybrid
+                                         SUVs</a>
+                                     </li>
+                                     <li class="footer-list__item"><a class="footer-list__link" href="about.html">Future
+                                         Cars</a>
+                                     </li>
+                                 </ul>
+                             </section>-->
                         </div>
                         <div class="col-md-3">
                             <section class="footer-section">
@@ -654,7 +698,8 @@
                                 </div>
                                 <div class="footer-contact"><i class="icon icon-xs fa fa-envelope-o"></i>Auto1partes@hotmail.com
                                 </div>
-                                <div class="footer-contact"><i class="icon icon-lg fa fa-map-marker"></i>Avenida Quevedo y Juan Pio Montufar 408. Santo Domingo
+                                <div class="footer-contact"><i class="icon icon-lg fa fa-map-marker"></i>Avenida Quevedo
+                                    y Juan Pio Montufar 408. Santo Domingo
                                 </div>
                                 <div class="footer-contact"><i class="icon fa fa-clock-o"></i>Lunes a viernes : 08:00 a
                                     18:00
