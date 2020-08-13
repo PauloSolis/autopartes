@@ -118,8 +118,8 @@
             outline: 0;
             background: #f2f2f2;
             border: 0;
-            margin: 0 0 15px;
-            padding: 10px;
+            margin: 0 0 20px;
+            padding: 15px;
             box-sizing: border-box;
             font-size: 14px;
 
@@ -129,6 +129,7 @@
         body {
             background-image: url("/static/images/login.jpg"); /* fallback for old browsers */
             background-repeat: no-repeat;
+            background-position: center center;
             background-attachment: fixed;
             background-size: cover;
             font-family: "Roboto", sans-serif;
@@ -150,9 +151,20 @@
 <div class="login-page">
     <div class="form">
         <strong style="font-size: xx-large">Crea tu cuenta</strong>
+        <br><br>
         <form method="post" class="login-form">
             {% csrf_token %}
-            {{ form.as_p }}
+            {% for field in form %}
+            {{ field.errors }}
+            {{ field.label_tag }}
+             <br>
+            {{ field }}
+            <br>
+            {% if field.help_text %}
+                  <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+
+            {% endfor %}
             <button type="submit">Ingresar</button>
             <p class="message"><a href="/login/">Acceder a tu cuenta en su lugar</a>
             </p>
