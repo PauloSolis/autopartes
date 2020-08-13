@@ -10,10 +10,10 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.core import serializers
 
-
 # Create your views here.
 @login_required
 def ver_catalogo(request):
+
     products = Product.objects.all().order_by('-id')
     paginator = Paginator(products, 20)
 
@@ -26,6 +26,18 @@ def ver_catalogo(request):
 
     return render(request, '../templates/shop/ver_catalogo.html',
                   {'products': page_obj, 'addresses': addresses, 'brands': brands})
+
+
+@login_required
+def get_product_names(request):
+    names = Product.objects.values('name').distinct()
+
+    data = []
+
+    for name in names:
+        data.append(name['name'])
+    data.sort()
+    return JsonResponse(json.dumps(data), safe=False)
 
 @login_required
 def get_models(request):
