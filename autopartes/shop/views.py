@@ -28,16 +28,18 @@ def ver_catalogo(request):
                   {'products': page_obj, 'addresses': addresses, 'brands': brands})
 
 
+
+prod_names = []
+
 @login_required
 def get_product_names(request):
     names = Product.objects.values('name').distinct()
 
-    data = []
-
     for name in names:
-        data.append(name['name'])
-    data.sort()
-    return JsonResponse(json.dumps(data), safe=False)
+        if name['name'] not in prod_names:
+            prod_names.append(name['name'])
+    prod_names.sort()
+    return JsonResponse(json.dumps(prod_names), safe=False)
 
 @login_required
 def get_models(request):
@@ -63,13 +65,25 @@ def get_years(request):
 
 @login_required
 def get_filtered(request):
-
-    print("hello there")
+    text_filter = request.POST.get('text_filter')
     brand = request.POST.get('brand_filter')
     model = request.POST.get('model_filter')
     year = request.POST.get('year_filter')
 
-    products = Product.objects.filter(car_brand=brand, car_model=model, car_year=year)
+    products = Product.objects.all()
+
+    if brand != '':
+        products = products.filter(car_brand=brand)
+
+    if model != '':
+        products = products.filter(car_model=model)
+
+    if year != '':
+        products = products.filter(car_year=year)
+
+    if text_filter != '':
+        products = products.filter(name__contains=text_filter)
+
     paginator = Paginator(products, 20)
 
     brands = Product.objects.values('car_brand').distinct()

@@ -32,7 +32,7 @@ $(document).ready(function () {
     request.done(function (msg) {
         $("#model_car_filter").empty()
         var models = JSON.parse(msg);
-        $("#model_car_filter").append(new Option("Modelos", "Modelos"));
+        $("#model_car_filter").append(new Option("Modelos", ""));
         $.each(models, function (i, val) {
             $("#model_car_filter").append(new Option(val, val));
         });
@@ -54,7 +54,7 @@ $(document).ready(function () {
         aux.done(function (msg) {
             $("#year_car_filter").empty()
             var years = JSON.parse(msg);
-            $("#year_car_filter").append(new Option("Años", "Años"));
+            $("#year_car_filter").append(new Option("Años", ""));
             $.each(years, function (i, val) {
                 $("#year_car_filter").append(new Option(val, val));
             });
@@ -110,7 +110,7 @@ $("#brand_car_filter").change(function () {
     request.done(function (msg) {
         $("#model_car_filter").empty()
         var models = JSON.parse(msg);
-        $("#model_car_filter").append(new Option("Modelos", "Modelos"));
+        $("#model_car_filter").append(new Option("Modelos", ""));
         $.each(models, function (i, val) {
             $("#model_car_filter").append(new Option(val, val));
         });
@@ -132,7 +132,7 @@ $("#brand_car_filter").change(function () {
         aux.done(function (msg) {
             $("#year_car_filter").empty()
             var years = JSON.parse(msg);
-            $("#year_car_filter").append(new Option("Años", "Años"));
+            $("#year_car_filter").append(new Option("Años", ""));
             $.each(years, function (i, val) {
                 $("#year_car_filter").append(new Option(val, val));
             });
@@ -157,9 +157,9 @@ $("#model_car_filter").change(function () {
     });
 
     request.done(function (msg) {
-        $("#year_car_filter").empty()
+        $("#year_car_filter").empty();
         var years = JSON.parse(msg);
-        $("#year_car_filter").append(new Option("Años", "Años"));
+        $("#year_car_filter").append(new Option("Años", ""));
         $.each(years, function (i, val) {
             $("#year_car_filter").append(new Option(val, val));
         });
