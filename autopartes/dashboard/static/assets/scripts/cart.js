@@ -222,11 +222,11 @@ function updateCartTotal() {
     var cartRows = cartItemContainer.getElementsByClassName('cart-row');
     var total = 0
     for (var i = 0; i < cartRows.length; i++) {
-        var cartRow = cartRows[i]
+        var cartRow = cartRows[i];
         var priceElement = cartRow.getElementsByClassName('base-price')[0];
         var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0];
         var price = parseFloat(priceElement.innerText.replace('$', ''));
-        var quantity = quantityElement.value
+        var quantity = quantityElement.value;
         cartRow.getElementsByClassName("cart-price")[0].innerHTML = "$" + price * quantity;
         total = total + (price * quantity)
     }
