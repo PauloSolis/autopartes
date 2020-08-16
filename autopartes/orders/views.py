@@ -222,9 +222,9 @@ def make_report(request, id):
         aux = Product.objects.get(id=o.product_id)
         p.drawString(30, a, aux.product_code)
         p.drawString(180, a, aux.name + ' ' + aux.description)
-        p.drawString(380, a, '$ ' + str(o.quantity))
-        p.drawString(450, a, '$ ' + str(o.price))
-        p.drawString(500, a, '$ ' + str(o.total))
+        p.drawString(380, a, str(o.quantity))
+        p.drawString(448, a, '$' + str(o.price))
+        p.drawString(498, a, '$' + str(o.total))
         a -= 20
         if (a <= 45):
             p.showPage()
@@ -236,7 +236,7 @@ def make_report(request, id):
     p.rect(375, a - 25, 120, 20)
     p.rect(495, a - 25, 60, 20)
     p.drawString(380, a - 20, 'TOTAL (Incluye IVA)')
-    p.drawString(500, a - 20, '$ ' + str(order.total_price))
+    p.drawString(500, a - 22, '$' + str(order.total_price))
 
     # Close the PDF object cleanly, and we're done.
     p.showPage()
