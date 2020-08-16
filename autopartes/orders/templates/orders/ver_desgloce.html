@@ -18,9 +18,14 @@
            data-animation="blur" data-overlaycolor="#36404a" class="col-md">
             <button type="button" class=" btn btn-success"> Actualizar Estado
             </button>
-        </a>
 
         {% endif %}
+            </a>
+            <a href="{% url  'orders:report' id=order.id %}"
+           data-animation="blur" data-overlaycolor="#36404a" class="col-md">
+            <button type="button" class=" btn btn-success"> Descargar Orden
+            </button>
+        </a>
     </div>
     <br>
     <table class="table table-bordered">

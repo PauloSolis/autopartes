@@ -10,5 +10,6 @@ urlpatterns = [
     path('store_order/', views.crear_orden, name="crear_orden"),
     path('change_status/<int:id>/', views.change_status, name="change_status"),
     path('ver_ordernes/search/', views.search_order, name='search'),
+    path('report/<int:id>/', views.make_report, name="report")
 
 ]
