@@ -10,27 +10,33 @@
                         <form method='POST' action="{% url 'shop:get_filtered' %}">
                         {% csrf_token %}
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-2">
+                                    <input placeholder="Buscar por nombre" name="text_filter" id="text_filter" class="browser-default custom-select form-control">
+                                </div>
+                                <div class="col-md-2">
                                     <select id="brand_car_filter" name="brand_filter" class="browser-default custom-select form-control">
-                                        <option disabled selected value> Selecciona una Marca </option>>
+                                        <option selected value>Marcas </option>
                                         {% for brand in brands %}
                                             <option  value="{{ brand.car_brand }}">{{ brand.car_brand }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <select id="model_car_filter" name="model_filter" class="browser-default custom-select form-control">
-
+                                        <option selected value>Modelos </option>
                                     </select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <select id="year_car_filter" name="year_filter" class="browser-default custom-select form-control">
+                                        <option selected value>Años</option>
 
                                     </select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <button type="submit" id="filter-search-button " class="btn-danger-search btn">Buscar</button>
                                 </div>
+                                <div class="col-md-1"></div>
                             </div>
                         </form>
 
@@ -123,6 +129,9 @@
 
         {% endfor %}
     {% endif %}
+    </div>
+    </main>
+    </div>
 {% endblock %}
 
 

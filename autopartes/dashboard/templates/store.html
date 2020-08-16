@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="{% static 'assets/landingCss/master.css' %}"/>
     <link rel="stylesheet" href="{% static 'assets/landingCss/cart.css' %}"/>
 
+    <link rel="stylesheet" href="{% static 'assets/landingCss/jquery-ui.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'assets/landingCss/jquery-ui.structure.min.css' %}"/>
+
     <link rel="icon" type="image/x-icon" href="favicon.ico"/>
     <!--[if lt IE 9 ]>
 
@@ -134,10 +137,10 @@
                         </button>
                         <!-- Mobile Trigger End-->
                         <a class="navbar-brand scroll" href="home.html">
-                            <img class="normal-logo img-responsive" src="/static/images/logoNB.png" alt="logo"
-                                 width="202" height="44">
-                            <img class="scroll-logo hidden-xs img-responsive" src="/static/images/logoNB.png" alt="logo"
-                                 width="202" height="44">
+                            <img class="normal-logo img-responsive" src="/static/images/logoBoth.png" alt="logo"
+                                 width="270" height="44">
+                            <img class="scroll-logo hidden-xs img-responsive" src="/static/images/logoBoth.png" alt="logo"
+                                 width="270" height="44">
                         </a>
                     </div>
                     <div class="header-navibox-2">
@@ -326,7 +329,7 @@
         </div>
         <!-- end .b-title-page-->
     </div>
-
+</footer>
     <!-- .footer-->
     </div>
     <!-- end layout-theme-->
@@ -397,7 +400,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <span class="modal-title total_price">Total:<span
+                            <span class="modal-title shipment_price">Envío: $4 en ordenes debajo de $300</span>
+                                <span class="modal-title total_price">Total (IVA incluido):<span
                                         class="cart-total-price"></span> </span>
                                 <span class="hidden " id="token" value="{% csrf_token %}">{% csrf_token %}</span>
                                 <span class="hidden" value="{{ user.can_buy }}"></span>
@@ -466,8 +470,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-
-                                <span class="modal-title total_price">Total:<span
+                                <span class="modal-title shipment_price">Envío: $4 en ordenes debajo de $300</span>
+                                <span class="modal-title total_price">Total (IVA incluido):<span
                                         class="cart-total-price-to-pay"></span> </span>
                                     <span class="hidden " id="token" value="{% csrf_token %}">{% csrf_token %}</span>
                                     {% if user.can_buy == True %}
@@ -508,7 +512,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                <span class="modal-title total_price">Total:<span
+                                <span class="modal-title shipment_price">Envío: $4 en ordenes debajo de $300</span>
+                                <span class="modal-title total_price">Total (IVA incluido):<span
                                         class="cart-total-price"></span> </span>
                                     <span class="hidden " id="token" value="{% csrf_token %}">{% csrf_token %}</span>
                                     {% if user %}
@@ -572,6 +577,7 @@
     <!-- cart -->
     <script src="{% static 'assets/scripts/cart.js' %}"></script>
     <script src="{% static 'assets/scripts/filters.js' %}"></script>
+    <script src="{% static 'assets/scripts/jquery-ui.min.js' %}"></script>
 
 </body>
 

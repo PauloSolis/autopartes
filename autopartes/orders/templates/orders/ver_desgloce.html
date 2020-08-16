@@ -61,7 +61,7 @@
         </tr>
         <tr>
             <th scope="col">Total de la orden</th>
-            <td>{{ order.total_price }}</td>
+            <td>{{ total }}</td>
         </tr>
         </tbody>
     </table>
@@ -93,10 +93,29 @@
         </tr>
 
         {% endfor %}
-         <tr>
-            <th colspan="4" style="text-align:right; color:#FF0000">Total (IVA incluido):    </th>
-            <td>{{ order.total_price }}</td>
-        </tr>
+
+            {% if order.total_price < 300 %}
+            <tr>
+                <th colspan="4" style="text-align:right;">Subtotal (IVA incluido):    </th>
+                <td>{{ order.total_price }}</td>
+            </tr>
+            <tr>
+                <th colspan="4" style="text-align:right;">Costo de envío:    </th>
+                <td>4</td>
+            </tr>
+            <tr>
+                <th colspan="4" style="text-align:right; color:#FF0000">Total:    </th>
+                {% if total %}
+                    <td>{{ total }}</td>
+                {% endif %}
+            </tr>
+            {% else %}
+            <tr>
+                <th colspan="4" style="text-align:right; color:#FF0000">Total (IVA incluido):    </th>
+                <td>{{ order.total_price }}</td>
+            </tr>
+            {% endif %}
+
         {% endif %}
 
 
