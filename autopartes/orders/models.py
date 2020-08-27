@@ -13,6 +13,7 @@ class Order(models.Model):
     products = models.ManyToManyField(Product)
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    created_on = models.DateField(default=datetime.date.today)
 
 
 
