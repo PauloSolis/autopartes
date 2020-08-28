@@ -331,9 +331,10 @@
     </div>
 </footer>
     <!-- .footer-->
-    </div>
+</div>
     <!-- end layout-theme-->
-
+{% block modals %}
+{% endblock %}
 
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
@@ -578,6 +579,9 @@
     <script src="{% static 'assets/scripts/cart.js' %}"></script>
     <script src="{% static 'assets/scripts/filters.js' %}"></script>
     <script src="{% static 'assets/scripts/jquery-ui.min.js' %}"></script>
+
+{% block extra_scripts %}
+{% endblock %}
 
 </body>
 
