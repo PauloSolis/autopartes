@@ -16,6 +16,7 @@
 
     <link rel="stylesheet" href="{% static 'assets/landingCss/jquery-ui.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'assets/landingCss/jquery-ui.structure.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'assets/landingCss/jquery.exzoom.css' %}">
 
     <link rel="icon" type="image/x-icon" href="favicon.ico"/>
     <!--[if lt IE 9 ]>
@@ -331,9 +332,10 @@
     </div>
 </footer>
     <!-- .footer-->
-    </div>
+</div>
     <!-- end layout-theme-->
-
+{% block modals %}
+{% endblock %}
 
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
@@ -578,6 +580,10 @@
     <script src="{% static 'assets/scripts/cart.js' %}"></script>
     <script src="{% static 'assets/scripts/filters.js' %}"></script>
     <script src="{% static 'assets/scripts/jquery-ui.min.js' %}"></script>
+
+    <script src="{% static 'assets/scripts/jquery.exzoom.js' %}"></script>
+{% block extra_scripts %}
+{% endblock %}
 
 </body>
 

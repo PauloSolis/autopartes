@@ -8,33 +8,39 @@
                 <div class="b-filter-2__inner">
                     <div class="b-filter-2__group">
                         <form method='POST' action="{% url 'shop:get_filtered' %}">
-                        {% csrf_token %}
+                            {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-1"></div>
                                 <div class="col-md-2">
-                                    <input placeholder="Buscar por nombre" name="text_filter" id="text_filter" class="browser-default custom-select form-control">
+                                    <input placeholder="Buscar por nombre" name="text_filter" id="text_filter"
+                                           class="browser-default custom-select form-control">
                                 </div>
                                 <div class="col-md-2">
-                                    <select id="brand_car_filter" name="brand_filter" class="browser-default custom-select form-control">
-                                        <option selected value>Marcas </option>
+                                    <select id="brand_car_filter" name="brand_filter"
+                                            class="browser-default custom-select form-control">
+                                        <option selected value>Marcas</option>
                                         {% for brand in brands %}
-                                            <option  value="{{ brand.car_brand }}">{{ brand.car_brand }}</option>
+                                            <option value="{{ brand.car_brand }}">{{ brand.car_brand }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <select id="model_car_filter" name="model_filter" class="browser-default custom-select form-control">
-                                        <option selected value>Modelos </option>
+                                    <select id="model_car_filter" name="model_filter"
+                                            class="browser-default custom-select form-control">
+                                        <option selected value>Modelos</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <select id="year_car_filter" name="year_filter" class="browser-default custom-select form-control">
+                                    <select id="year_car_filter" name="year_filter"
+                                            class="browser-default custom-select form-control">
                                         <option selected value>Años</option>
 
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="submit" id="filter-search-button " class="btn-danger-search btn">Buscar</button>
+                                    <button type="submit" id="filter-search-button " class="btn-danger-search btn">
+                                        Buscar
+                                    </button>
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
@@ -49,89 +55,155 @@
         <!-- end .l-sidebar-->
     </div>
     <div class="col-md-12">
-    <main class="l-main-content">
-    <!-- end .filter-goods-->
-    <div class="goods-group-2 list-goods list-goods_th">
+        <main class="l-main-content">
+            <!-- end .filter-goods-->
+            <div class="goods-group-2 list-goods list-goods_th">
+                {% if products %}
+                    {% for product in products %}
+                        <section class="b-goods-1 b-goods-1_mod-a">
+                            <div class="row">
+                                <div>
+                                    <div class="b-goods-1__img col-md-8">
+                                        <a data-toggle="modal" data-target="#modal{{ product.id }}">
+                                            <img class="img-responsive center-block shop-image-product"
+                                                 src="{{ product.image1.url }}" alt="foto"/>
+                                        </a>
+
+
+                                        <span class="b-goods-1_price hidden-th">{{ product.public_price }}</span>
+                                    </div>
+                                    <div class="b-goods-1__inner row">
+                                        <div class="b-goods-1_header col-md-8"><a class="b-goods-1_choose hidden-th"
+                                                                                  href="listing-1.html"><i
+                                                class="icon fa fa-heart-o"></i></a>
+                                            <h2 class="shop-item-title b-goods-1__name">{{ product.name }} {{ product.description }}</h2>
+                                            <div hidden
+                                                 class="product-description"> {{ product.name }} {{ product.description }}
+                                            </div>
+                                            <br>
+
+                                        </div>
+                                        <div class="hidden product-id" value="{{ product.id }}">{{ product.id }}</div>
+                                        <div class="b-goods-1__info col-md-12 product-code"> {{ product.product_code }}
+                                        </div>
+                                        {% if user.is_retailer %}
+                                            <span class="shop-item-price b-goods-1_price_th text-primary visible-th col-md-12"
+                                                  value="{{ product.public_price }}">$ {{ product.public_price }}
+                                            </span>
+                                        {% endif %}
+                                        {% if user.is_wholesaler %}
+                                            <span class="shop-item-price b-goods-1_price_th text-primary visible-th col-md-12">$ {{ product.wholesale_price }}
+                                            </span>
+                                        {% endif %}
+                                        <div class="b-goods-1__section">
+                                            <div class="collapse in" id="desc-1">
+                                                <ul class="b-goods-1__desc list-unstyled">
+                                                    <li class="b-goods-1__desc-item">{{ product.car_brand }}</li>
+                                                    <li class="b-goods-1__desc-item">{{ product.car_model }}</li>
+                                                    <li class="b-goods-1__desc-item">{{ product.car_year }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input class="cart-quantity-input shop-item-quantity" type="number"
+                                                       value="1"
+                                                       min="1"
+                                                       max="1000" step="1"/>
+                                                <br><br>
+                                                {% if product.in_stock > 20 %}
+                                                    <p style="color: #d01818; font-size: medium;">En stock</p>
+                                                {% endif %}
+                                                {% if product.in_stock > 0 and product.in_stock < 20 %}
+                                                    <p style="color: #d01818; font-size: medium;">{{ product.in_stock }}
+                                                        en
+                                                        stock</p>
+                                                {% endif %}
+                                                {% if product.in_stock == 0 %}
+                                                    <p style="color: #d01818; font-size: medium;">No disponible</p>
+                                                {% endif %}
+                                            </div>
+                                            {% if product.in_stock != 0 %}
+                                                <div class="col-md-6">
+                                                    <button class="btn btn-primary shop-item-button" type="button">ADD
+                                                        TO CART
+                                                    </button>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </main>
+    </div>
+{% endblock %}
+
+
+{% block modals %}
     {% if products %}
         {% for product in products %}
-            <section class="b-goods-1 b-goods-1_mod-a">
-                <div class="row">
-                    <div>
-                        <div class="b-goods-1__img col-md-8">
-                            <a class="js-zoom-images "
-                               href="{{ product.image2.url }}">
-                                <img class="img-responsive center-block shop-image-product"
-                                     src="{{ product.image1.url }}" alt="foto"/>
-                            </a>
-                            <span class="b-goods-1_price hidden-th">{{ product.public_price }}</span>
-                        </div>
-                        <div class="b-goods-1__inner row">
-                            <div class="b-goods-1_header col-md-8"><a class="b-goods-1_choose hidden-th"
-                                                                      href="listing-1.html"><i
-                                    class="icon fa fa-heart-o"></i></a>
-                                <h2 class="shop-item-title b-goods-1__name">{{ product.name }} {{ product.description }}</h2>
-                                <div hidden class="product-description"> {{ product.name }} {{ product.description }}
-                                </div>
-                                <br>
+            <div id="modal{{ product.id }}" class="modal fade" role="dialog">
+                <div class="modal-dialog">
 
-                            </div>
-                            <div class="hidden product-id" value="{{ product.id }}">{{ product.id }}</div>
-                            <div class="b-goods-1__info col-md-12 product-code"> {{ product.product_code }}
-                            </div>
-                            {% if user.is_retailer %}
-                                <span class="shop-item-price b-goods-1_price_th text-primary visible-th col-md-12"
-                                      value="{{ product.public_price }}">$ {{ product.public_price }}
-                                            </span>
-                            {% endif %}
-                            {% if user.is_wholesaler %}
-                                <span class="shop-item-price b-goods-1_price_th text-primary visible-th col-md-12">$ {{ product.wholesale_price }}
-                                            </span>
-                            {% endif %}
-                            <div class="b-goods-1__section">
-                                <div class="collapse in" id="desc-1">
-                                    <ul class="b-goods-1__desc list-unstyled">
-                                        <li class="b-goods-1__desc-item">{{ product.car_brand }}</li>
-                                        <li class="b-goods-1__desc-item">{{ product.car_model }}</li>
-                                        <li class="b-goods-1__desc-item">{{ product.car_year }}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input class="cart-quantity-input shop-item-quantity" type="number" value="1"
-                                           min="1"
-                                           max="1000" step="1"/>
-                                    <br><br>
-                                    {% if product.in_stock > 20 %}
-                                        <p style="color: #d01818; font-size: medium;">En stock</p>
-                                    {% endif %}
-                                    {% if product.in_stock > 0 and product.in_stock < 20 %}
-                                        <p style="color: #d01818; font-size: medium;">{{ product.in_stock }} en
-                                            stock</p>
-                                    {% endif %}
-                                    {% if product.in_stock == 0 %}
-                                        <p style="color: #d01818; font-size: medium;">No disponible</p>
-                                    {% endif %}
-                                </div>
-                                {% if product.in_stock != 0 %}
-                                    <div class="col-md-6">
-                                        <button class="btn btn-primary shop-item-button" type="button">ADD TO CART
-                                        </button>
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div role="tabpanel">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#adelante" aria-controls="uploadTab"
+                                                                          role="tab"
+                                                                          data-toggle="tab"><h6>Parte delantera</h6></a>
+                                </li>
+                                <li role="presentation"><a href="#atras" aria-controls="browseTab" role="tab"
+                                                           data-toggle="tab"><h6>Parte trasera</h6></a>
+                                </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active no_top_padding" id="adelante">
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <img class="img-responsive center-block " id="image{{ product.image1.url }}"
+                                                     src="{{ product.image1.url }}" alt="foto"/>
+                                            </div>
+
+                                        </div>
                                     </div>
-                                {% endif %}
+                                </div>
+                                <div role="tabpanel" class="tab-pane no_top_padding" id="atras">
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <img class="img-responsive center-block " id="image{{ product.image2.url }}"
+                                                     src="{{ product.image2.url }}" alt="foto"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
                             </div>
 
                         </div>
+
+
                     </div>
                 </div>
-            </section>
 
+            </div>
+            </div>
         {% endfor %}
     {% endif %}
-    </div>
-    </main>
-    </div>
+
 {% endblock %}
 
 
@@ -158,6 +230,87 @@
                 </div>
 
             </div>
+
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block extra_scripts %}
+    <script>
+        function magnify(imgID, zoom) {
+            var img, glass, w, h, bw;
+            img = document.getElementById(imgID);
+            /*create magnifier glass:*/
+            glass = document.createElement("DIV");
+            glass.setAttribute("class", "img-magnifier-glass");
+            /*insert magnifier glass:*/
+            img.parentElement.insertBefore(glass, img);
+            /*set background properties for the magnifier glass:*/
+            glass.style.backgroundImage = "url('" + img.src + "')";
+            glass.style.backgroundRepeat = "no-repeat";
+            glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+            bw = 3;
+            w = glass.offsetWidth / 2;
+            h = glass.offsetHeight / 2;
+            /*execute a function when someone moves the magnifier glass over the image:*/
+            glass.addEventListener("mousemove", moveMagnifier);
+            img.addEventListener("mousemove", moveMagnifier);
+            /*and also for touch screens:*/
+            glass.addEventListener("touchmove", moveMagnifier);
+            img.addEventListener("touchmove", moveMagnifier);
+
+            function moveMagnifier(e) {
+                var pos, x, y;
+                /*prevent any other actions that may occur when moving over the image*/
+                e.preventDefault();
+                /*get the cursor's x and y positions:*/
+                pos = getCursorPos(e);
+                x = pos.x;
+                y = pos.y;
+                /*prevent the magnifier glass from being positioned outside the image:*/
+                if (x > img.width - (w / zoom)) {
+                    x = img.width - (w / zoom);
+                }
+                if (x < w / zoom) {
+                    x = w / zoom;
+                }
+                if (y > img.height - (h / zoom)) {
+                    y = img.height - (h / zoom);
+                }
+                if (y < h / zoom) {
+                    y = h / zoom;
+                }
+                /*set the position of the magnifier glass:*/
+                glass.style.left = (x - w) + "px";
+                glass.style.top = (y - h) + "px";
+                /*display what the magnifier glass "sees":*/
+                glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
+            }
+
+            function getCursorPos(e) {
+                var a, x = 0, y = 0;
+                e = e || window.event;
+                /*get the x and y positions of the image:*/
+                a = img.getBoundingClientRect();
+                /*calculate the cursor's x and y coordinates, relative to the image:*/
+                x = e.pageX - a.left;
+                y = e.pageY - a.top;
+                /*consider any page scrolling:*/
+                x = x - window.pageXOffset;
+                y = y - window.pageYOffset;
+                return {x: x, y: y};
+            }
+        }
+    </script>
+
+    {% if products %}
+        {% for product in products %}
+            <script>
+                /* Initiate Magnify Function
+                with the id of the image, and the strength of the magnifier glass:*/
+                magnify("image{{ product.image1.url }}", 1.5);
+                magnify("image{{ product.image2.url }}", 1.5);
+            </script>
 
         {% endfor %}
     {% endif %}
