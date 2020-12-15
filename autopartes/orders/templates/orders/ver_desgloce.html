@@ -1,0 +1,125 @@
+{% extends 'home.html' %}
+{% block content %}
+<div class="container-fluid ">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <br>
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div>
+        {% if user.is_administrator or user.is_seller%}
+        <a href="{% url  'orders:change_status' id=order.id %}"
+           data-animation="blur" data-overlaycolor="#36404a" class="col-md">
+            <button type="button" class=" btn btn-success"> Actualizar Estado
+            </button>
+
+        {% endif %}
+            </a>
+            <a href="{% url  'orders:report' id=order.id %}"
+           data-animation="blur" data-overlaycolor="#36404a" class="col-md">
+            <button type="button" class=" btn btn-success"> Descargar Orden
+            </button>
+        </a>
+    </div>
+    <br>
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <th scope="col">Número de orden</th>
+            <td>{{ order.id }}</td>
+        </tr>
+        <tr>
+            <th scope="col">Nombre del Cliente</th>
+            <td>{{ client.first_name }}
+            {{ client.last_name }}
+            </td>
+        </tr>
+        <tr>
+            <th scope="col">RUC</th>
+            <td>{{ client.ruc }}</td>
+        </tr>
+        <tr>
+            <th scope="col">Teléfono:</th>
+            <td>{{ client.phone }}</td>
+        </tr>
+        <tr>
+            <th scope="col">Estado</th>
+            <td>
+                {{ order.status }}, última actualización {{ order.status_update }}
+
+            </td>
+        </tr>
+        <tr>
+            <th scope="col">Dirección de entrega</th>
+            <td>{{ address.state }}, {{ address.city }}, {{ address.address }}</td>
+        </tr>
+        <tr>
+            <th scope="col">Total de la orden</th>
+            <td>{{ total }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <table class="table table-bordered" align="center">
+        <thead>
+        <tr>
+            <th scope="col">Código de producto</th>
+            <th scope="col">Nombre del producto</th>
+            <th scope="col">cantidad</th>
+            <th scope="col">Precio Unitario</th>
+            <th scope="col">Importe</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if order_products %}
+        {% for product in products %}
+        <tr>
+            <td>{{ product.product_code }}</td>
+            <td>{{ product.name }}, {{ product.description }}</td>
+            {% for o in order_products %}
+            {% if o.product_id == product.id %}
+            <td> {{ o.quantity }}</td>
+            <td> {{ o.price }}</td>
+            <td> {{ o.total }}</td>
+            {% endif %}
+            {% endfor %}
+        </tr>
+
+        {% endfor %}
+
+            {% if order.total_price < 300 %}
+            <tr>
+                <th colspan="4" style="text-align:right;">Subtotal (IVA incluido):    </th>
+                <td>{{ order.total_price }}</td>
+            </tr>
+            <tr>
+                <th colspan="4" style="text-align:right;">Costo de envío:    </th>
+                <td>4</td>
+            </tr>
+            <tr>
+                <th colspan="4" style="text-align:right; color:#FF0000">Total:    </th>
+                {% if total %}
+                    <td>{{ total }}</td>
+                {% endif %}
+            </tr>
+            {% else %}
+            <tr>
+                <th colspan="4" style="text-align:right; color:#FF0000">Total (IVA incluido):    </th>
+                <td>{{ order.total_price }}</td>
+            </tr>
+            {% endif %}
+
+        {% endif %}
+
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}

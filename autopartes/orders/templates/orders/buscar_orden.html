@@ -1,0 +1,102 @@
+{% extends 'home.html' %}
+{% block content %}
+<div class="container-fluid ">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <br>
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+    <div class="col mb-3">
+       <a href="{% url 'orders:ver_ordenes' %}"><button class="btn btn-dark" type="button" ><i
+                class="fas fa-arrow-left"></i></button></a>
+    </div>
+    <h1>Resultados de busqueda para: {{query}}</h1>
+
+    <br>
+    <div class="row">
+        <form method='GET' action="{% url 'orders:search' %}"
+              class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2">
+            <input class="form-control" type="text" name="q" placeholder="Número de orden, RUC"/>
+            <button type="submit" class=" btn btn-danger"><i
+                    class="mdi mdi-account">Buscar</i>
+            </button>
+        </form>
+    </div>
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Id de Orden</th>
+            {% if customers %}
+            <th scope="col">Nombre del cliente</th>
+            <th scope="col">RUC</th>
+            {% else %}
+            <th scope="col">Direccion de entrgega</th>
+            {% endif %}
+            <th scope="col">Estatus</th>
+            <th scope="col">Precio total</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        {% if orders %}
+
+        {% for order in orders %}
+
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>
+
+                {% if customers %}
+                {% for customer in customers %}
+                {% if customer.id == order.user.id %}
+                {{ customer.first_name }}
+                {{ customer.last_name }}
+            <td>
+                {{ customer.ruc }}
+            </td>
+            {% endif %}
+            {% endfor %}
+
+            {% else %}
+            {% for address in addresses %}
+            {% if address.id == order.address.id %}
+            {{ address.name }},
+            {{ address.address }}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            </td>
+            <td>
+                {{ order.status }}
+            </td>
+            <td>{{ order.total_price }}</td>
+
+            <td>
+                <a href="{% url  'orders:ver_desgloce' id=order.id %}"
+                   data-animation="blur" data-overlaycolor="#36404a">
+                    <button type="button" class=" btn btn-success"><i class="fa fa-eye"></i>
+                    </button>
+                    {# </a>#}
+            </td>
+
+        </tr>
+        {% endfor %}
+
+        {% else %}
+        <h1 id="msg">No hay ordenes registradas</h1>
+        {% endif %}
+
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}
