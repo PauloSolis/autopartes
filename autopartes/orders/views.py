@@ -16,14 +16,21 @@ from .forms import Status
 import io
 from django.http import FileResponse
 from reportlab.pdfgen import canvas
-from django.http import HttpResponse
+
 from django.shortcuts import render, get_object_or_404
-from reportlab.lib.units import inch
-
+from django.http import HttpResponse
+from django.views.generic import View
+from .utils import render_to_pdf
+from django.template.loader import get_template
 # Create your views here.
+from django.shortcuts import HttpResponse
+from django.template.loader import get_template, render_to_string
 
-
-logger = logging.getLogger(__name__)
+from fpdf import FPDF, HTMLMixin
+from easy_pdf.rendering import render_to_pdf_response
+from django.template.loader import render_to_string
+from weasyprint import HTML
+import tempfile
 
 
 @login_required
@@ -149,6 +156,107 @@ def search_order(request):
     }
 
     return render(request, template, context)
+
+def generate_pdf(request):
+    """Generate pdf."""
+    # Model data
+    order_p = ProductsOrder.objects.filter(order_id=id)
+    order = Order.objects.get(pk=id)
+    address = Address.objects.get(pk=order.address.id)
+    prod = []
+    user = User.objects.get(id=order.user_id)
+    for o in order_p:
+        aux = Product.objects.get(id=o.product_id)
+        prod.append(aux)
+
+    total = 0
+
+    if order.total_price < 300:
+        total = order.total_price + 4
+    else:
+        total = order.total_price
+    context = {
+        'order_products': order_p,
+        'products': prod,
+        'address': address,
+        'order': order,
+        'client': user,
+        'total': total
+    }
+
+    # Rendered
+    html_string = render_to_string("./orders/order_pdf.html", context)
+    html = HTML(string=html_string)
+    result = html.write_pdf()
+
+    # Creating http response
+    response = HttpResponse(content_type='application/pdf;')
+    response['Content-Disposition'] = 'inline; filename=list_people.pdf'
+    response['Content-Transfer-Encoding'] = 'binary'
+    with tempfile.NamedTemporaryFile(delete=True) as output:
+        output.write(result)
+        output.flush()
+        output = open(output.name, 'r')
+        response.write(output.read())
+
+    return response
+
+def detail_to_pdf(request, id):
+    template = "./orders/order_pdf.html"
+    order_p = ProductsOrder.objects.filter(order_id=id)
+    order = Order.objects.get(pk=id)
+    address = Address.objects.get(pk=order.address.id)
+    prod = []
+    user = User.objects.get(id=order.user_id)
+    for o in order_p:
+        aux = Product.objects.get(id=o.product_id)
+        prod.append(aux)
+
+    total = 0
+
+    if order.total_price < 300:
+        total = order.total_price + 4
+    else:
+        total = order.total_price
+    context = {
+        'order_products': order_p,
+        'products': prod,
+        'address': address,
+        'order': order,
+        'client': user,
+        'total': total
+    }
+    return render_to_pdf_response(request, template, context)
+
+
+def GeneratePDF(request, id):
+        template = get_template("./orders/order_pdf.html")
+        order_p = ProductsOrder.objects.filter(order_id=id)
+        order = Order.objects.get(pk=id)
+        address = Address.objects.get(pk=order.address.id)
+        prod = []
+        user = User.objects.get(id=order.user_id)
+        for o in order_p:
+            aux = Product.objects.get(id=o.product_id)
+            prod.append(aux)
+
+        total = 0
+
+        if order.total_price < 300:
+            total = order.total_price + 4
+        else:
+            total = order.total_price
+        context = {
+            'order_products': order_p,
+            'products': prod,
+            'address': address,
+            'order': order,
+            'client': user,
+            'total': total
+        }
+        html = template.render(context)
+        pdf = render_to_pdf("./orders/order_pdf.html", context)
+        return HttpResponse(pdf, content_type='application/pdf')
 
 
 def make_report(request, id):
